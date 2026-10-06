@@ -9,3 +9,4 @@ passlib[bcrypt]
 python-jose[cryptography]
 jinja2
 cloudinary
+a2wsgi
