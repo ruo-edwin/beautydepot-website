@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Login</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f5f1ed;
+            color: #1c1816;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+        }
+
+        .login-card {
+            width: 100%;
+            max-width: 430px;
+            background: #ffffff;
+            border: 1px solid #e8e1db;
+            border-radius: 20px;
+            padding: 42px;
+            box-shadow: 0 20px 60px rgba(30, 20, 15, 0.08);
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 42px;
+        }
+
+        .brand-mark {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: #201b18;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 21px;
+            font-weight: 700;
+        }
+
+        .brand-name {
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .brand-subtitle {
+            font-size: 12px;
+            color: #81766e;
+            margin-top: 3px;
+        }
+
+        .heading {
+            margin-bottom: 28px;
+        }
+
+        .heading h1 {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 34px;
+            font-weight: 500;
+            letter-spacing: -0.8px;
+            margin-bottom: 10px;
+        }
+
+        .heading p {
+            color: #766c65;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        input {
+            width: 100%;
+            height: 50px;
+            border: 1px solid #ddd5ce;
+            border-radius: 10px;
+            padding: 0 14px;
+            font-size: 14px;
+            color: #201b18;
+            background: #fff;
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        input:focus {
+            border-color: #8c7d72;
+            box-shadow: 0 0 0 3px rgba(140, 125, 114, 0.10);
+        }
+
+        .password-wrapper {
+            position: relative;
+        }
+
+        .password-wrapper input {
+            padding-right: 65px;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            border: none;
+            background: transparent;
+            color: #756960;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .password-toggle:hover {
+            color: #201b18;
+        }
+
+        .error {
+            background: #fff1ef;
+            color: #9b3d34;
+            border: 1px solid #f0ccc7;
+            border-radius: 9px;
+            padding: 11px 12px;
+            font-size: 13px;
+            line-height: 1.4;
+            margin-bottom: 18px;
+        }
+
+        .login-button {
+            width: 100%;
+            height: 52px;
+            border: none;
+            border-radius: 10px;
+            background: #201b18;
+            color: #ffffff;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.1s;
+        }
+
+        .login-button:hover {
+            background: #0f0c0a;
+        }
+
+        .login-button:active {
+            transform: translateY(1px);
+        }
+
+        .login-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .footer-note {
+            text-align: center;
+            margin-top: 24px;
+            font-size: 12px;
+            color: #91867e;
+        }
+
+        @media (max-width: 500px) {
+            body {
+                padding: 16px;
+            }
+
+            .login-card {
+                padding: 30px 24px;
+                border-radius: 16px;
+            }
+
+            .brand {
+                margin-bottom: 34px;
+            }
+
+            .heading h1 {
+                font-size: 30px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="login-card">
+
+        <div class="brand">
+            <div class="brand-mark">B</div>
+
+            <div>
+                <div class="brand-name">Beauty Depot</div>
+                <div class="brand-subtitle">Store Administration</div>
+            </div>
+        </div>
+
+
+        <div class="heading">
+            <h1>Welcome back</h1>
+
+            <p>
+                Sign in to manage your products, categories,
+                brands and online store.
+            </p>
+        </div>
+
+
+        <form id="loginForm">
+
+            <div class="form-group">
+                <label for="email">Email</label>
+
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="admin@example.com"
+                    autocomplete="email"
+                    required
+                >
+            </div>
+
+
+            <div class="form-group">
+                <label for="password">Password</label>
+
+                <div class="password-wrapper">
+
+                    <input
+                        type="password"
+                        id="password"
+                        placeholder="Enter your password"
+                        autocomplete="current-password"
+                        required
+                    >
+
+                    <button
+                        type="button"
+                        class="password-toggle"
+                        id="togglePassword"
+                    >
+                        Show
+                    </button>
+
+                </div>
+            </div>
+
+
+            <div
+                id="loginError"
+                class="error"
+                hidden
+            ></div>
+
+
+            <button
+                type="submit"
+                class="login-button"
+                id="loginButton"
+            >
+                <span id="loginButtonText">
+                    Sign in
+                </span>
+            </button>
+
+        </form>
+
+
+        <div class="footer-note">
+            Ruo Beauty Store
+        </div>
+
+    </div>
+
+
+    <script>
+
+        const loginForm = document.getElementById("loginForm");
+
+        const emailInput = document.getElementById("email");
+
+        const passwordInput = document.getElementById("password");
+
+        const togglePassword =
+            document.getElementById("togglePassword");
+
+        const loginButton =
+            document.getElementById("loginButton");
+
+        const loginButtonText =
+            document.getElementById("loginButtonText");
+
+        const loginError =
+            document.getElementById("loginError");
+
+
+        // Show / hide password
+        togglePassword.addEventListener("click", () => {
+
+            if (passwordInput.type === "password") {
+
+                passwordInput.type = "text";
+
+                togglePassword.textContent = "Hide";
+
+            } else {
+
+                passwordInput.type = "password";
+
+                togglePassword.textContent = "Show";
+            }
+
+        });
+
+
+        // Login
+        loginForm.addEventListener("submit", async (event) => {
+
+            event.preventDefault();
+
+            const email = emailInput.value.trim();
+
+            const password = passwordInput.value;
+
+
+            loginError.hidden = true;
+
+            loginButton.disabled = true;
+
+            loginButtonText.textContent = "Signing in...";
+
+
+            try {
+
+                const response = await fetch("/api/auth/login", {
+
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+
+                    body: JSON.stringify({
+                        email: email,
+                        password: password
+                    })
+
+                });
+
+
+                const data = await response.json();
+
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        data.detail || "Unable to sign in."
+                    );
+
+                }
+
+
+                // Store JWT
+                localStorage.setItem(
+                    "admin_token",
+                    data.access_token
+                );
+
+
+                // Go to products page after successful login
+                window.location.href =
+                    "/admin/products";
+
+
+            } catch (error) {
+
+                loginError.textContent =
+                    error.message;
+
+                loginError.hidden = false;
+
+            } finally {
+
+                loginButton.disabled = false;
+
+                loginButtonText.textContent =
+                    "Sign in";
+
+            }
+
+        });
+
+    </script>
+
+</body>
+</html>

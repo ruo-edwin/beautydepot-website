@@ -1,0 +1,1529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        {% block title %}Beauty Depot{% endblock %}
+    </title>
+
+    <meta
+        name="description"
+        content="{% block description %}Premium beauty, skincare, fragrance and lifestyle essentials.{% endblock %}"
+    >
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap"
+        rel="stylesheet"
+    >
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:wght@400;500;600&display=swap"
+        rel="stylesheet"
+    >
+
+    <style>
+
+        /* =========================================================
+           ROOT
+        ========================================================= */
+
+        :root {
+
+            --black: #111111;
+            --text: #1a1a1a;
+            --muted: #6b6b6b;
+
+            --white: #ffffff;
+            --warm-white: #ffffff;
+
+            --cream: #ffffff;
+            --beige: #ffffff;
+            --soft-beige: #f8f8f8;
+
+            --gold: #111111;
+            --gold-dark: #000000;
+
+            --border: #eeeeee;
+
+            --container: 1380px;
+
+            --serif: "Playfair Display", Georgia, serif;
+            --sans: "DM Sans", Arial, sans-serif;
+        }
+
+
+        /* =========================================================
+           RESET
+        ========================================================= */
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--white);
+            color: var(--text);
+            font-family: var(--sans);
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        button,
+        input {
+            font-family: inherit;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+
+        /* =========================================================
+           CONTAINER
+        ========================================================= */
+
+        .container {
+            width: min(var(--container), calc(100% - 80px));
+            margin: 0 auto;
+        }
+
+
+        /* =========================================================
+           TOP BAR
+        ========================================================= */
+
+        .top-bar {
+            height: 34px;
+            background: #ffffff;
+            border-bottom: 1px solid var(--border);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 11px;
+            letter-spacing: .04em;
+            color: #4d4742;
+        }
+
+        .top-bar-inner {
+            width: 100%;
+            max-width: var(--container);
+
+            padding: 0 40px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            gap: 35px;
+        }
+
+        .top-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap;
+        }
+
+        /* =========================================
+   BEAUTY DEPOT HEADER
+   ========================================= */
+
+header {
+    width: 100%;
+    background: #5A285F;
+    color: #fff;
+    position: relative;
+    z-index: 1000;
+}
+
+/* Main header */
+.header,
+.header-container,
+.navbar,
+.nav-container {
+    width: 100%;
+    max-width: 1500px;
+    height: 78px;
+    margin: 0 auto;
+
+    padding: 0 46px;
+
+    display: flex;
+    align-items: center;
+    gap: 35px;
+
+    box-sizing: border-box;
+}
+
+/* =========================================
+   LOGO
+   ========================================= */
+
+.logo,
+.logo-link,
+.header-logo {
+    flex: 0 0 auto;
+
+    display: flex;
+    align-items: center;
+
+    text-decoration: none;
+}
+
+.logo img,
+.logo-link img,
+.header-logo img {
+    display: block;
+
+    width: auto;
+    height: 52px;
+    max-width: 190px;
+
+    object-fit: contain;
+}
+
+/* =========================================
+   NAVIGATION
+   ========================================= */
+
+nav,
+.main-nav,
+.nav-links {
+    display: flex;
+    align-items: center;
+
+    gap: 34px;
+
+    margin-left: auto;
+    margin-right: auto;
+}
+
+nav a,
+.main-nav a,
+.nav-links a {
+    color: #fff;
+
+    text-decoration: none;
+    white-space: nowrap;
+
+    font-family: "Inter", Arial, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+
+    transition: color 0.2s ease;
+}
+
+nav a:hover,
+.main-nav a:hover,
+.nav-links a:hover {
+    color: #C9A227;
+}
+
+/* =========================================
+   RIGHT SIDE
+   ========================================= */
+
+.header-actions,
+.header-right,
+.nav-actions {
+    display: flex;
+    align-items: center;
+
+    gap: 18px;
+
+    flex: 0 0 auto;
+}
+
+/* =========================================
+   SEARCH
+   ========================================= */
+
+.header-search,
+.search-box,
+.search-container {
+    width: 225px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+
+    background: #fff;
+
+    border-radius: 5px;
+    border: none;
+
+    overflow: hidden;
+
+    box-sizing: border-box;
+}
+
+.header-search input,
+.search-box input,
+.search-container input {
+    width: 100%;
+    height: 100%;
+
+    padding: 0 14px;
+
+    border: none;
+    outline: none;
+
+    background: transparent;
+
+    color: #333;
+
+    font-family: "Inter", Arial, sans-serif;
+    font-size: 13px;
+}
+
+.header-search input::placeholder,
+.search-box input::placeholder,
+.search-container input::placeholder {
+    color: #999;
+}
+
+/* Search icon */
+.header-search i,
+.search-box i,
+.search-container i {
+    color: #5A285F;
+    margin-left: 14px;
+}
+
+/* =========================================
+   ICONS
+   ========================================= */
+
+.header-icons,
+.action-icons {
+    display: flex;
+    align-items: center;
+
+    gap: 17px;
+}
+
+.header-icons a,
+.action-icons a,
+.header-icons button,
+.action-icons button {
+    width: 28px;
+    height: 28px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #fff;
+
+    background: transparent;
+    border: none;
+
+    text-decoration: none;
+
+    cursor: pointer;
+}
+
+.header-icons a:hover,
+.action-icons a:hover,
+.header-icons button:hover,
+.action-icons button:hover {
+    color: #C9A227;
+}
+
+/* =========================================
+   CART BADGE
+   ========================================= */
+
+.cart-count,
+.cart-badge,
+.cart-item-count {
+    position: absolute;
+
+    top: -6px;
+    right: -7px;
+
+    min-width: 17px;
+    height: 17px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0 4px;
+
+    border-radius: 50%;
+
+    background: #C9A227;
+    color: #fff;
+
+    font-size: 9px;
+    font-weight: 700;
+}
+
+/* =========================================
+   GOLD BRAND LINE
+   ========================================= */
+
+.header-gold-line {
+    width: 100%;
+    height: 2px;
+
+    background: #C9A227;
+}
+
+
+/* =========================================
+   TABLET
+   ========================================= */
+
+@media (max-width: 1150px) {
+
+    .header,
+    .header-container,
+    .navbar,
+    .nav-container {
+        padding: 0 25px;
+        gap: 20px;
+    }
+
+    nav,
+    .main-nav,
+    .nav-links {
+        gap: 22px;
+    }
+
+    .header-search,
+    .search-box,
+    .search-container {
+        width: 180px;
+    }
+}
+
+
+/* =========================================
+   MOBILE
+   ========================================= */
+
+@media (max-width: 850px) {
+
+    .header,
+    .header-container,
+    .navbar,
+    .nav-container {
+        height: auto;
+        min-height: 70px;
+
+        padding: 12px 18px;
+
+        flex-wrap: wrap;
+    }
+
+    nav,
+    .main-nav,
+    .nav-links {
+        width: 100%;
+        flex-basis: 100%;
+
+        order: 3;
+
+        overflow-x: auto;
+
+        justify-content: flex-start;
+
+        gap: 25px;
+
+        padding-bottom: 5px;
+    }
+}
+
+
+@media (max-width: 600px) {
+
+    .logo img,
+    .logo-link img,
+    .header-logo img {
+        height: 42px;
+        max-width: 150px;
+    }
+
+    .header-search,
+    .search-box,
+    .search-container {
+        width: 150px;
+        height: 38px;
+    }
+
+    .header-icons,
+    .action-icons {
+        gap: 10px;
+    }
+}
+        /* =========================================================
+           NAVIGATION
+        ========================================================= */
+
+        .main-nav {
+            display: flex;
+            align-items: center;
+            gap: 34px;
+        }
+
+        .nav-link {
+            font-size: 14px;
+            color: #302b27;
+
+            position: relative;
+            transition: color .2s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--gold-dark);
+        }
+
+
+        /* =========================================================
+           HEADER ACTIONS
+        ========================================================= */
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .search-box {
+            width: 195px;
+            height: 38px;
+
+            border: 1px solid var(--border);
+            border-radius: 5px;
+
+            background: #faf9f7;
+
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            padding: 0 13px;
+        }
+
+        .search-box input {
+            width: 100%;
+            border: 0;
+            outline: none;
+            background: transparent;
+
+            font-size: 12px;
+            color: var(--text);
+        }
+
+        .search-box input::placeholder {
+            color: #99918a;
+        }
+
+        .header-icon {
+            border: 0;
+            background: transparent;
+
+            cursor: pointer;
+
+            font-size: 21px;
+            color: var(--black);
+
+            position: relative;
+        }
+
+        .cart-count {
+            position: absolute;
+
+            top: -8px;
+            right: -9px;
+
+            width: 17px;
+            height: 17px;
+
+            background: var(--gold);
+            color: white;
+
+            border-radius: 50%;
+
+            font-size: 9px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+
+        /* =========================================================
+           PAGE CONTENT
+        ========================================================= */
+
+        main {
+            min-height: 400px;
+        }
+
+
+       /* =========================================
+   BEAUTY DEPOT — PREMIUM FOOTER
+   ========================================= */
+
+.site-footer {
+    margin-top: 80px;
+    background: #4B0A68;
+    color: #ffffff;
+    padding: 70px 0 0;
+    border-top: none;
+}
+
+.site-footer .container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 48px;
+}
+
+/* FOOTER GRID */
+.footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 70px;
+    padding-bottom: 60px;
+}
+
+/* BRAND SECTION */
+.footer-brand h3 {
+    color: #ffffff;
+    font-size: 24px;
+    margin-bottom: 18px;
+    letter-spacing: 2px;
+}
+
+.footer-brand p {
+    color: rgba(255,255,255,0.75);
+    max-width: 360px;
+    line-height: 1.7;
+}
+
+/* COLUMN TITLES */
+.footer-title {
+    color: #D4A017;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+
+/* LINKS */
+.footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-links li {
+    margin-bottom: 12px;
+}
+
+.footer-links a {
+    color: rgba(255,255,255,0.78);
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.25s ease;
+}
+
+.footer-links a:hover {
+    color: #D4A017;
+    padding-left: 4px;
+}
+
+/* FOOTER BOTTOM */
+.footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.15);
+    padding: 22px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: rgba(255,255,255,0.65);
+    font-size: 13px;
+}
+
+/* MOBILE */
+@media (max-width: 800px) {
+
+    .footer-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+}
+
+@media (max-width: 500px) {
+
+    .footer-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .site-footer .container {
+        padding: 0 24px;
+    }
+}
+        /* =========================================================
+           MOBILE
+        ========================================================= */
+
+        .mobile-menu-btn {
+            display: none;
+            border: 0;
+            background: transparent;
+            font-size: 23px;
+            cursor: pointer;
+        }
+
+
+        @media (max-width: 1100px) {
+
+            .main-nav {
+                gap: 20px;
+            }
+
+            .header-actions {
+                gap: 12px;
+            }
+
+            .search-box {
+                width: 150px;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+
+        @media (max-width: 800px) {
+
+            .container,
+            .header-inner {
+                width: calc(100% - 36px);
+            }
+
+            .top-bar {
+                font-size: 9px;
+            }
+
+            .top-bar-inner {
+                padding: 0 18px;
+                gap: 15px;
+            }
+
+            .top-item:nth-child(2) {
+                display: none;
+            }
+
+            .site-header {
+                height: 70px;
+            }
+
+            .main-nav {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .brand {
+                min-width: auto;
+            }
+
+            .brand-name {
+                font-size: 18px;
+                letter-spacing: 3px;
+            }
+
+            .brand-tagline {
+                font-size: 7px;
+            }
+
+            .search-box {
+                display: none;
+            }
+
+            .header-actions {
+                margin-left: auto;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 35px 25px;
+            }
+        }
+
+
+        @media (max-width: 500px) {
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                justify-content: center;
+                gap: 8px;
+                padding: 20px 0;
+            }
+        }
+     /* =========================================================
+   BEAUTY DEPOT — FINAL HEADER DESIGN
+   ========================================================= */
+
+.site-header {
+  
+    background: #4B0A68 !important;
+    width: 100%;
+    position: sticky;
+    top: 0;
+    z-index: 9999;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+/* Main header alignment */
+.site-header .header-inner {
+    width: min(100%, 1600px);
+    min-height: 116px;
+    margin: 0 auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 46px;
+    gap: 40px;
+
+    box-sizing: border-box;
+}
+
+/* =========================================================
+   LOGO
+   ========================================================= */
+
+.site-header .brand {
+    flex: 0 0 auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    text-decoration: none;
+}
+
+/* Bigger logo so the small BEAUTY • SKINCARE •
+   FRAGRANCE • HAIRCARE text is visible */
+.site-header .brand-logo {
+    width: 300px !important;
+    height: 94px !important;
+
+    max-width: none !important;
+    max-height: none !important;
+
+    display: block;
+    object-fit: contain;
+}
+
+/* =========================================================
+   NAVIGATION
+   ========================================================= */
+
+.site-header .main-nav {
+    flex: 1;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 40px;
+}
+
+.site-header .nav-link {
+    color: #ffffff !important;
+
+    font-family: "DM Sans", Arial, sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+
+    white-space: nowrap;
+
+    text-decoration: none;
+
+    transition:
+        color 0.25s ease,
+        opacity 0.25s ease;
+}
+
+.site-header .nav-link:hover {
+    color: #C9A227 !important;
+}
+
+/* =========================================================
+   RIGHT SIDE
+   ========================================================= */
+
+.site-header .header-actions {
+    flex: 0 0 auto;
+
+    display: flex;
+    align-items: center;
+
+    gap: 18px;
+}
+
+/* Search */
+.site-header .search-box {
+    width: 225px;
+    height: 44px;
+
+    display: flex;
+    align-items: center;
+
+    background: #ffffff;
+    border: none;
+    border-radius: 6px;
+
+    overflow: hidden;
+}
+
+.site-header .search-box input {
+    width: 100%;
+    height: 100%;
+
+    border: none;
+    outline: none;
+
+    background: transparent;
+
+    padding: 0 14px;
+
+    color: #333;
+    font-size: 13px;
+}
+
+.site-header .search-box input::placeholder {
+    color: #999;
+}
+
+/* Header icons */
+.site-header .header-icon {
+    color: #ffffff !important;
+
+    background: transparent;
+    border: none;
+
+    font-size: 20px;
+
+    cursor: pointer;
+
+    position: relative;
+
+    padding: 4px;
+}
+
+.site-header .header-icon:hover {
+    color: #C9A227 !important;
+}
+
+/* Cart count */
+.site-header .cart-count {
+    position: absolute;
+
+    top: -7px;
+    right: -8px;
+
+    min-width: 18px;
+    height: 18px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #ffffff;
+    color: #5A285F;
+
+    border-radius: 50%;
+
+    font-size: 10px;
+    font-weight: 700;
+}
+
+/* =========================================================
+   MOBILE / TABLET
+   ========================================================= */
+
+@media (max-width: 1100px) {
+
+    .site-header .header-inner {
+        padding: 0 25px;
+        gap: 20px;
+    }
+
+    .site-header .brand-logo {
+        width: 240px !important;
+        height: 78px !important;
+    }
+
+    .site-header .main-nav {
+        gap: 24px;
+    }
+
+    .site-header .nav-link {
+        font-size: 14px;
+    }
+
+    .site-header .search-box {
+        width: 190px;
+    }
+}
+
+
+@media (max-width: 768px) {
+
+    .site-header .header-inner {
+        min-height: 82px;
+
+        padding: 8px 18px;
+
+        gap: 15px;
+    }
+
+    .site-header .brand-logo {
+        width: 210px !important;
+        height: 66px !important;
+    }
+
+    .site-header .main-nav {
+        display: none;
+    }
+
+    .site-header .search-box {
+        display: none;
+    }
+
+    .site-header .header-actions {
+        margin-left: auto;
+        gap: 10px;
+    }
+}
+
+
+@media (max-width: 480px) {
+
+    .site-header .header-inner {
+        min-height: 74px;
+        padding: 6px 12px;
+    }
+
+    .site-header .brand-logo {
+        width: 175px !important;
+        height: 58px !important;
+    }
+
+    .site-header .header-icon {
+        font-size: 18px;
+    }
+}
+
+    </style>
+
+    {% block extra_css %}{% endblock %}
+</head>
+
+
+<body>
+
+
+    <!-- =========================================================
+         TOP BAR
+    ========================================================== -->
+
+    <div class="top-bar">
+
+        <div class="top-bar-inner">
+
+            <div class="top-item">
+                🚚
+                <span>Free delivery within Nairobi on orders over KSh 5,000</span>
+            </div>
+
+            <div class="top-item">
+                🛡️
+                <span>100% Authentic Products</span>
+            </div>
+
+            <div class="top-item">
+                ☎
+                <span>Need help? 0712 345 678</span>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================================================
+         HEADER
+    ========================================================== -->
+
+    <header class="site-header">
+
+        <div class="header-inner">
+
+
+            <a href="/" class="brand">
+
+                 <img src="/static/images/beautydepottransparent.png"
+                    alt="Beauty Depot"
+                    class="brand-logo">
+
+            </a>
+
+
+            <nav class="main-nav">
+
+                <a href="/shop" class="nav-link">
+                    Shop
+                </a>
+
+                <a href="/shop#categories" class="nav-link">
+                    Categories
+                </a>
+
+                <a href="/shop#brands" class="nav-link">
+                    Brands
+                </a>
+
+                <a href="/shop?filter=new" class="nav-link">
+                    New Arrivals
+                </a>
+
+                <a href="/shop?filter=offers" class="nav-link">
+                    Offers
+                </a>
+
+            </nav>
+
+
+            <div class="header-actions">
+
+                <div class="search-box">
+
+                    <span>⌕</span>
+
+                    <input
+                        type="text"
+                        placeholder="Search products..."
+                        id="headerSearch"
+                    >
+
+                </div>
+
+
+                <button
+                    class="header-icon"
+                    title="Account"
+                    onclick="window.location.href='/account'"
+                >
+                    ♙
+                </button>
+
+
+                <button
+                    class="header-icon"
+                    title="Wishlist"
+                >
+                    ♡
+                </button>
+
+
+                <button
+                    class="header-icon"
+                    title="Cart"
+                    onclick="window.location.href='/cart'"
+                >
+
+                    ♧
+
+                    <span
+                        class="cart-count"
+                        id="cartCount"
+                    >
+                        0
+                    </span>
+
+                </button>
+
+
+                <button
+                    class="mobile-menu-btn"
+                    onclick="toggleMobileMenu()"
+                >
+                    ☰
+                </button>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- =========================================================
+         MOBILE MENU
+    ========================================================== -->
+
+    <div
+        id="mobileMenu"
+        style="
+            display:none;
+            position:fixed;
+            top:104px;
+            left:0;
+            right:0;
+            background:white;
+            border-bottom:1px solid #e8e1db;
+            z-index:999;
+            padding:25px;
+        "
+    >
+
+        <a href="/shop"
+           style="display:block;padding:12px 0;">
+            Shop
+        </a>
+
+        <a href="/shop#categories"
+           style="display:block;padding:12px 0;">
+            Categories
+        </a>
+
+        <a href="/shop#brands"
+           style="display:block;padding:12px 0;">
+            Brands
+        </a>
+
+        <a href="/shop?filter=new"
+           style="display:block;padding:12px 0;">
+            New Arrivals
+        </a>
+
+        <a href="/shop?filter=offers"
+           style="display:block;padding:12px 0;">
+            Offers
+        </a>
+
+    </div>
+
+
+    <!-- =========================================================
+         PAGE CONTENT
+    ========================================================== -->
+
+    <main>
+
+        {% block content %}
+        {% endblock %}
+
+    </main>
+
+
+    <!-- =========================================================
+         FOOTER
+    ========================================================== -->
+
+    <footer class="site-footer">
+
+        <div class="footer-main">
+
+            <div class="container">
+
+                <div class="footer-grid">
+
+
+                    <div>
+
+                        <div class="footer-brand-name">
+                            BEAUTY DEPOT
+                        </div>
+
+                        <p class="footer-description">
+
+                            Premium beauty, skincare, fragrance and
+                            lifestyle essentials, carefully selected
+                            for you.
+
+                        </p>
+
+                    </div>
+
+
+                    <div>
+
+                        <div class="footer-title">
+                            SHOP
+                        </div>
+
+                        <ul class="footer-links">
+
+                            <li>
+                                <a href="/shop">
+                                    All Products
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="/shop?filter=new">
+                                    New Arrivals
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="/shop?filter=offers">
+                                    Offers
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="/shop#brands">
+                                    Brands
+                                </a>
+                            </li>
+
+                        </ul>
+
+                    </div>
+
+
+                    <div>
+
+                        <div class="footer-title">
+                            CUSTOMER CARE
+                        </div>
+
+                        <ul class="footer-links">
+
+                            <li>
+                                <a href="/contact">
+                                    Contact Us
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="/delivery">
+                                    Delivery Information
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="/returns">
+                                    Returns
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="/faq">
+                                    FAQs
+                                </a>
+                            </li>
+
+                        </ul>
+
+                    </div>
+
+
+                    <div>
+
+                        <div class="footer-title">
+                            FOLLOW US
+                        </div>
+
+                        <ul class="footer-links">
+
+                            <li>
+                                <a href="#">
+                                    Instagram
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="#">
+                                    Facebook
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="#">
+                                    TikTok
+                                </a>
+                            </li>
+
+                        </ul>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            <div class="container"
+                 style="
+                    display:flex;
+                    justify-content:space-between;
+                    align-items:center;
+                    width:min(var(--container),calc(100% - 80px));
+                 "
+            >
+
+                <span>
+                    © 2026 Beauty Depot. All rights reserved.
+                </span>
+
+                <span>
+                    Payment on Delivery Available
+                </span>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+    <script>
+
+        function toggleMobileMenu() {
+
+            const menu = document.getElementById("mobileMenu");
+
+            if (menu.style.display === "none") {
+                menu.style.display = "block";
+            } else {
+                menu.style.display = "none";
+            }
+
+        }
+
+
+        /*
+         * Cart count
+         *
+         * We'll connect this to localStorage
+         * once the cart page is built.
+         */
+
+        function updateCartCount() {
+
+            try {
+
+                const cart =
+                    JSON.parse(
+                        localStorage.getItem("beauty_cart") || "[]"
+                    );
+
+                let total = 0;
+
+                cart.forEach(item => {
+                    total += Number(item.quantity || 0);
+                });
+
+                const count =
+                    document.getElementById("cartCount");
+
+                if (count) {
+                    count.textContent = total;
+                }
+
+            } catch (error) {
+
+                console.error(
+                    "Could not load cart count",
+                    error
+                );
+
+            }
+
+        }
+
+        updateCartCount();
+
+
+        /*
+         * Header search
+         */
+
+        const headerSearch =
+            document.getElementById("headerSearch");
+
+        if (headerSearch) {
+
+            headerSearch.addEventListener(
+                "keydown",
+                function(event) {
+
+                    if (event.key === "Enter") {
+
+                        const query =
+                            headerSearch.value.trim();
+
+                        if (query) {
+
+                            window.location.href =
+                                "/shop?search=" +
+                                encodeURIComponent(query);
+
+                        }
+
+                    }
+
+                }
+            );
+
+        }
+
+    </script>
+
+
+    {% block extra_js %}{% endblock %}
+
+</body>
+</html>

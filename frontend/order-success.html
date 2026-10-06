@@ -1,0 +1,608 @@
+{% extends "base.html" %}
+
+{% block title %}
+Order Confirmed | Beauty Depot
+{% endblock %}
+
+{% block description %}
+Your Beauty Depot order has been received.
+{% endblock %}
+
+{% block extra_css %}
+
+<style>
+
+/* ============================================================
+   ORDER SUCCESS
+============================================================ */
+
+.success-page {
+    min-height: auto;
+    background: #ffffff;
+
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+
+    padding: 48px 24px 55px;
+}
+
+.success-container {
+    width: min(760px, 100%);
+    text-align: center;
+}
+
+
+/* ============================================================
+   ICON
+============================================================ */
+
+.success-icon {
+    width: 58px;
+    height: 58px;
+
+    margin: 0 auto 18px;
+
+    border: 1px solid #111;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-family: var(--sans);
+    font-size: 22px;
+
+    color: #111;
+}
+
+
+/* ============================================================
+   TEXT
+============================================================ */
+
+.success-eyebrow {
+    margin-bottom: 9px;
+
+    font-family: var(--sans);
+    font-size: 10px;
+    font-weight: 700;
+
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+
+    color: #777;
+}
+
+.success-title {
+    margin: 0;
+
+    font-family: var(--serif);
+
+    font-size: clamp(40px, 4.5vw, 58px);
+
+    line-height: 1;
+
+    font-weight: 400;
+
+    letter-spacing: -0.035em;
+
+    color: #111;
+}
+
+.success-message {
+    max-width: 590px;
+
+    margin: 15px auto 0;
+
+    font-family: var(--sans);
+    font-size: 14px;
+    line-height: 1.5;
+
+    color: #666;
+}
+
+
+/* ============================================================
+   ORDER DETAILS
+============================================================ */
+
+.order-card {
+    margin-top: 27px;
+
+    border: 1px solid #e3e3e3;
+
+    text-align: left;
+}
+
+.order-card-header {
+    padding: 14px 22px;
+
+    border-bottom: 1px solid #e8e8e8;
+
+    font-family: var(--sans);
+    font-size: 10px;
+    font-weight: 700;
+
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+
+    color: #777;
+}
+
+.order-details {
+    padding: 10px 22px;
+}
+
+.order-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 30px;
+
+    padding: 11px 0;
+
+    font-family: var(--sans);
+    font-size: 13px;
+
+    border-bottom: 1px solid #eeeeee;
+}
+
+.order-row:last-child {
+    border-bottom: none;
+}
+
+.order-label {
+    color: #777;
+}
+
+.order-value {
+    text-align: right;
+
+    color: #111;
+    font-weight: 600;
+}
+
+
+/* ============================================================
+   BACK HOME BUTTON
+============================================================ */
+
+.success-actions {
+    display: flex;
+
+    justify-content: center;
+
+    margin-top: 24px;
+}
+
+.success-btn {
+    min-height: 45px;
+
+    padding: 0 30px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid #111;
+
+    background: #111;
+    color: #fff;
+
+    font-family: var(--sans);
+    font-size: 10px;
+    font-weight: 700;
+
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+
+    text-decoration: none;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease;
+}
+
+.success-btn:hover {
+    background: #fff;
+    color: #111;
+}
+
+
+/* ============================================================
+   NOTE
+============================================================ */
+
+.success-note {
+    margin: 15px auto 0;
+
+    font-family: var(--sans);
+    font-size: 11px;
+    line-height: 1.5;
+
+    color: #888;
+}
+
+
+/* ============================================================
+   MOBILE
+============================================================ */
+
+@media (max-width: 600px) {
+
+    .success-page {
+        padding: 35px 16px 50px;
+    }
+
+    .success-container {
+        width: 100%;
+    }
+
+    .success-icon {
+        width: 52px;
+        height: 52px;
+
+        margin-bottom: 15px;
+    }
+
+    .success-title {
+        font-size: 42px;
+    }
+
+    .success-message {
+        font-size: 13px;
+        line-height: 1.55;
+
+        margin-top: 13px;
+    }
+
+    .order-card {
+        margin-top: 24px;
+    }
+
+    .order-card-header {
+        padding: 13px 17px;
+    }
+
+    .order-details {
+        padding: 8px 17px;
+    }
+
+    .order-row {
+        padding: 10px 0;
+
+        font-size: 12px;
+
+        gap: 12px;
+    }
+
+    .success-actions {
+        margin-top: 20px;
+    }
+
+    .success-btn {
+        width: 100%;
+        max-width: 300px;
+    }
+
+    .success-note {
+        font-size: 10px;
+
+        margin-top: 13px;
+    }
+
+}
+
+</style>
+
+{% endblock %}
+
+
+{% block content %}
+
+<main class="success-page">
+
+    <div class="success-container">
+
+
+        <!-- ====================================================
+             SUCCESS ICON
+        ===================================================== -->
+
+        <div class="success-icon">
+            ✓
+        </div>
+
+
+        <!-- ====================================================
+             EYEBROW
+        ===================================================== -->
+
+        <div class="success-eyebrow">
+            Beauty Depot
+        </div>
+
+
+        <!-- ====================================================
+             TITLE
+        ===================================================== -->
+
+        <h1 class="success-title">
+            Order Confirmed
+        </h1>
+
+
+        <!-- ====================================================
+             MESSAGE
+        ===================================================== -->
+
+        <p class="success-message">
+            Thank you for your order. We've received your
+            request and will contact you using the phone
+            number provided to arrange delivery.
+        </p>
+
+
+        <!-- ====================================================
+             ORDER DETAILS
+        ===================================================== -->
+
+        <div
+            class="order-card"
+            id="orderCard"
+        >
+
+            <div class="order-card-header">
+                Order Details
+            </div>
+
+
+            <div class="order-details">
+
+
+                <!-- ORDER NUMBER -->
+
+                <div class="order-row">
+
+                    <span class="order-label">
+                        Order Number
+                    </span>
+
+                    <span
+                        class="order-value"
+                        id="orderNumber"
+                    >
+                        —
+                    </span>
+
+                </div>
+
+
+                <!-- CUSTOMER -->
+
+                <div class="order-row">
+
+                    <span class="order-label">
+                        Customer
+                    </span>
+
+                    <span
+                        class="order-value"
+                        id="customerName"
+                    >
+                        —
+                    </span>
+
+                </div>
+
+
+                <!-- PHONE -->
+
+                <div class="order-row">
+
+                    <span class="order-label">
+                        Phone
+                    </span>
+
+                    <span
+                        class="order-value"
+                        id="customerPhone"
+                    >
+                        —
+                    </span>
+
+                </div>
+
+
+                <!-- TOTAL -->
+
+                <div class="order-row">
+
+                    <span class="order-label">
+                        Total
+                    </span>
+
+                    <span
+                        class="order-value"
+                        id="orderTotal"
+                    >
+                        —
+                    </span>
+
+                </div>
+
+
+                <!-- PAYMENT -->
+
+                <div class="order-row">
+
+                    <span class="order-label">
+                        Payment
+                    </span>
+
+                    <span class="order-value">
+                        Pay on Delivery
+                    </span>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+        <!-- ====================================================
+             BACK HOME
+        ===================================================== -->
+
+        <div class="success-actions">
+
+            <a
+                href="/"
+                class="success-btn"
+            >
+                Back Home
+            </a>
+
+        </div>
+
+
+        <!-- ====================================================
+             NOTE
+        ===================================================== -->
+
+        <p class="success-note">
+            Keep your order number for reference.
+            Our team will contact you with delivery details.
+        </p>
+
+
+    </div>
+
+</main>
+
+{% endblock %}
+
+
+{% block extra_js %}
+
+<script>
+
+/* ============================================================
+   ORDER SUCCESS
+============================================================ */
+
+function formatMoney(value) {
+
+    return "KSh " + Number(value || 0).toLocaleString(
+        "en-KE",
+        {
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 0
+        }
+    );
+
+}
+
+
+/* ============================================================
+   LOAD ORDER
+============================================================ */
+
+function loadOrder() {
+
+    const storedOrder =
+        sessionStorage.getItem(
+            "beauty_last_order"
+        );
+
+
+    if (!storedOrder) {
+
+        return;
+
+    }
+
+
+    try {
+
+        const order =
+            JSON.parse(storedOrder);
+
+
+        /* ----------------------------------------------------
+           ORDER NUMBER
+        ---------------------------------------------------- */
+
+        document.getElementById(
+            "orderNumber"
+        ).textContent =
+            order.id
+                ? `#${order.id}`
+                : "—";
+
+
+        /* ----------------------------------------------------
+           CUSTOMER
+        ---------------------------------------------------- */
+
+        document.getElementById(
+            "customerName"
+        ).textContent =
+            order.customer_name ||
+            "—";
+
+
+        /* ----------------------------------------------------
+           PHONE
+        ---------------------------------------------------- */
+
+        document.getElementById(
+            "customerPhone"
+        ).textContent =
+            order.customer_phone ||
+            "—";
+
+
+        /* ----------------------------------------------------
+           TOTAL
+        ---------------------------------------------------- */
+
+        document.getElementById(
+            "orderTotal"
+        ).textContent =
+            formatMoney(
+                order.total_amount
+            );
+
+
+    } catch (error) {
+
+        console.error(
+            "Unable to read order:",
+            error
+        );
+
+    }
+
+}
+
+
+/* ============================================================
+   INITIALIZE
+============================================================ */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+        loadOrder();
+
+    }
+);
+
+</script>
+
+{% endblock %}

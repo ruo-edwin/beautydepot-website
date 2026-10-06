@@ -1,0 +1,2913 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Brands | Beauty Depot</title>
+
+    <style>
+        :root {
+            --ink: #24191d;
+            --muted: #786c70;
+            --soft-muted: #9a8b91;
+
+            --white: #ffffff;
+            --soft-white: #fffafa;
+
+            --pink-soft: #fff1f4;
+            --pink-light: #f8dce3;
+            --pink: #d9a5b1;
+            --pink-deep: #b85f75;
+
+            --gold: #c6a15b;
+            --gold-light: #ead9b5;
+            --gold-dark: #9d793b;
+
+            --line: #eee2e5;
+
+            --success-bg: #edf7ef;
+            --success-text: #3f7655;
+
+            --danger-bg: #fbeaec;
+            --danger-text: #b84c5e;
+
+            --warning-bg: #fbf4df;
+            --warning-text: #8a6a16;
+
+            --shadow-sm: 0 2px 12px rgba(70,35,45,.045);
+            --shadow-md: 0 10px 30px rgba(70,35,45,.08);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family:
+                Inter,
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                sans-serif;
+
+            background: var(--soft-white);
+            color: var(--ink);
+        }
+
+        button,
+        input,
+        select {
+            font: inherit;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        /* =====================================================
+           HEADER
+        ===================================================== */
+
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+
+            background: rgba(255,255,255,.96);
+            backdrop-filter: blur(14px);
+
+            border-bottom: 1px solid var(--line);
+        }
+
+        .header-inner {
+            max-width: 1400px;
+            margin: auto;
+
+            min-height: 78px;
+            padding: 0 32px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 30px;
+        }
+
+        .brand {
+            text-decoration: none;
+            color: var(--ink);
+
+            min-width: 180px;
+        }
+
+        .brand-name {
+            font-family: Georgia, serif;
+
+            font-size: 22px;
+            letter-spacing: 2px;
+
+            line-height: 1;
+        }
+
+        .brand-name span:last-child {
+            color: var(--pink-deep);
+        }
+
+        .brand-tagline {
+            margin-top: 6px;
+
+            font-size: 9px;
+            letter-spacing: 2.4px;
+            text-transform: uppercase;
+
+            color: var(--soft-muted);
+        }
+
+        .main-nav {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+        }
+
+        .nav-link {
+            position: relative;
+
+            text-decoration: none;
+            color: var(--muted);
+
+            font-size: 13px;
+            font-weight: 500;
+
+            padding: 30px 0;
+        }
+
+        .nav-link:hover {
+            color: var(--ink);
+        }
+
+        .nav-link.active {
+            color: var(--ink);
+        }
+
+        .nav-link.active::after {
+            content: "";
+
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 20px;
+
+            height: 2px;
+
+            background: var(--gold);
+        }
+
+        .header-user {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .user-icon {
+            width: 34px;
+            height: 34px;
+
+            border-radius: 50%;
+
+            border: 1px solid var(--gold-light);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: var(--pink-soft);
+
+            color: var(--pink-deep);
+        }
+
+        .user-arrow {
+            font-size: 10px;
+            color: var(--soft-muted);
+        }
+
+        /* =====================================================
+           PAGE
+        ===================================================== */
+
+        .page {
+            max-width: 1400px;
+            margin: auto;
+
+            padding: 45px 32px 70px;
+        }
+
+        .page-heading-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+
+            gap: 25px;
+
+            margin-bottom: 30px;
+        }
+
+        .eyebrow {
+            margin-bottom: 8px;
+
+            font-size: 10px;
+            font-weight: 700;
+
+            letter-spacing: 2px;
+            text-transform: uppercase;
+
+            color: var(--pink-deep);
+        }
+
+        .page-title {
+            margin: 0;
+
+            font-family: Georgia, serif;
+
+            font-size: 38px;
+            line-height: 1.1;
+
+            font-weight: 400;
+        }
+
+        .page-description {
+            margin: 10px 0 0;
+
+            max-width: 600px;
+
+            font-size: 14px;
+            line-height: 1.6;
+
+            color: var(--muted);
+        }
+
+        /* =====================================================
+           BUTTONS
+        ===================================================== */
+
+        .btn {
+            border: 0;
+            border-radius: 8px;
+
+            min-height: 42px;
+
+            padding: 0 18px;
+
+            font-size: 13px;
+            font-weight: 600;
+
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            gap: 8px;
+
+            transition: .2s ease;
+        }
+
+        .btn-primary {
+            background: var(--pink-light);
+            color: var(--ink);
+
+            border: 1px solid #edc7d0;
+        }
+
+        .btn-primary:hover {
+            background: var(--pink);
+            color: white;
+        }
+
+        .btn-dark {
+            background: var(--pink-deep);
+            color: white;
+        }
+
+        .btn-dark:hover {
+            background: #9f4f65;
+        }
+
+        .btn-outline {
+            background: white;
+            color: var(--muted);
+
+            border: 1px solid var(--line);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--gold-light);
+            color: var(--ink);
+        }
+
+        .btn-danger {
+            background: var(--danger-bg);
+            color: var(--danger-text);
+
+            border: 1px solid #f2ccd3;
+        }
+
+        .btn-danger:hover {
+            background: #f5d9de;
+        }
+
+        .plus {
+            font-size: 18px;
+            line-height: 1;
+        }
+
+        /* =====================================================
+           STATS
+        ===================================================== */
+
+        .stats-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, minmax(0, 1fr));
+
+            gap: 18px;
+
+            margin-bottom: 28px;
+        }
+
+        .stat-card {
+            position: relative;
+
+            background: white;
+
+            border: 1px solid var(--line);
+
+            border-radius: 12px;
+
+            padding: 22px;
+
+            box-shadow: var(--shadow-sm);
+
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: "";
+
+            position: absolute;
+
+            top: 0;
+            left: 0;
+            right: 0;
+
+            height: 2px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    var(--pink),
+                    var(--gold),
+                    var(--pink)
+                );
+        }
+
+        .stat-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            margin-bottom: 18px;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: var(--muted);
+        }
+
+        .stat-icon {
+            width: 34px;
+            height: 34px;
+
+            border-radius: 50%;
+
+            background: var(--pink-soft);
+
+            border: 1px solid var(--gold-light);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            color: var(--pink-deep);
+
+            font-size: 14px;
+        }
+
+        .stat-number {
+            font-family: Georgia, serif;
+
+            font-size: 32px;
+
+            line-height: 1;
+        }
+
+        .stat-note {
+            margin-top: 8px;
+
+            font-size: 11px;
+
+            color: var(--soft-muted);
+        }
+
+        /* =====================================================
+           TOOLBAR
+        ===================================================== */
+
+        .toolbar {
+            background: white;
+
+            border: 1px solid var(--line);
+            border-radius: 12px;
+
+            padding: 15px;
+
+            display: flex;
+            align-items: center;
+
+            gap: 10px;
+
+            margin-bottom: 22px;
+
+            box-shadow: var(--shadow-sm);
+        }
+
+        .search-box {
+            position: relative;
+            flex: 1;
+        }
+
+        .search-box input {
+            width: 100%;
+
+            height: 42px;
+
+            padding:
+                0 14px 0 40px;
+
+            border:
+                1px solid var(--line);
+
+            border-radius: 8px;
+
+            outline: none;
+
+            color: var(--ink);
+
+            background: #fff;
+        }
+
+        .search-box input:focus {
+            border-color: var(--gold);
+        }
+
+        .search-icon {
+            position: absolute;
+
+            left: 14px;
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            color: var(--soft-muted);
+
+            font-size: 14px;
+        }
+
+        .filter-select {
+            height: 42px;
+
+            padding: 0 38px 0 13px;
+
+            border:
+                1px solid var(--line);
+
+            border-radius: 8px;
+
+            background: white;
+
+            color: var(--muted);
+
+            outline: none;
+
+            min-width: 145px;
+        }
+
+        .filter-select:focus {
+            border-color: var(--gold);
+        }
+
+        .clear-btn {
+            height: 42px;
+
+            padding: 0 14px;
+
+            border: 0;
+
+            background: transparent;
+
+            color: var(--pink-deep);
+
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        /* =====================================================
+           BRAND GRID
+        ===================================================== */
+
+        .brands-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, minmax(0, 1fr));
+
+            gap: 18px;
+        }
+
+        .brand-card {
+            position: relative;
+
+            background: white;
+
+            border:
+                1px solid var(--line);
+
+            border-radius: 12px;
+
+            padding: 22px;
+
+            min-height: 245px;
+
+            display: flex;
+            flex-direction: column;
+
+            box-shadow: var(--shadow-sm);
+
+            transition:
+                transform .2s ease,
+                box-shadow .2s ease,
+                border-color .2s ease;
+        }
+
+        .brand-card:hover {
+            transform: translateY(-2px);
+
+            border-color: var(--gold-light);
+
+            box-shadow: var(--shadow-md);
+        }
+
+        .brand-card-top {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+
+            gap: 15px;
+        }
+
+        .brand-logo {
+            width: 74px;
+            height: 74px;
+
+            border-radius: 12px;
+
+            overflow: hidden;
+
+            background: var(--pink-soft);
+
+            border: 1px solid var(--gold-light);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .brand-logo img {
+            width: 100%;
+            height: 100%;
+
+            object-fit: contain;
+
+            display: block;
+        }
+
+        .brand-placeholder {
+            font-family: Georgia, serif;
+
+            font-size: 26px;
+
+            color: var(--pink-deep);
+        }
+
+        .status-pill {
+            display: inline-flex;
+            align-items: center;
+
+            min-height: 26px;
+
+            padding: 0 9px;
+
+            border-radius: 999px;
+
+            font-size: 10px;
+            font-weight: 700;
+
+            letter-spacing: .3px;
+        }
+
+        .status-active {
+            background: var(--success-bg);
+            color: var(--success-text);
+        }
+
+        .status-inactive {
+            background: var(--danger-bg);
+            color: var(--danger-text);
+        }
+
+        .brand-card-content {
+            margin-top: 20px;
+        }
+
+        .brand-name {
+            font-family: Georgia, serif;
+
+            font-size: 21px;
+
+            line-height: 1.2;
+
+            margin-bottom: 7px;
+        }
+
+        .brand-slug {
+            color: var(--soft-muted);
+
+            font-size: 12px;
+
+            word-break: break-all;
+        }
+
+        .brand-card-footer {
+            margin-top: auto;
+
+            padding-top: 20px;
+
+            border-top: 1px solid var(--line);
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 10px;
+        }
+
+        .brand-actions {
+            display: flex;
+            gap: 7px;
+        }
+
+        .icon-btn {
+            width: 34px;
+            height: 34px;
+
+            border-radius: 7px;
+
+            border: 1px solid var(--line);
+
+            background: white;
+
+            color: var(--muted);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .icon-btn:hover {
+            border-color: var(--gold-light);
+            color: var(--pink-deep);
+        }
+
+        .delete-btn:hover {
+            border-color: #efc4cc;
+            color: var(--danger-text);
+            background: var(--danger-bg);
+        }
+
+        /* =====================================================
+           EMPTY STATE
+        ===================================================== */
+
+        .empty-state {
+            display: none;
+
+            background: white;
+
+            border: 1px dashed var(--line);
+
+            border-radius: 12px;
+
+            padding: 70px 25px;
+
+            text-align: center;
+        }
+
+        .empty-icon {
+            width: 55px;
+            height: 55px;
+
+            margin: 0 auto 18px;
+
+            border-radius: 50%;
+
+            background: var(--pink-soft);
+
+            color: var(--pink-deep);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 20px;
+        }
+
+        .empty-state h3 {
+            margin: 0 0 8px;
+
+            font-family: Georgia, serif;
+
+            font-size: 22px;
+            font-weight: 400;
+        }
+
+        .empty-state p {
+            margin: 0;
+
+            color: var(--muted);
+
+            font-size: 13px;
+        }
+
+        /* =====================================================
+           MODALS
+        ===================================================== */
+
+        .modal-overlay {
+            position: fixed;
+
+            inset: 0;
+
+            z-index: 3000;
+
+            display: none;
+            align-items: center;
+            justify-content: center;
+
+            padding: 20px;
+
+            background:
+                rgba(36,25,29,.42);
+
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-overlay.show {
+            display: flex;
+        }
+
+        .modal {
+            width: 100%;
+            max-width: 580px;
+
+            max-height:
+                calc(100vh - 40px);
+
+            overflow-y: auto;
+
+            background: white;
+
+            border-radius: 14px;
+
+            box-shadow:
+                0 25px 70px
+                rgba(72,35,46,.16);
+        }
+
+        .modal-header {
+            padding: 22px 24px;
+
+            border-bottom: 1px solid var(--line);
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h2 {
+            margin: 0;
+
+            font-family: Georgia, serif;
+
+            font-size: 24px;
+
+            font-weight: 400;
+        }
+
+        .modal-close {
+            width: 34px;
+            height: 34px;
+
+            border: 0;
+
+            border-radius: 50%;
+
+            background: var(--pink-soft);
+
+            color: var(--pink-deep);
+
+            font-size: 18px;
+        }
+
+        .modal-body {
+            padding: 24px;
+        }
+
+        .form-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, minmax(0, 1fr));
+
+            gap: 18px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+
+            gap: 7px;
+        }
+
+        .form-group.full {
+            grid-column: 1 / -1;
+        }
+
+        .form-label {
+            font-size: 12px;
+
+            font-weight: 600;
+
+            color: var(--ink);
+        }
+
+        .form-control {
+            width: 100%;
+
+            height: 43px;
+
+            padding: 0 12px;
+
+            border:
+                1px solid var(--line);
+
+            border-radius: 8px;
+
+            outline: none;
+
+            color: var(--ink);
+
+            background: white;
+        }
+
+        textarea.form-control {
+            height: 100px;
+
+            padding-top: 12px;
+
+            resize: vertical;
+        }
+
+        .form-control:focus {
+            border-color: var(--gold);
+
+            box-shadow:
+                0 0 0 3px
+                rgba(198,161,91,.10);
+        }
+
+        .form-help {
+            color: var(--soft-muted);
+
+            font-size: 10px;
+
+            line-height: 1.4;
+        }
+
+        .checkbox-row {
+            display: flex;
+            align-items: center;
+
+            gap: 10px;
+
+            margin-top: 4px;
+        }
+
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+
+            gap: 8px;
+
+            cursor: pointer;
+
+            font-size: 13px;
+
+            color: var(--muted);
+        }
+
+        .checkbox-label input {
+            width: 16px;
+            height: 16px;
+
+            accent-color: var(--pink-deep);
+        }
+
+        .modal-footer {
+            padding: 18px 24px;
+
+            border-top: 1px solid var(--line);
+
+            display: flex;
+            justify-content: flex-end;
+
+            gap: 10px;
+        }
+
+        /* =====================================================
+           DELETE MODAL
+        ===================================================== */
+
+        .delete-modal {
+            max-width: 430px;
+        }
+
+        .delete-content {
+            padding: 30px;
+
+            text-align: center;
+        }
+
+        .delete-icon {
+            width: 58px;
+            height: 58px;
+
+            margin: 0 auto 18px;
+
+            border-radius: 50%;
+
+            background: var(--danger-bg);
+
+            color: var(--danger-text);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 22px;
+        }
+
+        .delete-content h3 {
+            margin: 0 0 10px;
+
+            font-family: Georgia, serif;
+
+            font-size: 23px;
+            font-weight: 400;
+        }
+
+        .delete-content p {
+            margin: 0;
+
+            color: var(--muted);
+
+            font-size: 13px;
+
+            line-height: 1.6;
+        }
+
+        .delete-actions {
+            margin-top: 25px;
+
+            display: flex;
+            justify-content: center;
+
+            gap: 10px;
+        }
+
+        /* =====================================================
+           TOAST
+        ===================================================== */
+
+        .toast {
+            position: fixed;
+
+            right: 25px;
+            bottom: 25px;
+
+            z-index: 5000;
+
+            min-width: 280px;
+
+            max-width: 420px;
+
+            padding: 14px 17px;
+
+            border-radius: 9px;
+
+            background: var(--ink);
+
+            color: white;
+
+            font-size: 13px;
+
+            box-shadow:
+                0 12px 30px
+                rgba(0,0,0,.16);
+
+            transform:
+                translateY(20px);
+
+            opacity: 0;
+
+            pointer-events: none;
+
+            transition: .25s ease;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .toast.success {
+            background: var(--success-text);
+        }
+
+        .toast.error {
+            background: var(--danger-text);
+        }
+
+        /* =====================================================
+           LOADING
+        ===================================================== */
+
+        .loading {
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            min-height: 250px;
+
+            color: var(--muted);
+
+            font-size: 13px;
+        }
+
+        .spinner {
+            width: 20px;
+            height: 20px;
+
+            border-radius: 50%;
+
+            border:
+                2px solid var(--pink-light);
+
+            border-top-color:
+                var(--pink-deep);
+
+            animation:
+                spin .7s linear infinite;
+
+            margin-right: 10px;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+
+        @media (max-width: 1100px) {
+
+            .brands-grid {
+                grid-template-columns:
+                    repeat(3, minmax(0, 1fr));
+            }
+
+            .main-nav {
+                gap: 18px;
+            }
+
+            .header-user {
+                display: none;
+            }
+        }
+
+        @media (max-width: 850px) {
+
+            .header-inner {
+                padding: 0 20px;
+            }
+
+            .main-nav {
+                display: none;
+            }
+
+            .page {
+                padding: 30px 20px 50px;
+            }
+
+            .stats-grid {
+                grid-template-columns:
+                    repeat(3, minmax(0, 1fr));
+            }
+
+            .brands-grid {
+                grid-template-columns:
+                    repeat(2, minmax(0, 1fr));
+            }
+
+            .toolbar {
+                flex-wrap: wrap;
+            }
+
+            .search-box {
+                flex-basis: 100%;
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            .header-inner {
+                min-height: 68px;
+            }
+
+            .brand-name {
+                font-size: 19px;
+            }
+
+            .page {
+                padding: 25px 15px 45px;
+            }
+
+            .page-heading-row {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .page-title {
+                font-size: 32px;
+            }
+
+            .page-heading-row .btn {
+                width: 100%;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+
+                gap: 10px;
+            }
+
+            .stat-card {
+                padding: 18px;
+            }
+
+            .stat-number {
+                font-size: 28px;
+            }
+
+            .toolbar {
+                padding: 12px;
+            }
+
+            .filter-select {
+                flex: 1;
+
+                min-width: 0;
+            }
+
+            .clear-btn {
+                width: 100%;
+            }
+
+            .brands-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .brand-card {
+                min-height: 220px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-group.full {
+                grid-column: auto;
+            }
+
+            .modal {
+                max-height:
+                    calc(100vh - 20px);
+            }
+
+            .modal-header,
+            .modal-body,
+            .modal-footer {
+                padding-left: 18px;
+                padding-right: 18px;
+            }
+
+            .modal-footer {
+                flex-direction: column-reverse;
+            }
+
+            .modal-footer .btn {
+                width: 100%;
+            }
+
+            .delete-actions {
+                flex-direction: column-reverse;
+            }
+
+            .delete-actions .btn {
+                width: 100%;
+            }
+
+            .toast {
+                left: 15px;
+                right: 15px;
+                bottom: 15px;
+
+                min-width: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- =========================================================
+     HEADER
+========================================================= -->
+
+<header class="site-header">
+
+    <div class="header-inner">
+
+        <a href="/admin/dashboard" class="brand">
+
+            <div class="brand-name">
+                BEAUTY <span>DEPOT</span>
+            </div>
+
+            <div class="brand-tagline">
+                Beauty for every you
+            </div>
+
+        </a>
+
+
+        <nav class="main-nav">
+
+            <a
+                href="/admin/orders"
+                class="nav-link"
+            >
+              Orders
+            </a>
+
+            <a
+                href="/admin/dashboard"
+                class="nav-link"
+            >
+                Products
+            </a>
+
+            <a
+                href="/admin/categories"
+                class="nav-link"
+            >
+                Categories
+            </a>
+
+            <a
+                href="/admin/subcategories"
+                class="nav-link"
+            >
+                Subcategories
+            </a>
+
+            <a
+                href="/admin/brands"
+                class="nav-link active"
+            >
+                Brands
+            </a>
+
+        </nav>
+
+
+        <div class="header-user">
+
+            <div class="user-icon">
+                ♡
+            </div>
+
+            <span
+                class="user-name"
+                id="userName"
+            >
+                Admin
+            </span>
+
+            <span class="user-arrow">
+                ▾
+            </span>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+<!-- =========================================================
+     PAGE
+========================================================= -->
+
+<main class="page">
+
+    <div class="page-heading-row">
+
+        <div>
+
+            <div class="eyebrow">
+                Catalogue Management
+            </div>
+
+            <h1 class="page-title">
+                Brands
+            </h1>
+
+            <p class="page-description">
+                Manage the beauty brands available across your
+                online store.
+            </p>
+
+        </div>
+
+
+        <button
+            class="btn btn-primary"
+            onclick="openCreateModal()"
+        >
+            <span class="plus">+</span>
+            Add Brand
+        </button>
+
+    </div>
+
+
+    <!-- =====================================================
+         STATS
+    ====================================================== -->
+
+    <section class="stats-grid">
+
+        <div class="stat-card">
+
+            <div class="stat-top">
+
+                <div class="stat-label">
+                    Total Brands
+                </div>
+
+                <div class="stat-icon">
+                    ✦
+                </div>
+
+            </div>
+
+            <div
+                class="stat-number"
+                id="totalBrands"
+            >
+                0
+            </div>
+
+            <div class="stat-note">
+                All brands in catalogue
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-top">
+
+                <div class="stat-label">
+                    Active
+                </div>
+
+                <div class="stat-icon">
+                    ✓
+                </div>
+
+            </div>
+
+            <div
+                class="stat-number"
+                id="activeBrands"
+            >
+                0
+            </div>
+
+            <div class="stat-note">
+                Currently visible
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-top">
+
+                <div class="stat-label">
+                    Inactive
+                </div>
+
+                <div class="stat-icon">
+                    —
+                </div>
+
+            </div>
+
+            <div
+                class="stat-number"
+                id="inactiveBrands"
+            >
+                0
+            </div>
+
+            <div class="stat-note">
+                Hidden from store
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         TOOLBAR
+    ====================================================== -->
+
+    <section class="toolbar">
+
+        <div class="search-box">
+
+            <span class="search-icon">
+                ⌕
+            </span>
+
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Search brands..."
+                autocomplete="off"
+            >
+
+        </div>
+
+
+        <select
+            id="statusFilter"
+            class="filter-select"
+        >
+
+            <option value="all">
+                All Status
+            </option>
+
+            <option value="active">
+                Active
+            </option>
+
+            <option value="inactive">
+                Inactive
+            </option>
+
+        </select>
+
+
+        <button
+            class="clear-btn"
+            onclick="clearFilters()"
+        >
+            Clear Filters
+        </button>
+
+    </section>
+
+
+    <!-- =====================================================
+         BRAND GRID
+    ====================================================== -->
+
+    <section>
+
+        <div
+            id="brandsLoading"
+            class="loading"
+        >
+
+            <div class="spinner"></div>
+
+            Loading brands...
+
+        </div>
+
+
+        <div
+            id="brandsGrid"
+            class="brands-grid"
+        >
+        </div>
+
+
+        <div
+            id="emptyState"
+            class="empty-state"
+        >
+
+            <div class="empty-icon">
+                ✦
+            </div>
+
+            <h3>
+                No brands found
+            </h3>
+
+            <p>
+                Try changing your search or add a new brand.
+            </p>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<!-- =========================================================
+     CREATE / EDIT MODAL
+========================================================= -->
+
+<div
+    id="brandModal"
+    class="modal-overlay"
+>
+
+    <div class="modal">
+
+        <div class="modal-header">
+
+            <h2 id="modalTitle">
+                Add Brand
+            </h2>
+
+            <button
+                class="modal-close"
+                onclick="closeBrandModal()"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <form
+            id="brandForm"
+            onsubmit="saveBrand(event)"
+        >
+
+            <div class="modal-body">
+
+                <div class="form-grid">
+
+                    <!-- NAME -->
+
+                    <div class="form-group full">
+
+                        <label class="form-label">
+                            Brand Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="brandName"
+                            class="form-control"
+                            placeholder="e.g. CeraVe"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- SLUG -->
+
+                    <div class="form-group">
+
+                        <label class="form-label">
+                            Slug
+                        </label>
+
+                        <input
+                            type="text"
+                            id="brandSlug"
+                            class="form-control"
+                            placeholder="cerave"
+                            required
+                        >
+
+                        <div class="form-help">
+                            Used in the brand URL.
+                        </div>
+
+                    </div>
+
+
+                    <!-- LOGO -->
+
+                    <div class="form-group">
+
+                        <label class="form-label">
+                            Logo URL
+                        </label>
+
+                        <input
+                            type="url"
+                            id="brandLogo"
+                            class="form-control"
+                            placeholder="https://..."
+                        >
+
+                        <div class="form-help">
+                            Enter a publicly accessible image URL.
+                        </div>
+
+                    </div>
+
+
+                    <!-- ACTIVE -->
+
+                    <div class="form-group full">
+
+                        <div class="checkbox-row">
+
+                            <label class="checkbox-label">
+
+                                <input
+                                    type="checkbox"
+                                    id="brandActive"
+                                    checked
+                                >
+
+                                Brand is active
+
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="modal-footer">
+
+                <button
+                    type="button"
+                    class="btn btn-outline"
+                    onclick="closeBrandModal()"
+                >
+                    Cancel
+                </button>
+
+                <button
+                    type="submit"
+                    class="btn btn-dark"
+                    id="saveBrandButton"
+                >
+                    Save Brand
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     DELETE MODAL
+========================================================= -->
+
+<div
+    id="deleteModal"
+    class="modal-overlay"
+>
+
+    <div class="modal delete-modal">
+
+        <div class="delete-content">
+
+            <div class="delete-icon">
+                !
+            </div>
+
+            <h3>
+                Delete Brand?
+            </h3>
+
+            <p id="deleteMessage">
+                Are you sure you want to delete this brand?
+            </p>
+
+
+            <div class="delete-actions">
+
+                <button
+                    class="btn btn-outline"
+                    onclick="closeDeleteModal()"
+                >
+                    Cancel
+                </button>
+
+                <button
+                    class="btn btn-danger"
+                    onclick="confirmDelete()"
+                    id="confirmDeleteButton"
+                >
+                    Delete Brand
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     TOAST
+========================================================= -->
+
+<div
+    id="toast"
+    class="toast"
+></div>
+
+
+<script>
+
+/* ============================================================
+   CONFIGURATION
+============================================================ */
+
+const API_BASE = "/api";
+
+let brands = [];
+
+let editingBrandId = null;
+
+let deletingBrandId = null;
+
+
+/* ============================================================
+   AUTH
+============================================================ */
+
+function getToken() {
+
+    return localStorage.getItem("admin_token") ;
+
+}
+
+
+function authHeaders() {
+
+    const token = getToken();
+
+    const headers = {
+        "Content-Type": "application/json"
+    };
+
+    if (token) {
+        headers["Authorization"] =
+            `Bearer ${token}`;
+    }
+
+    return headers;
+}
+
+
+/* ============================================================
+   AUTH CHECK
+============================================================ */
+
+function checkAuthentication() {
+
+    const token = getToken();
+
+    if (!token) {
+
+        window.location.href = "/admin";
+
+        return false;
+
+    }
+
+    return true;
+
+}
+
+
+/* ============================================================
+   INITIAL LOAD
+============================================================ */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
+
+        if (!checkAuthentication()) {
+            return;
+        }
+
+        const storedName =
+            localStorage.getItem("admin_name");
+
+        if (storedName) {
+
+            document.getElementById(
+                "userName"
+            ).textContent = storedName;
+
+        }
+
+        loadBrands();
+
+        setupFilters();
+
+    }
+);
+
+
+/* ============================================================
+   LOAD BRANDS
+============================================================ */
+
+async function loadBrands() {
+
+    const loading =
+        document.getElementById(
+            "brandsLoading"
+        );
+
+    const grid =
+        document.getElementById(
+            "brandsGrid"
+        );
+
+    try {
+
+        loading.style.display = "flex";
+
+        grid.innerHTML = "";
+
+        const response =
+            await fetch(
+                `${API_BASE}/brands/`
+            );
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Failed to load brands"
+            );
+
+        }
+
+        brands =
+            await response.json();
+
+        updateStats();
+
+        renderBrands();
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+        showToast(
+            "Unable to load brands.",
+            "error"
+        );
+
+    }
+
+    finally {
+
+        loading.style.display = "none";
+
+    }
+
+}
+
+
+/* ============================================================
+   STATS
+============================================================ */
+
+function updateStats() {
+
+    const total =
+        brands.length;
+
+    const active =
+        brands.filter(
+            brand => brand.is_active
+        ).length;
+
+    const inactive =
+        total - active;
+
+
+    document.getElementById(
+        "totalBrands"
+    ).textContent = total;
+
+
+    document.getElementById(
+        "activeBrands"
+    ).textContent = active;
+
+
+    document.getElementById(
+        "inactiveBrands"
+    ).textContent = inactive;
+
+}
+
+
+/* ============================================================
+   FILTER SETUP
+============================================================ */
+
+function setupFilters() {
+
+    document.getElementById(
+        "searchInput"
+    ).addEventListener(
+        "input",
+        renderBrands
+    );
+
+
+    document.getElementById(
+        "statusFilter"
+    ).addEventListener(
+        "change",
+        renderBrands
+    );
+
+}
+
+
+/* ============================================================
+   RENDER BRANDS
+============================================================ */
+
+function renderBrands() {
+
+    const grid =
+        document.getElementById(
+            "brandsGrid"
+        );
+
+    const emptyState =
+        document.getElementById(
+            "emptyState"
+        );
+
+
+    const search =
+        document.getElementById(
+            "searchInput"
+        ).value
+        .trim()
+        .toLowerCase();
+
+
+    const status =
+        document.getElementById(
+            "statusFilter"
+        ).value;
+
+
+    const filtered =
+        brands.filter(
+            brand => {
+
+                const matchesSearch =
+                    !search ||
+                    brand.name
+                        .toLowerCase()
+                        .includes(search) ||
+                    brand.slug
+                        .toLowerCase()
+                        .includes(search);
+
+
+                const matchesStatus =
+                    status === "all" ||
+                    (
+                        status === "active" &&
+                        brand.is_active
+                    ) ||
+                    (
+                        status === "inactive" &&
+                        !brand.is_active
+                    );
+
+
+                return (
+                    matchesSearch &&
+                    matchesStatus
+                );
+
+            }
+        );
+
+
+    grid.innerHTML = "";
+
+
+    if (!filtered.length) {
+
+        emptyState.style.display =
+            "block";
+
+        return;
+
+    }
+
+
+    emptyState.style.display =
+        "none";
+
+
+    filtered.forEach(
+        brand => {
+
+            grid.appendChild(
+                createBrandCard(brand)
+            );
+
+        }
+    );
+
+}
+
+
+/* ============================================================
+   CREATE BRAND CARD
+============================================================ */
+
+function createBrandCard(brand) {
+
+    const card =
+        document.createElement("article");
+
+    card.className =
+        "brand-card";
+
+
+    const initial =
+        brand.name
+            ? brand.name
+                .charAt(0)
+                .toUpperCase()
+            : "B";
+
+
+    const logo =
+        brand.logo
+            ? `
+                <img
+                    src="${escapeHtml(brand.logo)}"
+                    alt="${escapeHtml(brand.name)}"
+                    onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                >
+
+                <div
+                    class="brand-placeholder"
+                    style="display:none;"
+                >
+                    ${escapeHtml(initial)}
+                </div>
+              `
+            : `
+                <div class="brand-placeholder">
+                    ${escapeHtml(initial)}
+                </div>
+              `;
+
+
+    const status =
+        brand.is_active
+            ? `
+                <span class="status-pill status-active">
+                    Active
+                </span>
+              `
+            : `
+                <span class="status-pill status-inactive">
+                    Inactive
+                </span>
+              `;
+
+
+    card.innerHTML = `
+
+        <div class="brand-card-top">
+
+            <div class="brand-logo">
+                ${logo}
+            </div>
+
+            ${status}
+
+        </div>
+
+
+        <div class="brand-card-content">
+
+            <div class="brand-name">
+                ${escapeHtml(brand.name)}
+            </div>
+
+            <div class="brand-slug">
+                /${escapeHtml(brand.slug)}
+            </div>
+
+        </div>
+
+
+        <div class="brand-card-footer">
+
+            <span
+                style="
+                    font-size:11px;
+                    color:var(--soft-muted);
+                "
+            >
+                Brand #${brand.id}
+            </span>
+
+
+            <div class="brand-actions">
+
+                <button
+                    class="icon-btn"
+                    title="Edit brand"
+                    onclick="openEditModal(${brand.id})"
+                >
+                    ✎
+                </button>
+
+
+                <button
+                    class="icon-btn delete-btn"
+                    title="Delete brand"
+                    onclick="openDeleteModal(${brand.id})"
+                >
+                    ×
+                </button>
+
+            </div>
+
+        </div>
+
+    `;
+
+
+    return card;
+
+}
+
+
+/* ============================================================
+   CREATE MODAL
+============================================================ */
+
+function openCreateModal() {
+
+    editingBrandId = null;
+
+    document.getElementById(
+        "modalTitle"
+    ).textContent =
+        "Add Brand";
+
+
+    document.getElementById(
+        "saveBrandButton"
+    ).textContent =
+        "Save Brand";
+
+
+    document.getElementById(
+        "brandForm"
+    ).reset();
+
+
+    document.getElementById(
+        "brandActive"
+    ).checked = true;
+
+
+    document.getElementById(
+        "brandModal"
+    ).classList.add("show");
+
+
+    setTimeout(
+        () => {
+
+            document.getElementById(
+                "brandName"
+            ).focus();
+
+        },
+        100
+    );
+
+}
+
+
+/* ============================================================
+   EDIT MODAL
+============================================================ */
+
+function openEditModal(brandId) {
+
+    const brand =
+        brands.find(
+            item => item.id === brandId
+        );
+
+
+    if (!brand) {
+        return;
+    }
+
+
+    editingBrandId =
+        brandId;
+
+
+    document.getElementById(
+        "modalTitle"
+    ).textContent =
+        "Edit Brand";
+
+
+    document.getElementById(
+        "saveBrandButton"
+    ).textContent =
+        "Update Brand";
+
+
+    document.getElementById(
+        "brandName"
+    ).value =
+        brand.name || "";
+
+
+    document.getElementById(
+        "brandSlug"
+    ).value =
+        brand.slug || "";
+
+
+    document.getElementById(
+        "brandLogo"
+    ).value =
+        brand.logo || "";
+
+
+    document.getElementById(
+        "brandActive"
+    ).checked =
+        Boolean(brand.is_active);
+
+
+    document.getElementById(
+        "brandModal"
+    ).classList.add("show");
+
+}
+
+
+/* ============================================================
+   CLOSE BRAND MODAL
+============================================================ */
+
+function closeBrandModal() {
+
+    document.getElementById(
+        "brandModal"
+    ).classList.remove("show");
+
+    editingBrandId = null;
+
+}
+
+
+/* ============================================================
+   AUTO SLUG
+============================================================ */
+
+document.getElementById(
+    "brandName"
+).addEventListener(
+    "input",
+    function () {
+
+        if (editingBrandId !== null) {
+            return;
+        }
+
+
+        const slug =
+            this.value
+                .toLowerCase()
+                .trim()
+                .replace(
+                    /[^a-z0-9]+/g,
+                    "-"
+                )
+                .replace(
+                    /^-+|-+$/g,
+                    ""
+                );
+
+
+        document.getElementById(
+            "brandSlug"
+        ).value = slug;
+
+    }
+);
+
+
+/* ============================================================
+   SAVE BRAND
+============================================================ */
+
+async function saveBrand(event) {
+
+    event.preventDefault();
+
+
+    const button =
+        document.getElementById(
+            "saveBrandButton"
+        );
+
+
+    const name =
+        document.getElementById(
+            "brandName"
+        ).value.trim();
+
+
+    const slug =
+        document.getElementById(
+            "brandSlug"
+        ).value.trim();
+
+
+    const logo =
+        document.getElementById(
+            "brandLogo"
+        ).value.trim();
+
+
+    const isActive =
+        document.getElementById(
+            "brandActive"
+        ).checked;
+
+
+    if (!name) {
+
+        showToast(
+            "Brand name is required.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    if (!slug) {
+
+        showToast(
+            "Brand slug is required.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    const payload = {
+
+        name: name,
+
+        slug: slug,
+
+        logo: logo || null,
+
+        is_active: isActive
+
+    };
+
+
+    try {
+
+        button.disabled = true;
+
+        button.textContent =
+            editingBrandId
+                ? "Updating..."
+                : "Saving...";
+
+
+        let response;
+
+
+        if (editingBrandId) {
+
+            response =
+                await fetch(
+                    `${API_BASE}/brands/${editingBrandId}`,
+                    {
+                        method: "PUT",
+
+                        headers:
+                            authHeaders(),
+
+                        body:
+                            JSON.stringify(payload)
+                    }
+                );
+
+        } else {
+
+            response =
+                await fetch(
+                    `${API_BASE}/brands/`,
+                    {
+                        method: "POST",
+
+                        headers:
+                            authHeaders(),
+
+                        body:
+                            JSON.stringify(payload)
+                    }
+                );
+
+        }
+
+
+        const data =
+            await response.json();
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                data.detail ||
+                "Unable to save brand."
+            );
+
+        }
+
+
+        closeBrandModal();
+
+
+        showToast(
+            editingBrandId
+                ? "Brand updated successfully."
+                : "Brand created successfully.",
+            "success"
+        );
+
+
+        await loadBrands();
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+        showToast(
+            error.message ||
+            "Something went wrong.",
+            "error"
+        );
+
+    }
+
+    finally {
+
+        button.disabled = false;
+
+        button.textContent =
+            editingBrandId
+                ? "Update Brand"
+                : "Save Brand";
+
+    }
+
+}
+
+
+/* ============================================================
+   DELETE MODAL
+============================================================ */
+
+function openDeleteModal(brandId) {
+
+    const brand =
+        brands.find(
+            item => item.id === brandId
+        );
+
+
+    if (!brand) {
+        return;
+    }
+
+
+    deletingBrandId =
+        brandId;
+
+
+    document.getElementById(
+        "deleteMessage"
+    ).innerHTML = `
+        Are you sure you want to delete
+        <strong>${escapeHtml(brand.name)}</strong>?
+        <br><br>
+        This action cannot be undone.
+    `;
+
+
+    document.getElementById(
+        "deleteModal"
+    ).classList.add("show");
+
+}
+
+
+/* ============================================================
+   CLOSE DELETE MODAL
+============================================================ */
+
+function closeDeleteModal() {
+
+    document.getElementById(
+        "deleteModal"
+    ).classList.remove("show");
+
+    deletingBrandId = null;
+
+}
+
+
+/* ============================================================
+   CONFIRM DELETE
+============================================================ */
+
+async function confirmDelete() {
+
+    if (!deletingBrandId) {
+        return;
+    }
+
+
+    const button =
+        document.getElementById(
+            "confirmDeleteButton"
+        );
+
+
+    const brandId =
+        deletingBrandId;
+
+
+    try {
+
+        button.disabled = true;
+
+        button.textContent =
+            "Deleting...";
+
+
+        const response =
+            await fetch(
+                `${API_BASE}/brands/${brandId}`,
+                {
+                    method: "DELETE",
+
+                    headers:
+                        authHeaders()
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                data.detail ||
+                "Unable to delete brand."
+            );
+
+        }
+
+
+        closeDeleteModal();
+
+
+        showToast(
+            "Brand deleted successfully.",
+            "success"
+        );
+
+
+        await loadBrands();
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+        showToast(
+            error.message ||
+            "Unable to delete brand.",
+            "error"
+        );
+
+    }
+
+    finally {
+
+        button.disabled = false;
+
+        button.textContent =
+            "Delete Brand";
+
+    }
+
+}
+
+
+/* ============================================================
+   CLEAR FILTERS
+============================================================ */
+
+function clearFilters() {
+
+    document.getElementById(
+        "searchInput"
+    ).value = "";
+
+
+    document.getElementById(
+        "statusFilter"
+    ).value = "all";
+
+
+    renderBrands();
+
+}
+
+
+/* ============================================================
+   TOAST
+============================================================ */
+
+let toastTimer = null;
+
+
+function showToast(message, type = "") {
+
+    const toast =
+        document.getElementById(
+            "toast"
+        );
+
+
+    toast.textContent =
+        message;
+
+
+    toast.className =
+        "toast show " +
+        type;
+
+
+    clearTimeout(
+        toastTimer
+    );
+
+
+    toastTimer =
+        setTimeout(
+            () => {
+
+                toast.classList.remove(
+                    "show"
+                );
+
+            },
+            3500
+        );
+
+}
+
+
+/* ============================================================
+   ESCAPE HTML
+============================================================ */
+
+function escapeHtml(value) {
+
+    if (
+        value === null ||
+        value === undefined
+    ) {
+        return "";
+    }
+
+
+    return String(value)
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+        .replace(
+            /</g,
+            "&lt;"
+        )
+        .replace(
+            />/g,
+            "&gt;"
+        )
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
+}
+
+
+/* ============================================================
+   CLOSE MODALS WHEN CLICKING OVERLAY
+============================================================ */
+
+document.getElementById(
+    "brandModal"
+).addEventListener(
+    "click",
+    function(event) {
+
+        if (
+            event.target === this
+        ) {
+
+            closeBrandModal();
+
+        }
+
+    }
+);
+
+
+document.getElementById(
+    "deleteModal"
+).addEventListener(
+    "click",
+    function(event) {
+
+        if (
+            event.target === this
+        ) {
+
+            closeDeleteModal();
+
+        }
+
+    }
+);
+
+
+/* ============================================================
+   ESC KEY
+============================================================ */
+
+document.addEventListener(
+    "keydown",
+    function(event) {
+
+        if (
+            event.key !== "Escape"
+        ) {
+            return;
+        }
+
+
+        closeBrandModal();
+
+        closeDeleteModal();
+
+    }
+);
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1718 @@
+{% extends "base.html" %}
+
+{% block title %}
+Product | Beauty Depot
+{% endblock %}
+
+{% block description %}
+Discover premium beauty products at Beauty Depot.
+{% endblock %}
+
+{% block extra_css %}
+
+<style>
+
+/* =========================================================
+   PRODUCT DETAILS
+========================================================= */
+
+.product-page {
+    padding: 45px 0 110px;
+}
+
+
+/* =========================================================
+   BREADCRUMB
+========================================================= */
+
+.product-breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin-bottom: 45px;
+
+    font-size: 11px;
+    color: var(--muted);
+}
+
+.product-breadcrumb a {
+    color: var(--muted);
+    text-decoration: none;
+}
+
+.product-breadcrumb a:hover {
+    color: var(--black);
+}
+
+.product-breadcrumb .separator {
+    color: #bbb;
+}
+
+.product-breadcrumb .current {
+    color: var(--text);
+}
+
+
+/* =========================================================
+   PRODUCT LAYOUT
+========================================================= */
+
+.product-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(400px, .95fr);
+    gap: 80px;
+    align-items: start;
+}
+
+
+/* =========================================================
+   IMAGE
+========================================================= */
+
+.product-image-wrap {
+    position: relative;
+    background: #f7f7f7;
+    overflow: hidden;
+}
+
+.product-main-image {
+    width: 100%;
+    aspect-ratio: 1 / 1.08;
+    display: block;
+    object-fit: cover;
+}
+
+
+/* =========================================================
+   BADGES
+========================================================= */
+
+.product-detail-badges {
+    position: absolute;
+    top: 18px;
+    left: 18px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+
+    z-index: 2;
+}
+
+.product-detail-badge {
+    display: inline-flex;
+    align-items: center;
+
+    width: fit-content;
+
+    padding: 6px 10px;
+
+    background: var(--black);
+    color: var(--white);
+
+    font-size: 9px;
+    letter-spacing: .8px;
+    text-transform: uppercase;
+}
+
+.product-detail-badge.sale {
+    background: var(--white);
+    color: var(--black);
+    border: 1px solid #ddd;
+}
+
+
+/* =========================================================
+   PRODUCT INFO
+========================================================= */
+
+.product-info {
+    padding-top: 5px;
+}
+
+.product-brand {
+    margin-bottom: 13px;
+
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+
+    color: #777;
+}
+
+.product-name {
+    margin: 0 0 20px;
+
+    font-family: var(--serif);
+    font-size: clamp(38px, 4vw, 58px);
+    line-height: 1.08;
+    font-weight: 500;
+
+    color: var(--black);
+}
+
+.product-price {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+
+    margin-bottom: 28px;
+
+    font-size: 16px;
+}
+
+.product-sale-price {
+    font-weight: 600;
+    color: var(--black);
+}
+
+.product-regular-price {
+    color: #999;
+    text-decoration: line-through;
+}
+
+.product-description {
+    padding: 25px 0;
+
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.9;
+}
+
+.product-description p {
+    margin: 0;
+}
+
+
+/* =========================================================
+   AVAILABILITY
+========================================================= */
+
+.product-availability {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    margin-top: 22px;
+
+    font-size: 11px;
+    letter-spacing: .5px;
+}
+
+.availability-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #111;
+}
+
+.availability-unavailable {
+    color: #888;
+}
+
+.availability-unavailable .availability-dot {
+    background: #bbb;
+}
+
+
+/* =========================================================
+   PURCHASE AREA
+========================================================= */
+
+.purchase-area {
+    display: flex;
+    align-items: stretch;
+    gap: 12px;
+
+    margin-top: 30px;
+}
+
+.quantity-control {
+    display: flex;
+    align-items: center;
+
+    height: 52px;
+
+    border: 1px solid var(--border);
+}
+
+.quantity-btn {
+    width: 45px;
+    height: 100%;
+
+    border: 0;
+    background: var(--white);
+
+    font-size: 18px;
+    color: var(--black);
+
+    cursor: pointer;
+}
+
+.quantity-btn:hover {
+    background: #f8f8f8;
+}
+
+.quantity-value {
+    width: 42px;
+
+    text-align: center;
+
+    font-size: 13px;
+    font-weight: 500;
+}
+
+
+.add-cart-btn {
+    flex: 1;
+
+    height: 52px;
+
+    border: 1px solid var(--black);
+
+    background: var(--black);
+    color: var(--white);
+
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+
+    cursor: pointer;
+
+    transition:
+        background .2s ease,
+        color .2s ease;
+}
+
+.add-cart-btn:hover {
+    background: var(--white);
+    color: var(--black);
+}
+
+.add-cart-btn:disabled {
+    background: #eee;
+    color: #999;
+    border-color: #eee;
+    cursor: not-allowed;
+}
+
+
+/* =========================================================
+   BUY NOW
+========================================================= */
+
+.buy-now-btn {
+    width: 100%;
+    height: 50px;
+
+    margin-top: 12px;
+
+    border: 1px solid var(--black);
+
+    background: var(--white);
+    color: var(--black);
+
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+
+    cursor: pointer;
+}
+
+.buy-now-btn:hover {
+    background: var(--black);
+    color: var(--white);
+}
+
+
+/* =========================================================
+   TRUST INFORMATION
+========================================================= */
+
+.product-trust {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    margin-top: 38px;
+
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+}
+
+.trust-item {
+    padding: 19px 0;
+
+    font-size: 11px;
+    color: var(--muted);
+}
+
+.trust-item:nth-child(odd) {
+    padding-right: 20px;
+    border-right: 1px solid var(--border);
+}
+
+.trust-item:nth-child(even) {
+    padding-left: 20px;
+}
+
+.trust-title {
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: var(--black);
+
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: .8px;
+    text-transform: uppercase;
+}
+
+
+/* =========================================================
+   PRODUCT META
+========================================================= */
+
+.product-meta {
+    margin-top: 25px;
+}
+
+.meta-row {
+    display: flex;
+    justify-content: space-between;
+
+    padding: 10px 0;
+
+    border-bottom: 1px solid #f1f1f1;
+
+    font-size: 11px;
+}
+
+.meta-label {
+    color: #888;
+}
+
+.meta-value {
+    color: var(--text);
+}
+
+
+/* =========================================================
+   LOADING
+========================================================= */
+
+.product-loading {
+    min-height: 500px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.product-spinner {
+    width: 27px;
+    height: 27px;
+
+    border: 2px solid #eee;
+    border-top-color: var(--black);
+
+    border-radius: 50%;
+
+    animation: productSpin .8s linear infinite;
+}
+
+@keyframes productSpin {
+
+    to {
+        transform: rotate(360deg);
+    }
+
+}
+
+
+/* =========================================================
+   ERROR
+========================================================= */
+
+.product-error {
+    max-width: 600px;
+
+    margin: 100px auto;
+
+    text-align: center;
+}
+
+.product-error h1 {
+    margin-bottom: 12px;
+
+    font-family: var(--serif);
+    font-size: 38px;
+    font-weight: 500;
+}
+
+.product-error p {
+    margin-bottom: 25px;
+
+    color: var(--muted);
+    font-size: 14px;
+}
+
+.back-shop-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    height: 45px;
+    padding: 0 25px;
+
+    background: var(--black);
+    color: var(--white);
+
+    text-decoration: none;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+.product-toast {
+    position: fixed;
+
+    right: 25px;
+    bottom: 25px;
+
+    z-index: 9999;
+
+    min-width: 250px;
+
+    padding: 15px 18px;
+
+    background: var(--black);
+    color: var(--white);
+
+    font-size: 12px;
+
+    opacity: 0;
+    transform: translateY(15px);
+
+    pointer-events: none;
+
+    transition:
+        opacity .25s ease,
+        transform .25s ease;
+}
+
+.product-toast.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 900px) {
+
+    .product-layout {
+        grid-template-columns: 1fr;
+        gap: 45px;
+    }
+
+    .product-info {
+        padding-top: 0;
+    }
+
+    .product-name {
+        font-size: 42px;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .product-page {
+        padding: 30px 0 80px;
+    }
+
+    .product-breadcrumb {
+        margin-bottom: 25px;
+    }
+
+    .product-name {
+        font-size: 36px;
+    }
+
+    .product-layout {
+        gap: 35px;
+    }
+
+    .purchase-area {
+        gap: 8px;
+    }
+
+    .quantity-control {
+        flex-shrink: 0;
+    }
+
+    .product-trust {
+        grid-template-columns: 1fr;
+    }
+
+    .trust-item:nth-child(odd) {
+        padding-right: 0;
+        border-right: 0;
+        border-bottom: 1px solid var(--border);
+    }
+
+    .trust-item:nth-child(even) {
+        padding-left: 0;
+    }
+
+}
+
+
+/* =========================================================
+   VERY SMALL SCREENS
+========================================================= */
+
+@media (max-width: 380px) {
+
+    .product-name {
+        font-size: 31px;
+    }
+
+    .quantity-btn {
+        width: 38px;
+    }
+
+    .quantity-value {
+        width: 35px;
+    }
+
+    .add-cart-btn {
+        font-size: 9px;
+    }
+
+}
+
+</style>
+
+{% endblock %}
+
+
+{% block content %}
+
+<section class="product-page">
+
+    <div class="container">
+
+        <!-- =================================================
+             BREADCRUMB
+        ================================================== -->
+
+        <div class="product-breadcrumb">
+
+            <a href="/">
+                Home
+            </a>
+
+            <span class="separator">
+                /
+            </span>
+
+            <a href="/shop">
+                Shop
+            </a>
+
+            <span class="separator">
+                /
+            </span>
+
+            <span
+                class="current"
+                id="breadcrumbProduct"
+            >
+                Product
+            </span>
+
+        </div>
+
+
+        <!-- =================================================
+             PRODUCT CONTENT
+        ================================================== -->
+
+        <div
+            id="productContent"
+            class="product-layout"
+            style="display:none;"
+        >
+
+            <!-- =================================================
+                 IMAGE
+            ================================================== -->
+
+            <div>
+
+                <div class="product-image-wrap">
+
+                    <div
+                        class="product-detail-badges"
+                        id="productBadges"
+                    ></div>
+
+                    <img
+                        id="productImage"
+                        class="product-main-image"
+                        src="/static/images/product-placeholder.jpg"
+                        alt="Product"
+                    >
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 PRODUCT INFORMATION
+            ================================================== -->
+
+            <div class="product-info">
+
+                <div
+                    class="product-brand"
+                    id="productBrand"
+                ></div>
+
+
+                <h1
+                    class="product-name"
+                    id="productName"
+                ></h1>
+
+
+                <div
+                    class="product-price"
+                    id="productPrice"
+                ></div>
+
+
+                <div
+                    class="product-description"
+                    id="productDescription"
+                >
+                </div>
+
+
+                <div
+                    class="product-availability"
+                    id="productAvailability"
+                >
+                </div>
+
+
+                <!-- PURCHASE -->
+
+                <div class="purchase-area">
+
+                    <div class="quantity-control">
+
+                        <button
+                            type="button"
+                            class="quantity-btn"
+                            onclick="decreaseQuantity()"
+                        >
+                            −
+                        </button>
+
+                        <span
+                            class="quantity-value"
+                            id="quantityValue"
+                        >
+                            1
+                        </span>
+
+                        <button
+                            type="button"
+                            class="quantity-btn"
+                            onclick="increaseQuantity()"
+                        >
+                            +
+                        </button>
+
+                    </div>
+
+
+                    <button
+                        type="button"
+                        class="add-cart-btn"
+                        id="addCartButton"
+                        onclick="addProductToCart()"
+                    >
+                        Add to Cart
+                    </button>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="buy-now-btn"
+                    id="buyNowButton"
+                    onclick="buyNow()"
+                >
+                    Buy Now
+                </button>
+
+
+                <!-- TRUST -->
+
+                <div class="product-trust">
+
+                    <div class="trust-item">
+
+                        <span class="trust-title">
+                            Authentic Products
+                        </span>
+
+                        Carefully selected beauty essentials.
+
+                    </div>
+
+
+                    <div class="trust-item">
+
+                        <span class="trust-title">
+                            Pay on Delivery
+                        </span>
+
+                        Pay when your order arrives.
+
+                    </div>
+
+
+                    <div class="trust-item">
+
+                        <span class="trust-title">
+                            Beauty Depot
+                        </span>
+
+                        Quality products, simply delivered.
+
+                    </div>
+
+
+                    <div class="trust-item">
+
+                        <span class="trust-title">
+                            Need Help?
+                        </span>
+
+                        Contact us for product assistance.
+
+                    </div>
+
+                </div>
+
+
+                <!-- META -->
+
+                <div
+                    class="product-meta"
+                    id="productMeta"
+                ></div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             LOADING
+        ================================================== -->
+
+        <div
+            id="productLoading"
+            class="product-loading"
+        >
+
+            <div class="product-spinner"></div>
+
+        </div>
+
+
+        <!-- =================================================
+             ERROR
+        ================================================== -->
+
+        <div
+            id="productError"
+            class="product-error"
+            style="display:none;"
+        >
+
+            <h1>
+                Product Not Found
+            </h1>
+
+            <p>
+                We couldn't find the product you're looking for.
+            </p>
+
+            <a
+                href="/shop"
+                class="back-shop-btn"
+            >
+                Back to Shop
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<div
+    id="productToast"
+    class="product-toast"
+></div>
+
+{% endblock %}
+
+
+{% block extra_js %}
+
+<script>
+
+/* =========================================================
+   STATE
+========================================================= */
+
+let currentProduct = null;
+
+let productQuantity = 1;
+
+const API_BASE = "/api";
+
+
+/* =========================================================
+   INITIALIZE
+========================================================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    loadProduct
+);
+
+
+/* =========================================================
+   GET PRODUCT ID
+========================================================= */
+
+function getProductId() {
+
+    const parts =
+        window.location.pathname
+            .split("/")
+            .filter(Boolean);
+
+    const productIndex =
+        parts.indexOf("product");
+
+    if (
+        productIndex === -1 ||
+        !parts[productIndex + 1]
+    ) {
+        return null;
+    }
+
+    const id =
+        Number(
+            parts[productIndex + 1]
+        );
+
+    return Number.isInteger(id) && id > 0
+        ? id
+        : null;
+}
+
+
+/* =========================================================
+   LOAD PRODUCT
+========================================================= */
+
+async function loadProduct() {
+
+    const productId =
+        getProductId();
+
+    if (!productId) {
+
+        showProductError();
+
+        return;
+
+    }
+
+    try {
+
+        const response =
+            await fetch(
+                `${API_BASE}/products/${productId}`
+            );
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Product not found"
+            );
+
+        }
+
+        const product =
+            await response.json();
+
+        currentProduct =
+            product;
+
+        renderProduct(product);
+
+    } catch (error) {
+
+        console.error(
+            "PRODUCT LOAD ERROR:",
+            error
+        );
+
+        showProductError();
+
+    }
+
+}
+
+
+/* =========================================================
+   RENDER PRODUCT
+========================================================= */
+
+function renderProduct(product) {
+
+    document.title =
+        `${product.name || "Product"} | Beauty Depot`;
+
+
+    const productContent =
+        document.getElementById(
+            "productContent"
+        );
+
+    const loading =
+        document.getElementById(
+            "productLoading"
+        );
+
+
+    loading.style.display =
+        "none";
+
+    productContent.style.display =
+        "grid";
+
+
+    /* =====================================================
+       IMAGE
+    ===================================================== */
+
+    const image =
+        product.image ||
+        "/static/images/product-placeholder.jpg";
+
+    const productImage =
+        document.getElementById(
+            "productImage"
+        );
+
+    productImage.src =
+        image;
+
+    productImage.alt =
+        product.name || "Product";
+
+    productImage.onerror =
+        function () {
+
+            this.src =
+                "/static/images/product-placeholder.jpg";
+
+        };
+
+
+    /* =====================================================
+       BRAND
+    ===================================================== */
+
+    const brand =
+        product.brand &&
+        product.brand.name
+            ? product.brand.name
+            : "";
+
+    document.getElementById(
+        "productBrand"
+    ).textContent =
+        brand;
+
+
+    /* =====================================================
+       NAME
+    ===================================================== */
+
+    document.getElementById(
+        "productName"
+    ).textContent =
+        product.name || "";
+
+
+    document.getElementById(
+        "breadcrumbProduct"
+    ).textContent =
+        product.name || "Product";
+
+
+    /* =====================================================
+       PRICE
+    ===================================================== */
+
+    const regularPrice =
+        Number(
+            product.price || 0
+        );
+
+    const salePrice =
+        product.sale_price !== null &&
+        product.sale_price !== undefined
+            ? Number(
+                product.sale_price
+            )
+            : null;
+
+    const hasSale =
+        salePrice !== null &&
+        salePrice < regularPrice;
+
+
+    const priceContainer =
+        document.getElementById(
+            "productPrice"
+        );
+
+
+    if (hasSale) {
+
+        priceContainer.innerHTML = `
+
+            <span class="product-sale-price">
+                KSh ${formatPrice(salePrice)}
+            </span>
+
+            <span class="product-regular-price">
+                KSh ${formatPrice(regularPrice)}
+            </span>
+
+        `;
+
+    } else {
+
+        priceContainer.innerHTML = `
+
+            <span class="product-sale-price">
+                KSh ${formatPrice(regularPrice)}
+            </span>
+
+        `;
+
+    }
+
+
+    /* =====================================================
+       BADGES
+    ===================================================== */
+
+    const badges =
+        document.getElementById(
+            "productBadges"
+        );
+
+    badges.innerHTML = "";
+
+
+    if (hasSale) {
+
+        badges.innerHTML += `
+
+            <span class="product-detail-badge sale">
+                Sale
+            </span>
+
+        `;
+
+    }
+
+
+    if (product.is_new_arrival) {
+
+        badges.innerHTML += `
+
+            <span class="product-detail-badge">
+                New
+            </span>
+
+        `;
+
+    }
+
+
+    /* =====================================================
+       DESCRIPTION
+    ===================================================== */
+
+    const description =
+        document.getElementById(
+            "productDescription"
+        );
+
+
+    if (product.description) {
+
+        description.innerHTML = `
+
+            <p>
+                ${escapeHTML(
+                    product.description
+                )}
+            </p>
+
+        `;
+
+    } else {
+
+        description.innerHTML = `
+
+            <p>
+                Discover more about this product
+                from Beauty Depot.
+            </p>
+
+        `;
+
+    }
+
+
+    /* =====================================================
+       AVAILABILITY
+    ===================================================== */
+
+    const availability =
+        document.getElementById(
+            "productAvailability"
+        );
+
+
+    if (product.is_available) {
+
+        availability.className =
+            "product-availability";
+
+        availability.innerHTML = `
+
+            <span class="availability-dot"></span>
+
+            <span>
+                In Stock
+            </span>
+
+        `;
+
+    } else {
+
+        availability.className =
+            "product-availability availability-unavailable";
+
+        availability.innerHTML = `
+
+            <span class="availability-dot"></span>
+
+            <span>
+                Currently unavailable
+            </span>
+
+        `;
+
+    }
+
+
+    /* =====================================================
+       BUTTONS
+    ===================================================== */
+
+    const addButton =
+        document.getElementById(
+            "addCartButton"
+        );
+
+    const buyButton =
+        document.getElementById(
+            "buyNowButton"
+        );
+
+
+    addButton.disabled =
+        !product.is_available;
+
+    buyButton.disabled =
+        !product.is_available;
+
+
+    /* =====================================================
+       META
+    ===================================================== */
+
+    const meta =
+        document.getElementById(
+            "productMeta"
+        );
+
+    let metaHTML = "";
+
+
+    if (product.sku) {
+
+        metaHTML += `
+
+            <div class="meta-row">
+
+                <span class="meta-label">
+                    SKU
+                </span>
+
+                <span class="meta-value">
+                    ${escapeHTML(
+                        product.sku
+                    )}
+                </span>
+
+            </div>
+
+        `;
+
+    }
+
+
+    if (brand) {
+
+        metaHTML += `
+
+            <div class="meta-row">
+
+                <span class="meta-label">
+                    Brand
+                </span>
+
+                <span class="meta-value">
+                    ${escapeHTML(
+                        brand
+                    )}
+                </span>
+
+            </div>
+
+        `;
+
+    }
+
+
+    meta.innerHTML =
+        metaHTML;
+
+}
+
+
+/* =========================================================
+   QUANTITY
+========================================================= */
+
+function increaseQuantity() {
+
+    if (!currentProduct) {
+        return;
+    }
+
+    if (!currentProduct.is_available) {
+        return;
+    }
+
+    productQuantity += 1;
+
+    updateQuantityDisplay();
+
+}
+
+
+function decreaseQuantity() {
+
+    if (productQuantity <= 1) {
+        return;
+    }
+
+    productQuantity -= 1;
+
+    updateQuantityDisplay();
+
+}
+
+
+function updateQuantityDisplay() {
+
+    document.getElementById(
+        "quantityValue"
+    ).textContent =
+        productQuantity;
+
+}
+
+
+/* =========================================================
+   CART
+========================================================= */
+
+function getCart() {
+
+    try {
+
+        return JSON.parse(
+            localStorage.getItem(
+                "beauty_cart"
+            ) || "[]"
+        );
+
+    } catch (error) {
+
+        return [];
+
+    }
+
+}
+
+
+function saveCart(cart) {
+
+    localStorage.setItem(
+        "beauty_cart",
+        JSON.stringify(cart)
+    );
+
+}
+
+
+/* =========================================================
+   ADD TO CART
+========================================================= */
+
+function addProductToCart() {
+
+    if (!currentProduct) {
+        return;
+    }
+
+    if (!currentProduct.is_available) {
+        return;
+    }
+
+
+    const cart =
+        getCart();
+
+
+    const existing =
+        cart.find(
+            item =>
+                Number(
+                    item.product_id
+                ) === Number(
+                    currentProduct.id
+                )
+        );
+
+
+    const price =
+        currentProduct.sale_price ??
+        currentProduct.price;
+
+
+    if (existing) {
+
+        existing.quantity +=
+            productQuantity;
+
+    } else {
+
+        cart.push({
+
+            product_id:
+                currentProduct.id,
+
+            name:
+                currentProduct.name,
+
+            price:
+                price,
+
+            image:
+                currentProduct.image ||
+                "",
+
+            quantity:
+                productQuantity
+
+        });
+
+    }
+
+
+    saveCart(cart);
+
+
+    if (typeof updateCartCount === "function") {
+
+        updateCartCount();
+
+    }
+
+
+    showToast(
+        productQuantity === 1
+            ? "Added to cart"
+            : `${productQuantity} items added to cart`
+    );
+
+}
+
+
+/* =========================================================
+   BUY NOW
+========================================================= */
+
+function buyNow() {
+
+    if (!currentProduct) {
+        return;
+    }
+
+    if (!currentProduct.is_available) {
+        return;
+    }
+
+
+    const cart =
+        getCart();
+
+
+    const existing =
+        cart.find(
+            item =>
+                Number(
+                    item.product_id
+                ) === Number(
+                    currentProduct.id
+                )
+        );
+
+
+    const price =
+        currentProduct.sale_price ??
+        currentProduct.price;
+
+
+    if (existing) {
+
+        existing.quantity +=
+            productQuantity;
+
+    } else {
+
+        cart.push({
+
+            product_id:
+                currentProduct.id,
+
+            name:
+                currentProduct.name,
+
+            price:
+                price,
+
+            image:
+                currentProduct.image ||
+                "",
+
+            quantity:
+                productQuantity
+
+        });
+
+    }
+
+
+    saveCart(cart);
+
+
+    if (typeof updateCartCount === "function") {
+
+        updateCartCount();
+
+    }
+
+
+    window.location.href =
+        "/cart";
+
+}
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+let toastTimer = null;
+
+
+function showToast(message) {
+
+    const toast =
+        document.getElementById(
+            "productToast"
+        );
+
+
+    toast.textContent =
+        message;
+
+
+    toast.classList.add(
+        "show"
+    );
+
+
+    clearTimeout(
+        toastTimer
+    );
+
+
+    toastTimer =
+        setTimeout(
+            function () {
+
+                toast.classList.remove(
+                    "show"
+                );
+
+            },
+            2200
+        );
+
+}
+
+
+/* =========================================================
+   ERROR
+========================================================= */
+
+function showProductError() {
+
+    document.getElementById(
+        "productLoading"
+    ).style.display =
+        "none";
+
+
+    document.getElementById(
+        "productContent"
+    ).style.display =
+        "none";
+
+
+    document.getElementById(
+        "productError"
+    ).style.display =
+        "block";
+
+}
+
+
+/* =========================================================
+   PRICE FORMAT
+========================================================= */
+
+function formatPrice(value) {
+
+    return Number(
+        value || 0
+    ).toLocaleString(
+        "en-KE",
+        {
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 0
+        }
+    );
+
+}
+
+
+/* =========================================================
+   HTML ESCAPE
+========================================================= */
+
+function escapeHTML(value) {
+
+    return String(
+        value ?? ""
+    )
+    .replace(
+        /&/g,
+        "&amp;"
+    )
+    .replace(
+        /</g,
+        "&lt;"
+    )
+    .replace(
+        />/g,
+        "&gt;"
+    )
+    .replace(
+        /"/g,
+        "&quot;"
+    )
+    .replace(
+        /'/g,
+        "&#039;"
+    );
+
+}
+
+</script>
+
+{% endblock %}

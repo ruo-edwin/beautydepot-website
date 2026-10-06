@@ -1,0 +1,5512 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Orders — Beauty Depot Admin</title>
+
+    <meta
+        name="description"
+        content="Beauty Depot order management"
+    >
+
+    <style>
+
+        /* =========================================================
+           ROOT
+        ========================================================= */
+
+        :root {
+
+            --ink: #24191d;
+
+            --muted: #786c70;
+
+            --soft-muted: #9a8b91;
+
+            --white: #ffffff;
+
+            --soft-white: #fffafa;
+
+            --pink-soft: #fff1f4;
+
+            --pink-light: #f8dce3;
+
+            --pink: #d9a5b1;
+
+            --pink-deep: #b85f75;
+
+            --gold: #c6a15b;
+
+            --gold-light: #ead9b5;
+
+            --gold-dark: #9d793b;
+
+            --line: #eee2e5;
+
+            --green: #3e765d;
+
+            --green-soft: #edf7f1;
+
+            --orange: #a66b2c;
+
+            --orange-soft: #fff5e8;
+
+            --red: #a44b59;
+
+            --red-soft: #fff0f2;
+
+            --blue: #4d668c;
+
+            --blue-soft: #eef3fa;
+
+            --shadow:
+                0 12px 40px rgba(50, 25, 32, 0.06);
+
+            --shadow-small:
+                0 5px 20px rgba(50, 25, 32, 0.05);
+
+            --radius: 16px;
+
+        }
+
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+
+        body {
+
+            margin: 0;
+
+            background: var(--soft-white);
+
+            color: var(--ink);
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            font-size: 14px;
+
+        }
+
+
+        button,
+        input,
+        select {
+
+            font: inherit;
+
+        }
+
+
+        button {
+            cursor: pointer;
+        }
+
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+
+        /* =========================================================
+           HEADER
+        ========================================================= */
+
+        .site-header {
+
+            position: sticky;
+
+            top: 0;
+
+            z-index: 100;
+
+            background:
+                rgba(255, 250, 250, 0.96);
+
+            backdrop-filter: blur(14px);
+
+            border-bottom:
+                1px solid var(--line);
+
+        }
+
+
+        .header-inner {
+
+            max-width: 1500px;
+
+            margin: 0 auto;
+
+            padding:
+                17px 34px;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 35px;
+
+        }
+
+
+        .brand {
+
+            min-width: 210px;
+
+        }
+
+
+        .brand-name {
+
+            font-family: Georgia, serif;
+
+            font-size: 20px;
+
+            font-weight: 700;
+
+            letter-spacing: 2px;
+
+            line-height: 1;
+
+        }
+
+
+        .brand-name span {
+
+            color: var(--pink-deep);
+
+        }
+
+
+        .brand-tagline {
+
+            margin-top: 6px;
+
+            font-size: 10px;
+
+            letter-spacing: 1.6px;
+
+            text-transform: uppercase;
+
+            color: var(--soft-muted);
+
+        }
+
+
+        .main-nav {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 5px;
+
+            flex: 1;
+
+        }
+
+
+        .nav-link {
+
+            position: relative;
+
+            padding:
+                10px 13px;
+
+            border-radius: 9px;
+
+            color: var(--muted);
+
+            transition:
+                background .2s ease,
+                color .2s ease;
+
+        }
+
+
+        .nav-link:hover {
+
+            background: var(--pink-soft);
+
+            color: var(--ink);
+
+        }
+
+
+        .nav-link.active {
+
+            color: var(--pink-deep);
+
+            background: var(--pink-soft);
+
+            font-weight: 600;
+
+        }
+
+
+        .header-user {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 9px;
+
+            color: var(--muted);
+
+            white-space: nowrap;
+
+        }
+
+
+        .user-icon {
+
+            width: 34px;
+
+            height: 34px;
+
+            display: grid;
+
+            place-items: center;
+
+            border:
+                1px solid var(--line);
+
+            border-radius: 50%;
+
+            color: var(--pink-deep);
+
+            background: var(--white);
+
+        }
+
+
+        .user-arrow {
+
+            font-size: 12px;
+
+            color: var(--soft-muted);
+
+        }
+
+
+        /* =========================================================
+           PAGE
+        ========================================================= */
+
+        .page {
+
+            max-width: 1500px;
+
+            margin: 0 auto;
+
+            padding:
+                45px 34px 80px;
+
+        }
+
+
+        .page-heading-row {
+
+            display: flex;
+
+            align-items: flex-end;
+
+            justify-content: space-between;
+
+            gap: 30px;
+
+            margin-bottom: 32px;
+
+        }
+
+
+        .eyebrow {
+
+            margin-bottom: 8px;
+
+            color: var(--pink-deep);
+
+            font-size: 11px;
+
+            font-weight: 700;
+
+            letter-spacing: 1.7px;
+
+            text-transform: uppercase;
+
+        }
+
+
+        .page-title {
+
+            margin: 0;
+
+            font-family: Georgia, serif;
+
+            font-size: clamp(34px, 4vw, 50px);
+
+            font-weight: 500;
+
+            letter-spacing: -1.2px;
+
+        }
+
+
+        .page-description {
+
+            max-width: 610px;
+
+            margin:
+                12px 0 0;
+
+            color: var(--muted);
+
+            font-size: 14px;
+
+            line-height: 1.7;
+
+        }
+
+
+        /* =========================================================
+           BUTTONS
+        ========================================================= */
+
+        .btn {
+
+            min-height: 43px;
+
+            padding:
+                0 17px;
+
+            border-radius: 10px;
+
+            border: 1px solid transparent;
+
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 8px;
+
+            font-weight: 600;
+
+            transition:
+                transform .15s ease,
+                box-shadow .15s ease,
+                background .15s ease;
+
+        }
+
+
+        .btn:hover {
+
+            transform: translateY(-1px);
+
+        }
+
+
+        .btn-primary {
+
+            color: var(--white);
+
+            background: var(--pink-deep);
+
+            border-color: var(--pink-deep);
+
+            box-shadow:
+                0 8px 20px rgba(184, 95, 117, .18);
+
+        }
+
+
+        .btn-primary:hover {
+
+            background: #a94f66;
+
+        }
+
+
+        .btn-outline {
+
+            color: var(--ink);
+
+            background: var(--white);
+
+            border-color: var(--line);
+
+        }
+
+
+        .btn-outline:hover {
+
+            background: var(--pink-soft);
+
+            border-color: var(--pink-light);
+
+        }
+
+
+        .btn-danger {
+
+            color: var(--red);
+
+            background: var(--red-soft);
+
+            border-color: #f2d2d8;
+
+        }
+
+
+        /* =========================================================
+           STATS
+        ========================================================= */
+
+        .stats-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, minmax(0, 1fr));
+
+            gap: 16px;
+
+            margin-bottom: 24px;
+
+        }
+
+
+        .stat-card {
+
+            background: var(--white);
+
+            border:
+                1px solid var(--line);
+
+            border-radius: var(--radius);
+
+            padding: 21px;
+
+            box-shadow: var(--shadow-small);
+
+        }
+
+
+        .stat-top {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 10px;
+
+        }
+
+
+        .stat-label {
+
+            color: var(--muted);
+
+            font-size: 12px;
+
+            font-weight: 600;
+
+            letter-spacing: .2px;
+
+        }
+
+
+        .stat-icon {
+
+            width: 35px;
+
+            height: 35px;
+
+            border-radius: 10px;
+
+            display: grid;
+
+            place-items: center;
+
+            background: var(--pink-soft);
+
+            color: var(--pink-deep);
+
+            font-size: 15px;
+
+        }
+
+
+        .stat-number {
+
+            margin-top: 13px;
+
+            font-size: 31px;
+
+            font-weight: 700;
+
+            letter-spacing: -1px;
+
+        }
+
+
+        .stat-note {
+
+            margin-top: 5px;
+
+            color: var(--soft-muted);
+
+            font-size: 11px;
+
+        }
+
+
+        /* =========================================================
+           MAIN PANEL
+        ========================================================= */
+
+        .orders-panel {
+
+            background: var(--white);
+
+            border:
+                1px solid var(--line);
+
+            border-radius: 18px;
+
+            box-shadow: var(--shadow);
+
+            overflow: hidden;
+
+        }
+
+
+        .panel-toolbar {
+
+            padding: 19px;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            flex-wrap: wrap;
+
+            border-bottom:
+                1px solid var(--line);
+
+        }
+
+
+        .search-wrap {
+
+            flex: 1;
+
+            min-width: 260px;
+
+            position: relative;
+
+        }
+
+
+        .search-icon {
+
+            position: absolute;
+
+            left: 13px;
+
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            color: var(--soft-muted);
+
+            font-size: 14px;
+
+        }
+
+
+        .search-input {
+
+            width: 100%;
+
+            height: 43px;
+
+            padding:
+                0 14px 0 38px;
+
+            border:
+                1px solid var(--line);
+
+            border-radius: 10px;
+
+            outline: none;
+
+            background: var(--soft-white);
+
+            color: var(--ink);
+
+        }
+
+
+        .search-input:focus {
+
+            border-color: var(--pink);
+
+            background: var(--white);
+
+            box-shadow:
+                0 0 0 3px var(--pink-soft);
+
+        }
+
+
+        .filter-select {
+
+            height: 43px;
+
+            min-width: 160px;
+
+            padding:
+                0 13px;
+
+            border:
+                1px solid var(--line);
+
+            border-radius: 10px;
+
+            background: var(--soft-white);
+
+            color: var(--ink);
+
+            outline: none;
+
+        }
+
+
+        .filter-select:focus {
+
+            border-color: var(--pink);
+
+        }
+
+
+        /* =========================================================
+           TABLE
+        ========================================================= */
+
+        .table-wrap {
+
+            width: 100%;
+
+            overflow-x: auto;
+
+        }
+
+
+        .orders-table {
+
+            width: 100%;
+
+            min-width: 950px;
+
+            border-collapse: collapse;
+
+        }
+
+
+        .orders-table th {
+
+            padding:
+                14px 19px;
+
+            text-align: left;
+
+            background: #fffdfd;
+
+            color: var(--soft-muted);
+
+            border-bottom:
+                1px solid var(--line);
+
+            font-size: 10px;
+
+            font-weight: 700;
+
+            letter-spacing: 1.1px;
+
+            text-transform: uppercase;
+
+            white-space: nowrap;
+
+        }
+
+
+        .orders-table td {
+
+            padding:
+                17px 19px;
+
+            border-bottom:
+                1px solid #f3eaec;
+
+            vertical-align: middle;
+
+        }
+
+
+        .orders-table tbody tr {
+
+            transition:
+                background .15s ease;
+
+        }
+
+
+        .orders-table tbody tr:hover {
+
+            background: #fffafb;
+
+        }
+
+
+        .order-number {
+
+            color: var(--pink-deep);
+
+            font-weight: 700;
+
+        }
+
+
+        .customer-name {
+
+            font-weight: 600;
+
+        }
+
+
+        .customer-phone {
+
+            margin-top: 4px;
+
+            color: var(--soft-muted);
+
+            font-size: 11px;
+
+        }
+
+
+        .items-count {
+
+            color: var(--muted);
+
+        }
+
+
+        .order-total {
+
+            font-weight: 700;
+
+            white-space: nowrap;
+
+        }
+
+
+        .order-date {
+
+            color: var(--muted);
+
+            font-size: 12px;
+
+            line-height: 1.5;
+
+        }
+
+
+        /* =========================================================
+           STATUS
+        ========================================================= */
+
+        .status-badge {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 6px;
+
+            padding:
+                6px 10px;
+
+            border-radius: 999px;
+
+            font-size: 11px;
+
+            font-weight: 700;
+
+            text-transform: capitalize;
+
+            white-space: nowrap;
+
+        }
+
+
+        .status-dot {
+
+            width: 6px;
+
+            height: 6px;
+
+            border-radius: 50%;
+
+            background: currentColor;
+
+        }
+
+
+        .status-pending {
+
+            color: var(--orange);
+
+            background: var(--orange-soft);
+
+        }
+
+
+        .status-confirmed {
+
+            color: var(--blue);
+
+            background: var(--blue-soft);
+
+        }
+
+
+        .status-processing {
+
+            color: var(--pink-deep);
+
+            background: var(--pink-soft);
+
+        }
+
+
+        .status-out_for_delivery {
+
+            color: #806e2d;
+
+            background: #fffbea;
+
+        }
+
+
+        .status-completed {
+
+            color: var(--green);
+
+            background: var(--green-soft);
+
+        }
+
+
+        .status-cancelled {
+
+            color: var(--red);
+
+            background: var(--red-soft);
+
+        }
+
+
+        /* =========================================================
+           ACTION
+        ========================================================= */
+
+        .view-btn {
+
+            height: 35px;
+
+            padding:
+                0 12px;
+
+            border:
+                1px solid var(--line);
+
+            border-radius: 8px;
+
+            background: var(--white);
+
+            color: var(--ink);
+
+            font-size: 12px;
+
+            font-weight: 600;
+
+        }
+
+
+        .view-btn:hover {
+
+            background: var(--pink-soft);
+
+            border-color: var(--pink-light);
+
+            color: var(--pink-deep);
+
+        }
+
+
+        /* =========================================================
+           EMPTY / LOADING
+        ========================================================= */
+
+        .table-message {
+
+            padding:
+                65px 25px;
+
+            text-align: center;
+
+            color: var(--muted);
+
+        }
+
+
+        .table-message-icon {
+
+            width: 55px;
+
+            height: 55px;
+
+            margin:
+                0 auto 14px;
+
+            display: grid;
+
+            place-items: center;
+
+            border-radius: 50%;
+
+            background: var(--pink-soft);
+
+            color: var(--pink-deep);
+
+            font-size: 22px;
+
+        }
+
+
+        .table-message-title {
+
+            color: var(--ink);
+
+            font-weight: 700;
+
+            margin-bottom: 6px;
+
+        }
+
+
+        .table-message-text {
+
+            color: var(--muted);
+
+            font-size: 13px;
+
+        }
+
+
+        /* =========================================================
+           PAGINATION INFO
+        ========================================================= */
+
+        .table-footer {
+
+            padding:
+                15px 19px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 15px;
+
+            color: var(--soft-muted);
+
+            font-size: 12px;
+
+        }
+
+
+        /* =========================================================
+           MODAL
+        ========================================================= */
+
+        .modal-overlay {
+
+            position: fixed;
+
+            inset: 0;
+
+            z-index: 500;
+
+            display: none;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 20px;
+
+            background:
+                rgba(36, 25, 29, .48);
+
+            backdrop-filter: blur(5px);
+
+        }
+
+
+        .modal-overlay.open {
+
+            display: flex;
+
+        }
+
+
+        .modal {
+
+            width: min(850px, 100%);
+
+            max-height: 90vh;
+
+            overflow: hidden;
+
+            background: var(--white);
+
+            border-radius: 20px;
+
+            box-shadow:
+                0 30px 90px rgba(20, 10, 15, .25);
+
+            display: flex;
+
+            flex-direction: column;
+
+        }
+
+
+        .modal-header {
+
+            padding:
+                22px 24px;
+
+            border-bottom:
+                1px solid var(--line);
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 15px;
+
+        }
+
+
+        .modal-title {
+
+            margin: 0;
+
+            font-family: Georgia, serif;
+
+            font-size: 25px;
+
+            font-weight: 500;
+
+        }
+
+
+        .modal-subtitle {
+
+            margin-top: 5px;
+
+            color: var(--muted);
+
+            font-size: 12px;
+
+        }
+
+
+        .close-btn {
+
+            width: 38px;
+
+            height: 38px;
+
+            border:
+                1px solid var(--line);
+
+            border-radius: 50%;
+
+            background: var(--white);
+
+            color: var(--muted);
+
+            font-size: 20px;
+
+            line-height: 1;
+
+        }
+
+
+        .close-btn:hover {
+
+            background: var(--pink-soft);
+
+            color: var(--pink-deep);
+
+        }
+
+
+        .modal-body {
+
+            padding: 24px;
+
+            overflow-y: auto;
+
+        }
+
+
+        /* =========================================================
+           ORDER DETAIL TOP
+        ========================================================= */
+
+        .detail-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap: 16px;
+
+            margin-bottom: 24px;
+
+        }
+
+
+        .detail-card {
+
+            border:
+                1px solid var(--line);
+
+            border-radius: 13px;
+
+            padding: 17px;
+
+            background: #fffdfd;
+
+        }
+
+
+        .detail-label {
+
+            margin-bottom: 8px;
+
+            color: var(--soft-muted);
+
+            font-size: 10px;
+
+            font-weight: 700;
+
+            letter-spacing: 1px;
+
+            text-transform: uppercase;
+
+        }
+
+
+        .detail-value {
+
+            color: var(--ink);
+
+            line-height: 1.6;
+
+        }
+
+
+        .detail-value strong {
+
+            font-weight: 700;
+
+        }
+
+
+        .phone-link {
+
+            color: var(--pink-deep);
+
+            font-weight: 600;
+
+        }
+
+
+        /* =========================================================
+           STATUS CONTROL
+        ========================================================= */
+
+        .status-control {
+
+            padding: 17px;
+
+            margin-bottom: 24px;
+
+            border:
+                1px solid var(--line);
+
+            border-radius: 13px;
+
+            background: var(--pink-soft);
+
+        }
+
+
+        .status-control-row {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+        }
+
+
+        .status-control-label {
+
+            font-weight: 700;
+
+            flex: 1;
+
+        }
+
+
+        .status-select {
+
+            height: 40px;
+
+            min-width: 200px;
+
+            padding:
+                0 12px;
+
+            border:
+                1px solid var(--pink-light);
+
+            border-radius: 9px;
+
+            background: var(--white);
+
+            color: var(--ink);
+
+            outline: none;
+
+        }
+
+
+        /* =========================================================
+           ITEMS
+        ========================================================= */
+
+        .section-heading {
+
+            margin-bottom: 12px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+        }
+
+
+        .section-title {
+
+            margin: 0;
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1px;
+
+        }
+
+
+        .items-table-wrap {
+
+            overflow-x: auto;
+
+            border:
+                1px solid var(--line);
+
+            border-radius: 13px;
+
+        }
+
+
+        .items-table {
+
+            width: 100%;
+
+            min-width: 550px;
+
+            border-collapse: collapse;
+
+        }
+
+
+        .items-table th {
+
+            padding:
+                12px 14px;
+
+            text-align: left;
+
+            background: #fffafa;
+
+            color: var(--soft-muted);
+
+            font-size: 10px;
+
+            text-transform: uppercase;
+
+            letter-spacing: .9px;
+
+        }
+
+
+        .items-table td {
+
+            padding:
+                14px;
+
+            border-top:
+                1px solid #f3eaec;
+
+        }
+
+
+        .item-name {
+
+            font-weight: 600;
+
+        }
+
+
+        .item-price {
+
+            color: var(--muted);
+
+        }
+
+
+        .item-subtotal {
+
+            font-weight: 700;
+
+            white-space: nowrap;
+
+        }
+
+
+        .total-row td {
+
+            background: #fffafa;
+
+            font-weight: 700;
+
+        }
+
+
+        .grand-total {
+
+            color: var(--pink-deep);
+
+            font-size: 16px;
+
+        }
+
+
+        /* =========================================================
+           MODAL FOOTER
+        ========================================================= */
+
+        .modal-footer {
+
+            padding:
+                17px 24px;
+
+            border-top:
+                1px solid var(--line);
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: flex-end;
+
+            gap: 10px;
+
+        }
+
+
+        /* =========================================================
+           TOAST
+        ========================================================= */
+
+        .toast {
+
+            position: fixed;
+
+            right: 25px;
+
+            bottom: 25px;
+
+            z-index: 1000;
+
+            min-width: 280px;
+
+            max-width: 420px;
+
+            padding:
+                14px 16px;
+
+            border:
+                1px solid var(--line);
+
+            border-radius: 12px;
+
+            background: var(--white);
+
+            box-shadow:
+                0 15px 45px rgba(30, 15, 20, .16);
+
+            display: flex;
+
+            align-items: flex-start;
+
+            gap: 11px;
+
+            transform:
+                translateY(25px);
+
+            opacity: 0;
+
+            pointer-events: none;
+
+            transition:
+                opacity .2s ease,
+                transform .2s ease;
+
+        }
+
+
+        .toast.show {
+
+            opacity: 1;
+
+            transform: translateY(0);
+
+        }
+
+
+        .toast-icon {
+
+            width: 28px;
+
+            height: 28px;
+
+            flex: 0 0 28px;
+
+            border-radius: 50%;
+
+            display: grid;
+
+            place-items: center;
+
+            background: var(--green-soft);
+
+            color: var(--green);
+
+            font-size: 13px;
+
+        }
+
+
+        .toast.error .toast-icon {
+
+            background: var(--red-soft);
+
+            color: var(--red);
+
+        }
+
+
+        .toast-title {
+
+            font-weight: 700;
+
+            font-size: 13px;
+
+            margin-bottom: 3px;
+
+        }
+
+
+        .toast-message {
+
+            color: var(--muted);
+
+            font-size: 12px;
+
+            line-height: 1.5;
+
+        }
+
+
+        /* =========================================================
+           SPINNER
+        ========================================================= */
+
+        .spinner {
+
+            width: 18px;
+
+            height: 18px;
+
+            border:
+                2px solid rgba(255,255,255,.45);
+
+            border-top-color: var(--white);
+
+            border-radius: 50%;
+
+            animation:
+                spin .7s linear infinite;
+
+        }
+
+
+        @keyframes spin {
+
+            to {
+                transform: rotate(360deg);
+            }
+
+        }
+
+
+        /* =========================================================
+           RESPONSIVE
+        ========================================================= */
+
+        @media (max-width: 1050px) {
+
+            .header-inner {
+
+                gap: 15px;
+
+                padding:
+                    15px 20px;
+
+            }
+
+
+            .brand {
+
+                min-width: 175px;
+
+            }
+
+
+            .main-nav {
+
+                gap: 0;
+
+            }
+
+
+            .nav-link {
+
+                padding:
+                    9px 8px;
+
+                font-size: 12px;
+
+            }
+
+
+            .page {
+
+                padding:
+                    35px 20px 60px;
+
+            }
+
+        }
+
+
+        @media (max-width: 850px) {
+
+            .header-inner {
+
+                flex-wrap: wrap;
+
+            }
+
+
+            .main-nav {
+
+                order: 3;
+
+                width: 100%;
+
+                overflow-x: auto;
+
+                padding-bottom: 2px;
+
+            }
+
+
+            .header-user {
+
+                margin-left: auto;
+
+            }
+
+
+            .stats-grid {
+
+                grid-template-columns:
+                    repeat(2, minmax(0, 1fr));
+
+            }
+
+
+            .page-heading-row {
+
+                align-items: flex-start;
+
+                flex-direction: column;
+
+            }
+
+
+            .detail-grid {
+
+                grid-template-columns: 1fr;
+
+            }
+
+        }
+
+
+        @media (max-width: 600px) {
+
+            .header-inner {
+
+                padding:
+                    14px 15px;
+
+            }
+
+
+            .brand {
+
+                min-width: auto;
+
+            }
+
+
+            .brand-name {
+
+                font-size: 17px;
+
+            }
+
+
+            .brand-tagline {
+
+                display: none;
+
+            }
+
+
+            .header-user span:not(.user-arrow) {
+
+                display: none;
+
+            }
+
+
+            .page {
+
+                padding:
+                    28px 15px 50px;
+
+            }
+
+
+            .page-title {
+
+                font-size: 36px;
+
+            }
+
+
+            .stats-grid {
+
+                grid-template-columns: 1fr 1fr;
+
+                gap: 10px;
+
+            }
+
+
+            .stat-card {
+
+                padding: 16px;
+
+            }
+
+
+            .stat-number {
+
+                font-size: 25px;
+
+            }
+
+
+            .panel-toolbar {
+
+                padding: 14px;
+
+            }
+
+
+            .search-wrap {
+
+                min-width: 100%;
+
+            }
+
+
+            .filter-select {
+
+                flex: 1;
+
+                min-width: 0;
+
+            }
+
+
+            .modal-overlay {
+
+                padding: 10px;
+
+            }
+
+
+            .modal {
+
+                max-height: 94vh;
+
+                border-radius: 15px;
+
+            }
+
+
+            .modal-header,
+            .modal-body,
+            .modal-footer {
+
+                padding-left: 16px;
+
+                padding-right: 16px;
+
+            }
+
+
+            .status-control-row {
+
+                align-items: stretch;
+
+                flex-direction: column;
+
+            }
+
+
+            .status-select {
+
+                width: 100%;
+
+            }
+
+
+            .toast {
+
+                left: 15px;
+
+                right: 15px;
+
+                bottom: 15px;
+
+                min-width: 0;
+
+            }
+
+        }
+        /* =========================================================
+   BEAUTY DEPOT ADMIN — MATCH PRODUCTS DESIGN
+   Orders page visual override
+========================================================= */
+
+
+/* =========================================================
+   GLOBAL
+========================================================= */
+
+body {
+
+    font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+    background:
+        var(--soft-white);
+
+    color:
+        var(--ink);
+
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.site-header {
+
+    background:
+        rgba(255,255,255,.96);
+
+    border-bottom:
+        1px solid var(--line);
+
+}
+
+
+.header-inner {
+
+    max-width:
+        1400px;
+
+    min-height:
+        78px;
+
+    margin:
+        auto;
+
+    padding:
+        0 32px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        space-between;
+
+    gap:
+        30px;
+
+}
+
+
+.brand {
+
+    min-width:
+        180px;
+
+}
+
+
+.brand-name {
+
+    font-family:
+        Georgia,
+        serif;
+
+    font-size:
+        22px;
+
+    letter-spacing:
+        2px;
+
+    line-height:
+        1;
+
+}
+
+
+.brand-name span {
+
+    color:
+        var(--pink-deep);
+
+}
+
+
+.brand-tagline {
+
+    margin-top:
+        6px;
+
+    font-size:
+        9px;
+
+    letter-spacing:
+        2.4px;
+
+    text-transform:
+        uppercase;
+
+    color:
+        var(--soft-muted);
+
+}
+
+
+.main-nav {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        28px;
+
+}
+
+
+.nav-link {
+
+    position:
+        relative;
+
+    padding:
+        30px 0;
+
+    color:
+        var(--muted);
+
+    background:
+        transparent;
+
+    border-radius:
+        0;
+
+    font-size:
+        13px;
+
+    font-weight:
+        500;
+
+}
+
+
+.nav-link:hover {
+
+    color:
+        var(--ink);
+
+    background:
+        transparent;
+
+}
+
+
+.nav-link.active {
+
+    color:
+        var(--ink);
+
+    background:
+        transparent;
+
+    font-weight:
+        500;
+
+}
+
+
+.nav-link.active::after {
+
+    content:
+        "";
+
+    position:
+        absolute;
+
+    left:
+        0;
+
+    right:
+        0;
+
+    bottom:
+        20px;
+
+    height:
+        2px;
+
+    background:
+        var(--gold);
+
+}
+
+
+.header-user {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        10px;
+
+    color:
+        var(--muted);
+
+    font-size:
+        13px;
+
+}
+
+
+.user-icon {
+
+    width:
+        34px;
+
+    height:
+        34px;
+
+    border-radius:
+        50%;
+
+    border:
+        1px solid var(--gold-light);
+
+    background:
+        var(--pink-soft);
+
+    color:
+        var(--pink-deep);
+
+}
+
+
+.user-arrow {
+
+    color:
+        var(--soft-muted);
+
+    font-size:
+        10px;
+
+}
+
+
+/* =========================================================
+   PAGE
+========================================================= */
+
+.page {
+
+    max-width:
+        1400px;
+
+    margin:
+        auto;
+
+    padding:
+        45px 32px 70px;
+
+}
+
+
+.page-heading-row {
+
+    display:
+        flex;
+
+    align-items:
+        flex-end;
+
+    justify-content:
+        space-between;
+
+    gap:
+        25px;
+
+    margin-bottom:
+        30px;
+
+}
+
+
+.eyebrow {
+
+    margin-bottom:
+        8px;
+
+    font-size:
+        10px;
+
+    font-weight:
+        700;
+
+    letter-spacing:
+        2px;
+
+    text-transform:
+        uppercase;
+
+    color:
+        var(--pink-deep);
+
+}
+
+
+.page-title {
+
+    margin:
+        0;
+
+    font-family:
+        Georgia,
+        serif;
+
+    font-size:
+        38px;
+
+    font-weight:
+        400;
+
+    line-height:
+        1.1;
+
+    letter-spacing:
+        0;
+
+}
+
+
+.page-description {
+
+    max-width:
+        650px;
+
+    margin:
+        10px 0 0;
+
+    font-size:
+        14px;
+
+    line-height:
+        1.6;
+
+    color:
+        var(--muted);
+
+}
+
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.btn {
+
+    min-height:
+        42px;
+
+    padding:
+        0 17px;
+
+    border-radius:
+        8px;
+
+    border:
+        0;
+
+    display:
+        inline-flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    gap:
+        8px;
+
+    font-size:
+        13px;
+
+    font-weight:
+        600;
+
+    transition:
+        .2s ease;
+
+}
+
+
+.btn-primary {
+
+    background:
+        var(--pink-light);
+
+    border:
+        1px solid #edc7d0;
+
+    color:
+        var(--ink);
+
+    box-shadow:
+        none;
+
+}
+
+
+.btn-primary:hover {
+
+    background:
+        var(--pink);
+
+    color:
+        white;
+
+}
+
+
+.btn-outline {
+
+    background:
+        white;
+
+    border:
+        1px solid var(--line);
+
+    color:
+        var(--muted);
+
+}
+
+
+.btn-outline:hover {
+
+    border-color:
+        var(--gold-light);
+
+    color:
+        var(--ink);
+
+    background:
+        white;
+
+}
+
+
+/* =========================================================
+   STATISTICS
+========================================================= */
+
+.stats-grid {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+    gap:
+        18px;
+
+    margin-bottom:
+        28px;
+
+}
+
+
+.stat-card {
+
+    position:
+        relative;
+
+    overflow:
+        hidden;
+
+    background:
+        white;
+
+    border:
+        1px solid var(--line);
+
+    border-radius:
+        12px;
+
+    padding:
+        22px;
+
+    box-shadow:
+        var(--shadow-sm);
+
+}
+
+
+.stat-card::before {
+
+    content:
+        "";
+
+    position:
+        absolute;
+
+    left:
+        0;
+
+    right:
+        0;
+
+    top:
+        0;
+
+    height:
+        2px;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--pink),
+            var(--gold),
+            var(--pink)
+        );
+
+}
+
+
+.stat-top {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        space-between;
+
+    margin-bottom:
+        18px;
+
+}
+
+
+.stat-label {
+
+    font-size:
+        12px;
+
+    color:
+        var(--muted);
+
+}
+
+
+.stat-icon {
+
+    width:
+        34px;
+
+    height:
+        34px;
+
+    border-radius:
+        50%;
+
+    background:
+        var(--pink-soft);
+
+    border:
+        1px solid var(--gold-light);
+
+    color:
+        var(--pink-deep);
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+}
+
+
+.stat-number {
+
+    font-family:
+        Georgia,
+        serif;
+
+    font-size:
+        32px;
+
+    line-height:
+        1;
+
+}
+
+
+.stat-note {
+
+    margin-top:
+        8px;
+
+    color:
+        var(--soft-muted);
+
+    font-size:
+        11px;
+
+}
+
+
+/* =========================================================
+   ORDERS PANEL
+========================================================= */
+
+/*
+   Products page has the toolbar and table as
+   separate cards. Make Orders behave the same.
+*/
+
+.orders-panel {
+
+    background:
+        transparent;
+
+    border:
+        0;
+
+    border-radius:
+        0;
+
+    box-shadow:
+        none;
+
+    overflow:
+        visible;
+
+}
+
+
+/* =========================================================
+   TOOLBAR
+========================================================= */
+
+.panel-toolbar {
+
+    background:
+        white;
+
+    border:
+        1px solid var(--line);
+
+    border-radius:
+        12px;
+
+    padding:
+        15px;
+
+    margin-bottom:
+        20px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        10px;
+
+    box-shadow:
+        var(--shadow-sm);
+
+}
+
+
+.search-wrap {
+
+    position:
+        relative;
+
+    flex:
+        1;
+
+    min-width:
+        0;
+
+}
+
+
+.search-input {
+
+    width:
+        100%;
+
+    height:
+        42px;
+
+    padding:
+        0 14px 0 40px;
+
+    border:
+        1px solid var(--line);
+
+    border-radius:
+        8px;
+
+    outline:
+        none;
+
+    background:
+        white;
+
+    color:
+        var(--ink);
+
+}
+
+
+.search-input:focus {
+
+    border-color:
+        var(--gold);
+
+    box-shadow:
+        none;
+
+    background:
+        white;
+
+}
+
+
+.search-icon {
+
+    position:
+        absolute;
+
+    left:
+        14px;
+
+    top:
+        50%;
+
+    transform:
+        translateY(-50%);
+
+    color:
+        var(--soft-muted);
+
+}
+
+
+.filter-select {
+
+    height:
+        42px;
+
+    min-width:
+        145px;
+
+    padding:
+        0 34px 0 12px;
+
+    border:
+        1px solid var(--line);
+
+    border-radius:
+        8px;
+
+    background:
+        white;
+
+    color:
+        var(--muted);
+
+    outline:
+        none;
+
+}
+
+
+.filter-select:focus {
+
+    border-color:
+        var(--gold);
+
+}
+
+
+/* =========================================================
+   TABLE CARD
+========================================================= */
+
+.table-wrap {
+
+    background:
+        white;
+
+    border:
+        1px solid var(--line);
+
+    border-radius:
+        12px;
+
+    overflow-x:
+        auto;
+
+    box-shadow:
+        var(--shadow-sm);
+
+}
+
+
+.orders-table {
+
+    width:
+        100%;
+
+    min-width:
+        1050px;
+
+    border-collapse:
+        collapse;
+
+}
+
+
+.orders-table thead {
+
+    background:
+        #fff7f9;
+
+}
+
+
+.orders-table th {
+
+    padding:
+        14px 16px;
+
+    text-align:
+        left;
+
+    white-space:
+        nowrap;
+
+    font-size:
+        10px;
+
+    font-weight:
+        700;
+
+    letter-spacing:
+        1px;
+
+    text-transform:
+        uppercase;
+
+    color:
+        var(--gold-dark);
+
+    border-bottom:
+        1px solid var(--line);
+
+}
+
+
+.orders-table td {
+
+    padding:
+        16px;
+
+    border-bottom:
+        1px solid #f2e8eb;
+
+    vertical-align:
+        middle;
+
+}
+
+
+.orders-table tbody tr:hover {
+
+    background:
+        #fffafb;
+
+}
+
+
+.orders-table tbody tr:last-child td {
+
+    border-bottom:
+        0;
+
+}
+
+
+/* =========================================================
+   ORDER TEXT
+========================================================= */
+
+.order-number {
+
+    color:
+        var(--pink-deep);
+
+    font-weight:
+        700;
+
+}
+
+
+.customer-name {
+
+    font-size:
+        13px;
+
+    font-weight:
+        600;
+
+}
+
+
+.customer-phone {
+
+    margin-top:
+        4px;
+
+    color:
+        var(--soft-muted);
+
+    font-size:
+        11px;
+
+}
+
+
+.items-count {
+
+    color:
+        var(--muted);
+
+    font-size:
+        13px;
+
+}
+
+
+.order-total {
+
+    font-size:
+        13px;
+
+    font-weight:
+        600;
+
+}
+
+
+.order-date {
+
+    color:
+        var(--muted);
+
+    font-size:
+        11px;
+
+    line-height:
+        1.5;
+
+}
+
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+.status-badge {
+
+    display:
+        inline-flex;
+
+    align-items:
+        center;
+
+    gap:
+        6px;
+
+    padding:
+        6px 10px;
+
+    border-radius:
+        999px;
+
+    font-size:
+        10px;
+
+    font-weight:
+        700;
+
+    white-space:
+        nowrap;
+
+}
+
+
+.status-dot {
+
+    width:
+        6px;
+
+    height:
+        6px;
+
+    border-radius:
+        50%;
+
+    background:
+        currentColor;
+
+}
+
+
+.status-pending {
+
+    color:
+        var(--warning-text);
+
+    background:
+        var(--warning-bg);
+
+}
+
+
+.status-confirmed {
+
+    color:
+        #55728e;
+
+    background:
+        #edf3f8;
+
+}
+
+
+.status-processing {
+
+    color:
+        var(--pink-deep);
+
+    background:
+        var(--pink-soft);
+
+}
+
+
+.status-out_for_delivery {
+
+    color:
+        var(--warning-text);
+
+    background:
+        var(--warning-bg);
+
+}
+
+
+.status-completed {
+
+    color:
+        var(--success-text);
+
+    background:
+        var(--success-bg);
+
+}
+
+
+.status-cancelled {
+
+    color:
+        var(--danger-text);
+
+    background:
+        var(--danger-bg);
+
+}
+
+
+/* =========================================================
+   VIEW BUTTON
+========================================================= */
+
+.view-btn {
+
+    height:
+        36px;
+
+    padding:
+        0 13px;
+
+    border:
+        1px solid var(--line);
+
+    border-radius:
+        8px;
+
+    background:
+        white;
+
+    color:
+        var(--muted);
+
+    font-size:
+        12px;
+
+    font-weight:
+        600;
+
+}
+
+
+.view-btn:hover {
+
+    border-color:
+        var(--gold-light);
+
+    color:
+        var(--ink);
+
+    background:
+        white;
+
+}
+
+
+/* =========================================================
+   TABLE FOOTER
+========================================================= */
+
+.table-footer {
+
+    background:
+        white;
+
+    border:
+        1px solid var(--line);
+
+    border-top:
+        0;
+
+    border-radius:
+        0 0 12px 12px;
+
+    padding:
+        13px 16px;
+
+    color:
+        var(--soft-muted);
+
+    font-size:
+        11px;
+
+}
+
+
+/* =========================================================
+   EMPTY / ERROR
+========================================================= */
+
+.table-message {
+
+    padding:
+        60px 25px;
+
+    text-align:
+        center;
+
+    color:
+        var(--muted);
+
+}
+
+
+.table-message-icon {
+
+    width:
+        45px;
+
+    height:
+        45px;
+
+    margin:
+        0 auto 12px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    border-radius:
+        50%;
+
+    background:
+        var(--pink-soft);
+
+    border:
+        1px solid var(--gold-light);
+
+    color:
+        var(--pink-deep);
+
+}
+
+
+.table-message-title {
+
+    color:
+        var(--ink);
+
+    font-size:
+        13px;
+
+    font-weight:
+        600;
+
+    margin-bottom:
+        5px;
+
+}
+
+
+.table-message-text {
+
+    color:
+        var(--muted);
+
+    font-size:
+        12px;
+
+}
+
+
+/* =========================================================
+   MODAL — KEEP BEAUTY DEPOT STYLE
+========================================================= */
+
+.modal {
+
+    width:
+        min(850px, 100%);
+
+    max-height:
+        90vh;
+
+    background:
+        white;
+
+    border:
+        1px solid var(--line);
+
+    border-radius:
+        12px;
+
+    box-shadow:
+        var(--shadow-md);
+
+}
+
+
+.modal-header {
+
+    padding:
+        20px 22px;
+
+    border-bottom:
+        1px solid var(--line);
+
+}
+
+
+.modal-title {
+
+    font-family:
+        Georgia,
+        serif;
+
+    font-size:
+        25px;
+
+    font-weight:
+        400;
+
+}
+
+
+.close-btn {
+
+    width:
+        34px;
+
+    height:
+        34px;
+
+    border:
+        1px solid var(--line);
+
+    border-radius:
+        50%;
+
+    background:
+        white;
+
+    color:
+        var(--muted);
+
+}
+
+
+.close-btn:hover {
+
+    background:
+        var(--pink-soft);
+
+    color:
+        var(--pink-deep);
+
+}
+
+
+.detail-card {
+
+    border:
+        1px solid var(--line);
+
+    border-radius:
+        10px;
+
+    padding:
+        16px;
+
+    background:
+        white;
+
+}
+
+
+.status-control {
+
+    padding:
+        16px;
+
+    border:
+        1px solid var(--line);
+
+    border-radius:
+        10px;
+
+    background:
+        #fff7f9;
+
+}
+
+
+.items-table-wrap {
+
+    border:
+        1px solid var(--line);
+
+    border-radius:
+        10px;
+
+}
+
+
+.items-table th {
+
+    background:
+        #fff7f9;
+
+    color:
+        var(--gold-dark);
+
+}
+
+
+.modal-footer {
+
+    padding:
+        16px 22px;
+
+    border-top:
+        1px solid var(--line);
+
+}
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     HEADER
+========================================================= -->
+
+<header class="site-header">
+
+    <div class="header-inner">
+
+
+        <a
+            href="/admin/dashboard"
+            class="brand"
+        >
+
+            <div class="brand-name">
+
+                BEAUTY
+                <span>DEPOT</span>
+
+            </div>
+
+            <div class="brand-tagline">
+
+                Beauty for every you
+
+            </div>
+
+        </a>
+
+
+        <nav class="main-nav">
+
+            <a
+                href="/admin/orders"
+                class="nav-link active"
+            >
+                Orders
+            </a>
+
+
+            <a
+                href="/admin/products"
+                class="nav-link"
+            >
+                Products
+            </a>
+
+
+            <a
+                href="/admin/categories"
+                class="nav-link"
+            >
+                Categories
+            </a>
+
+
+            <a
+                href="/admin/subcategories"
+                class="nav-link"
+            >
+                Subcategories
+            </a>
+
+
+            <a
+                href="/admin/brands"
+                class="nav-link"
+            >
+                Brands
+            </a>
+
+
+            
+
+
+        </nav>
+
+
+        <div class="header-user">
+
+            <div class="user-icon">
+                ♡
+            </div>
+
+            <span id="userName">
+                Admin
+            </span>
+
+            <span class="user-arrow">
+                ▾
+            </span>
+
+        </div>
+
+
+    </div>
+
+</header>
+
+
+<!-- =========================================================
+     PAGE
+========================================================= -->
+
+<main class="page">
+
+
+    <div class="page-heading-row">
+
+
+        <div>
+
+            <div class="eyebrow">
+                Sales Management
+            </div>
+
+            <h1 class="page-title">
+                Orders
+            </h1>
+
+            <p class="page-description">
+
+                View customer orders, review order details
+                and keep each order moving through the
+                fulfilment process.
+
+            </p>
+
+        </div>
+
+
+        <button
+            class="btn btn-outline"
+            onclick="loadOrders()"
+            id="refreshButton"
+        >
+
+            ↻
+
+            Refresh Orders
+
+        </button>
+
+
+    </div>
+
+
+    <!-- =====================================================
+         STATS
+    ====================================================== -->
+
+    <section class="stats-grid">
+
+
+        <div class="stat-card">
+
+            <div class="stat-top">
+
+                <div class="stat-label">
+                    Total Orders
+                </div>
+
+                <div class="stat-icon">
+                    #
+                </div>
+
+            </div>
+
+            <div
+                class="stat-number"
+                id="totalOrders"
+            >
+                0
+            </div>
+
+            <div class="stat-note">
+                All customer orders
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-top">
+
+                <div class="stat-label">
+                    Pending
+                </div>
+
+                <div class="stat-icon">
+                    ◷
+                </div>
+
+            </div>
+
+            <div
+                class="stat-number"
+                id="pendingOrders"
+            >
+                0
+            </div>
+
+            <div class="stat-note">
+                Awaiting confirmation
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-top">
+
+                <div class="stat-label">
+                    Processing
+                </div>
+
+                <div class="stat-icon">
+                    ↻
+                </div>
+
+            </div>
+
+            <div
+                class="stat-number"
+                id="processingOrders"
+            >
+                0
+            </div>
+
+            <div class="stat-note">
+                Being prepared
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-top">
+
+                <div class="stat-label">
+                    Completed
+                </div>
+
+                <div class="stat-icon">
+                    ✓
+                </div>
+
+            </div>
+
+            <div
+                class="stat-number"
+                id="completedOrders"
+            >
+                0
+            </div>
+
+            <div class="stat-note">
+                Successfully completed
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+    <!-- =====================================================
+         ORDERS PANEL
+    ====================================================== -->
+
+    <section class="orders-panel">
+
+
+        <div class="panel-toolbar">
+
+
+            <div class="search-wrap">
+
+                <span class="search-icon">
+                    ⌕
+                </span>
+
+                <input
+                    type="text"
+                    id="searchInput"
+                    class="search-input"
+                    placeholder="Search order number, customer or phone..."
+                    autocomplete="off"
+                >
+
+            </div>
+
+
+            <select
+                id="statusFilter"
+                class="filter-select"
+            >
+
+                <option value="">
+                    All statuses
+                </option>
+
+                <option value="pending">
+                    Pending
+                </option>
+
+                <option value="confirmed">
+                    Confirmed
+                </option>
+
+                <option value="processing">
+                    Processing
+                </option>
+
+                <option value="out_for_delivery">
+                    Out for delivery
+                </option>
+
+                <option value="completed">
+                    Completed
+                </option>
+
+                <option value="cancelled">
+                    Cancelled
+                </option>
+
+            </select>
+
+
+        </div>
+
+
+        <div class="table-wrap">
+
+
+            <table class="orders-table">
+
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            Order
+                        </th>
+
+                        <th>
+                            Customer
+                        </th>
+
+                        <th>
+                            Items
+                        </th>
+
+                        <th>
+                            Total
+                        </th>
+
+                        <th>
+                            Status
+                        </th>
+
+                        <th>
+                            Date
+                        </th>
+
+                        <th>
+                            Action
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="ordersTableBody">
+
+                    <tr>
+
+                        <td colspan="7">
+
+                            <div class="table-message">
+
+                                <div class="table-message-icon">
+                                    ↻
+                                </div>
+
+                                <div class="table-message-title">
+                                    Loading orders
+                                </div>
+
+                                <div class="table-message-text">
+                                    Please wait...
+                                </div>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+
+            </table>
+
+
+        </div>
+
+
+        <div class="table-footer">
+
+            <span id="resultsCount">
+                0 orders
+            </span>
+
+            <span>
+                Beauty Depot Order Management
+            </span>
+
+        </div>
+
+
+    </section>
+
+
+</main>
+
+
+<!-- =========================================================
+     ORDER DETAIL MODAL
+========================================================= -->
+
+<div
+    class="modal-overlay"
+    id="orderModal"
+    onclick="handleOverlayClick(event)"
+>
+
+
+    <div class="modal">
+
+
+        <div class="modal-header">
+
+
+            <div>
+
+                <h2
+                    class="modal-title"
+                    id="modalOrderTitle"
+                >
+                    Order #0000
+                </h2>
+
+                <div
+                    class="modal-subtitle"
+                    id="modalOrderDate"
+                >
+                    Order details
+                </div>
+
+            </div>
+
+
+            <button
+                class="close-btn"
+                onclick="closeOrderModal()"
+                aria-label="Close"
+            >
+                ×
+            </button>
+
+
+        </div>
+
+
+        <div class="modal-body">
+
+
+            <!-- CUSTOMER INFORMATION -->
+
+            <div class="detail-grid">
+
+
+                <div class="detail-card">
+
+                    <div class="detail-label">
+                        Customer
+                    </div>
+
+                    <div
+                        class="detail-value"
+                        id="detailCustomer"
+                    >
+                        —
+                    </div>
+
+                </div>
+
+
+                <div class="detail-card">
+
+                    <div class="detail-label">
+                        Phone
+                    </div>
+
+                    <div
+                        class="detail-value"
+                        id="detailPhone"
+                    >
+                        —
+                    </div>
+
+                </div>
+
+
+                <div class="detail-card">
+
+                    <div class="detail-label">
+                        Delivery Address
+                    </div>
+
+                    <div
+                        class="detail-value"
+                        id="detailAddress"
+                    >
+                        —
+                    </div>
+
+                </div>
+
+
+                <div class="detail-card">
+
+                    <div class="detail-label">
+                        Current Status
+                    </div>
+
+                    <div
+                        class="detail-value"
+                        id="detailStatus"
+                    >
+                        —
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- STATUS -->
+
+            <div class="status-control">
+
+
+                <div class="status-control-row">
+
+
+                    <div class="status-control-label">
+
+                        Update Order Status
+
+                    </div>
+
+
+                    <select
+                        id="orderStatusSelect"
+                        class="status-select"
+                    >
+
+                        <option value="pending">
+                            Pending
+                        </option>
+
+                        <option value="confirmed">
+                            Confirmed
+                        </option>
+
+                        <option value="processing">
+                            Processing
+                        </option>
+
+                        <option value="out_for_delivery">
+                            Out for delivery
+                        </option>
+
+                        <option value="completed">
+                            Completed
+                        </option>
+
+                        <option value="cancelled">
+                            Cancelled
+                        </option>
+
+                    </select>
+
+
+                    <button
+                        class="btn btn-primary"
+                        id="updateStatusButton"
+                        onclick="updateOrderStatus()"
+                    >
+                        Update
+                    </button>
+
+
+                </div>
+
+
+            </div>
+
+
+            <!-- ORDER ITEMS -->
+
+            <div class="section-heading">
+
+                <h3 class="section-title">
+                    Order Items
+                </h3>
+
+            </div>
+
+
+            <div class="items-table-wrap">
+
+
+                <table class="items-table">
+
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Product
+                            </th>
+
+                            <th>
+                                Price
+                            </th>
+
+                            <th>
+                                Qty
+                            </th>
+
+                            <th>
+                                Subtotal
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="orderItemsBody">
+
+                    </tbody>
+
+
+                </table>
+
+
+            </div>
+
+
+        </div>
+
+
+        <div class="modal-footer">
+
+
+            <button
+                class="btn btn-outline"
+                onclick="closeOrderModal()"
+            >
+                Close
+            </button>
+
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
+<!-- =========================================================
+     TOAST
+========================================================= -->
+
+<div
+    class="toast"
+    id="toast"
+>
+
+
+    <div
+        class="toast-icon"
+        id="toastIcon"
+    >
+        ✓
+    </div>
+
+
+    <div>
+
+        <div
+            class="toast-title"
+            id="toastTitle"
+        >
+            Success
+        </div>
+
+        <div
+            class="toast-message"
+            id="toastMessage"
+        >
+            Done.
+        </div>
+
+    </div>
+
+
+</div>
+
+
+<script>
+
+
+    /* =========================================================
+       API
+    ========================================================= */
+
+    const API_BASE = "/api";
+
+
+    /* =========================================================
+       STATE
+    ========================================================= */
+
+    let orders = [];
+
+    let filteredOrders = [];
+
+    let selectedOrder = null;
+
+    let toastTimer = null;
+
+
+    /* =========================================================
+       AUTH
+    ========================================================= */
+
+    function getToken() {
+
+        return (
+            localStorage.getItem("admin_token") ||
+            localStorage.getItem("token") ||
+            localStorage.getItem("access_token") ||
+            ""
+        );
+
+    }
+
+
+    function authHeaders() {
+
+        const token = getToken();
+
+        return {
+
+            "Authorization":
+                `Bearer ${token}`,
+
+            "Accept":
+                "application/json"
+
+        };
+
+    }
+
+
+    function checkAuthentication() {
+
+        const token = getToken();
+
+        if (!token) {
+
+            window.location.href =
+                "/admin";
+
+            return false;
+
+        }
+
+        return true;
+
+    }
+
+
+    /* =========================================================
+       HELPERS
+    ========================================================= */
+
+    function escapeHtml(value) {
+
+        if (value === null || value === undefined) {
+            return "";
+        }
+
+        return String(value)
+
+            .replace(/&/g, "&amp;")
+
+            .replace(/</g, "&lt;")
+
+            .replace(/>/g, "&gt;")
+
+            .replace(/"/g, "&quot;")
+
+            .replace(/'/g, "&#039;");
+
+    }
+
+
+    function formatMoney(value) {
+
+        const amount =
+            Number(value || 0);
+
+        return "KSh " +
+            amount.toLocaleString(
+                "en-KE",
+                {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2
+                }
+            );
+
+    }
+
+
+    function formatDate(value) {
+
+        if (!value) {
+            return "—";
+        }
+
+        const date =
+            new Date(value);
+
+        if (Number.isNaN(date.getTime())) {
+            return value;
+        }
+
+        return date.toLocaleDateString(
+            "en-KE",
+            {
+                day: "2-digit",
+                month: "short",
+                year: "numeric"
+            }
+        );
+
+    }
+
+
+    function formatDateTime(value) {
+
+        if (!value) {
+            return "—";
+        }
+
+        const date =
+            new Date(value);
+
+        if (Number.isNaN(date.getTime())) {
+            return value;
+        }
+
+        return date.toLocaleString(
+            "en-KE",
+            {
+                day: "2-digit",
+                month: "short",
+                year: "numeric",
+                hour: "2-digit",
+                minute: "2-digit"
+            }
+        );
+
+    }
+
+
+    function formatStatus(status) {
+
+        if (!status) {
+            return "Unknown";
+        }
+
+        return status
+            .replace(/_/g, " ")
+            .replace(/\b\w/g, letter =>
+                letter.toUpperCase()
+            );
+
+    }
+
+
+    function statusBadge(status) {
+
+        const safeStatus =
+            String(status || "pending")
+                .toLowerCase()
+                .replace(/[^a-z_]/g, "");
+
+        return `
+
+            <span
+                class="status-badge status-${safeStatus}"
+            >
+
+                <span class="status-dot"></span>
+
+                ${escapeHtml(
+                    formatStatus(status)
+                )}
+
+            </span>
+
+        `;
+
+    }
+
+
+    function showToast(
+        title,
+        message,
+        isError = false
+    ) {
+
+        const toast =
+            document.getElementById("toast");
+
+        const icon =
+            document.getElementById("toastIcon");
+
+        document.getElementById(
+            "toastTitle"
+        ).textContent = title;
+
+        document.getElementById(
+            "toastMessage"
+        ).textContent = message;
+
+        icon.textContent =
+            isError ? "!" : "✓";
+
+        toast.classList.toggle(
+            "error",
+            isError
+        );
+
+        toast.classList.add("show");
+
+        clearTimeout(toastTimer);
+
+        toastTimer =
+            setTimeout(() => {
+
+                toast.classList.remove(
+                    "show"
+                );
+
+            }, 3500);
+
+    }
+
+
+    /* =========================================================
+       LOAD ORDERS
+    ========================================================= */
+
+    async function loadOrders() {
+
+        if (!checkAuthentication()) {
+            return;
+        }
+
+
+        const refreshButton =
+            document.getElementById(
+                "refreshButton"
+            );
+
+
+        refreshButton.disabled = true;
+
+        refreshButton.innerHTML = `
+
+            <span
+                style="
+                    width:16px;
+                    height:16px;
+                    border:2px solid #d9a5b1;
+                    border-top-color:transparent;
+                    border-radius:50%;
+                    display:inline-block;
+                    animation:spin .7s linear infinite;
+                "
+            ></span>
+
+            Loading...
+
+        `;
+
+
+        try {
+
+            const response =
+                await fetch(
+                    `${API_BASE}/orders/admin`,
+                    {
+                        method: "GET",
+                        headers: authHeaders()
+                    }
+                );
+
+
+            if (response.status === 401 ||
+                response.status === 403) {
+
+                localStorage.removeItem(
+                    "admin_token"
+                );
+
+                localStorage.removeItem(
+                    "token"
+                );
+
+                localStorage.removeItem(
+                    "access_token"
+                );
+
+                window.location.href =
+                    "/admin";
+
+                return;
+
+            }
+
+
+            if (!response.ok) {
+
+                let errorMessage =
+                    "Unable to load orders.";
+
+                try {
+
+                    const errorData =
+                        await response.json();
+
+                    if (errorData.detail) {
+                        errorMessage =
+                            errorData.detail;
+                    }
+
+                } catch (_) {}
+
+                throw new Error(
+                    errorMessage
+                );
+
+            }
+
+
+            orders =
+                await response.json();
+
+
+            if (!Array.isArray(orders)) {
+                orders = [];
+            }
+
+
+            updateStatistics();
+
+            applyFilters();
+
+
+        } catch (error) {
+
+            console.error(
+                "Load orders error:",
+                error
+            );
+
+
+            renderError(
+                error.message ||
+                "Unable to load orders."
+            );
+
+
+            showToast(
+                "Could not load orders",
+                error.message ||
+                "Please try again.",
+                true
+            );
+
+
+        } finally {
+
+            refreshButton.disabled = false;
+
+            refreshButton.innerHTML = `
+                ↻
+                Refresh Orders
+            `;
+
+        }
+
+    }
+
+
+    /* =========================================================
+       STATISTICS
+    ========================================================= */
+
+    function updateStatistics() {
+
+        const total =
+            orders.length;
+
+
+        const pending =
+            orders.filter(
+                order =>
+                    String(order.status)
+                        .toLowerCase() ===
+                    "pending"
+            ).length;
+
+
+        const processing =
+            orders.filter(
+                order =>
+                    String(order.status)
+                        .toLowerCase() ===
+                    "processing"
+            ).length;
+
+
+        const completed =
+            orders.filter(
+                order =>
+                    String(order.status)
+                        .toLowerCase() ===
+                    "completed"
+            ).length;
+
+
+        document.getElementById(
+            "totalOrders"
+        ).textContent = total;
+
+
+        document.getElementById(
+            "pendingOrders"
+        ).textContent = pending;
+
+
+        document.getElementById(
+            "processingOrders"
+        ).textContent = processing;
+
+
+        document.getElementById(
+            "completedOrders"
+        ).textContent = completed;
+
+    }
+
+
+    /* =========================================================
+       FILTERS
+    ========================================================= */
+
+    function applyFilters() {
+
+        const search =
+            document.getElementById(
+                "searchInput"
+            )
+            .value
+            .trim()
+            .toLowerCase();
+
+
+        const status =
+            document.getElementById(
+                "statusFilter"
+            )
+            .value
+            .toLowerCase();
+
+
+        filteredOrders =
+            orders.filter(order => {
+
+
+                const orderId =
+                    String(
+                        order.id || ""
+                    );
+
+
+                const customer =
+                    String(
+                        order.customer_name || ""
+                    )
+                    .toLowerCase();
+
+
+                const phone =
+                    String(
+                        order.customer_phone || ""
+                    )
+                    .toLowerCase();
+
+
+                const orderStatus =
+                    String(
+                        order.status || ""
+                    )
+                    .toLowerCase();
+
+
+                const matchesSearch =
+                    !search ||
+                    orderId.includes(search) ||
+                    customer.includes(search) ||
+                    phone.includes(search);
+
+
+                const matchesStatus =
+                    !status ||
+                    orderStatus === status;
+
+
+                return (
+                    matchesSearch &&
+                    matchesStatus
+                );
+
+            });
+
+
+        renderOrders();
+
+    }
+
+
+    /* =========================================================
+       RENDER ORDERS
+    ========================================================= */
+
+    function renderOrders() {
+
+        const tbody =
+            document.getElementById(
+                "ordersTableBody"
+            );
+
+
+        document.getElementById(
+            "resultsCount"
+        ).textContent =
+            `${filteredOrders.length} ${
+                filteredOrders.length === 1
+                    ? "order"
+                    : "orders"
+            }`;
+
+
+        if (!filteredOrders.length) {
+
+            tbody.innerHTML = `
+
+                <tr>
+
+                    <td colspan="7">
+
+                        <div class="table-message">
+
+                            <div class="table-message-icon">
+                                ♡
+                            </div>
+
+                            <div class="table-message-title">
+                                No orders found
+                            </div>
+
+                            <div class="table-message-text">
+                                There are no orders matching
+                                your current search or filter.
+                            </div>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+            `;
+
+            return;
+
+        }
+
+
+        tbody.innerHTML =
+            filteredOrders
+                .map(order => {
+
+
+                    const items =
+                        Array.isArray(order.items)
+                            ? order.items
+                            : [];
+
+
+                    const itemQuantity =
+                        items.reduce(
+                            (sum, item) =>
+                                sum +
+                                Number(
+                                    item.quantity || 0
+                                ),
+                            0
+                        );
+
+
+                    return `
+
+                        <tr>
+
+
+                            <td>
+
+                                <div class="order-number">
+
+                                    #${escapeHtml(
+                                        order.id
+                                    )}
+
+                                </div>
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="customer-name">
+
+                                    ${escapeHtml(
+                                        order.customer_name ||
+                                        "Customer"
+                                    )}
+
+                                </div>
+
+                                <div class="customer-phone">
+
+                                    ${escapeHtml(
+                                        order.customer_phone ||
+                                        "No phone"
+                                    )}
+
+                                </div>
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="items-count">
+
+                                    ${items.length}
+                                    ${
+                                        items.length === 1
+                                            ? "product"
+                                            : "products"
+                                    }
+
+                                    ·
+
+                                    ${itemQuantity}
+                                    ${
+                                        itemQuantity === 1
+                                            ? "unit"
+                                            : "units"
+                                    }
+
+                                </div>
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="order-total">
+
+                                    ${formatMoney(
+                                        order.total_amount
+                                    )}
+
+                                </div>
+
+                            </td>
+
+
+                            <td>
+
+                                ${statusBadge(
+                                    order.status
+                                )}
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="order-date">
+
+                                    ${formatDate(
+                                        order.created_at
+                                    )}
+
+                                    <br>
+
+                                    ${formatTime(
+                                        order.created_at
+                                    )}
+
+                                </div>
+
+                            </td>
+
+
+                            <td>
+
+                                <button
+                                    class="view-btn"
+                                    onclick="openOrderModal(${Number(order.id)})"
+                                >
+                                    View Order
+                                </button>
+
+                            </td>
+
+
+                        </tr>
+
+                    `;
+
+                })
+                .join("");
+
+    }
+
+
+    function formatTime(value) {
+
+        if (!value) {
+            return "";
+        }
+
+        const date =
+            new Date(value);
+
+        if (Number.isNaN(date.getTime())) {
+            return "";
+        }
+
+        return date.toLocaleTimeString(
+            "en-KE",
+            {
+                hour: "2-digit",
+                minute: "2-digit"
+            }
+        );
+
+    }
+
+
+    function renderError(message) {
+
+        const tbody =
+            document.getElementById(
+                "ordersTableBody"
+            );
+
+
+        tbody.innerHTML = `
+
+            <tr>
+
+                <td colspan="7">
+
+                    <div class="table-message">
+
+                        <div
+                            class="table-message-icon"
+                            style="
+                                background:#fff0f2;
+                                color:#a44b59;
+                            "
+                        >
+                            !
+                        </div>
+
+                        <div class="table-message-title">
+                            Something went wrong
+                        </div>
+
+                        <div class="table-message-text">
+
+                            ${escapeHtml(
+                                message
+                            )}
+
+                        </div>
+
+                    </div>
+
+                </td>
+
+            </tr>
+
+        `;
+
+    }
+
+
+    /* =========================================================
+       OPEN ORDER
+    ========================================================= */
+
+    async function openOrderModal(orderId) {
+
+        if (!checkAuthentication()) {
+            return;
+        }
+
+
+        try {
+
+            const response =
+                await fetch(
+                    `${API_BASE}/orders/admin/${orderId}`,
+                    {
+                        method: "GET",
+                        headers: authHeaders()
+                    }
+                );
+
+
+            if (response.status === 401 ||
+                response.status === 403) {
+
+                window.location.href =
+                    "/admin";
+
+                return;
+
+            }
+
+
+            if (!response.ok) {
+
+                let message =
+                    "Unable to load order.";
+
+                try {
+
+                    const errorData =
+                        await response.json();
+
+                    if (errorData.detail) {
+                        message =
+                            errorData.detail;
+                    }
+
+                } catch (_) {}
+
+                throw new Error(message);
+
+            }
+
+
+            selectedOrder =
+                await response.json();
+
+
+            renderOrderModal(
+                selectedOrder
+            );
+
+
+            document
+                .getElementById(
+                    "orderModal"
+                )
+                .classList.add("open");
+
+
+            document.body.style.overflow =
+                "hidden";
+
+
+        } catch (error) {
+
+            console.error(
+                "Open order error:",
+                error
+            );
+
+
+            showToast(
+                "Unable to open order",
+                error.message ||
+                "Please try again.",
+                true
+            );
+
+        }
+
+    }
+
+
+    /* =========================================================
+       RENDER ORDER MODAL
+    ========================================================= */
+
+    function renderOrderModal(order) {
+
+
+        document.getElementById(
+            "modalOrderTitle"
+        ).textContent =
+            `Order #${order.id}`;
+
+
+        document.getElementById(
+            "modalOrderDate"
+        ).textContent =
+            `Placed ${formatDateTime(
+                order.created_at
+            )}`;
+
+
+        document.getElementById(
+            "detailCustomer"
+        ).innerHTML = `
+
+            <strong>
+                ${escapeHtml(
+                    order.customer_name ||
+                    "Customer"
+                )}
+            </strong>
+
+        `;
+
+
+        document.getElementById(
+            "detailPhone"
+        ).innerHTML = `
+
+            <a
+                class="phone-link"
+                href="tel:${escapeHtml(
+                    order.customer_phone || ""
+                )}"
+            >
+
+                ${escapeHtml(
+                    order.customer_phone ||
+                    "No phone number"
+                )}
+
+            </a>
+
+        `;
+
+
+        document.getElementById(
+            "detailAddress"
+        ).textContent =
+            order.delivery_address ||
+            "No delivery address";
+
+
+        document.getElementById(
+            "detailStatus"
+        ).innerHTML =
+            statusBadge(
+                order.status
+            );
+
+
+        document.getElementById(
+            "orderStatusSelect"
+        ).value =
+            order.status || "pending";
+
+
+        renderOrderItems(order);
+
+    }
+
+
+    /* =========================================================
+       RENDER ORDER ITEMS
+    ========================================================= */
+
+    function renderOrderItems(order) {
+
+        const tbody =
+            document.getElementById(
+                "orderItemsBody"
+            );
+
+
+        const items =
+            Array.isArray(order.items)
+                ? order.items
+                : [];
+
+
+        if (!items.length) {
+
+            tbody.innerHTML = `
+
+                <tr>
+
+                    <td
+                        colspan="4"
+                        style="
+                            text-align:center;
+                            color:#786c70;
+                            padding:30px;
+                        "
+                    >
+                        No items found for this order.
+                    </td>
+
+                </tr>
+
+            `;
+
+            return;
+
+        }
+
+
+        tbody.innerHTML =
+
+            items.map(item => `
+
+                <tr>
+
+                    <td>
+
+                        <div class="item-name">
+
+                            ${escapeHtml(
+                                item.product_name ||
+                                "Product"
+                            )}
+
+                        </div>
+
+                    </td>
+
+
+                    <td>
+
+                        <div class="item-price">
+
+                            ${formatMoney(
+                                item.price
+                            )}
+
+                        </div>
+
+                    </td>
+
+
+                    <td>
+
+                        ${Number(
+                            item.quantity || 0
+                        )}
+
+                    </td>
+
+
+                    <td>
+
+                        <div class="item-subtotal">
+
+                            ${formatMoney(
+                                item.subtotal
+                            )}
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+            `).join("");
+
+
+        tbody.innerHTML += `
+
+            <tr class="total-row">
+
+                <td
+                    colspan="3"
+                    style="text-align:right;"
+                >
+                    Order Total
+                </td>
+
+                <td>
+
+                    <span class="grand-total">
+
+                        ${formatMoney(
+                            order.total_amount
+                        )}
+
+                    </span>
+
+                </td>
+
+            </tr>
+
+        `;
+
+    }
+
+
+    /* =========================================================
+       UPDATE ORDER STATUS
+    ========================================================= */
+
+    async function updateOrderStatus() {
+
+        if (!selectedOrder) {
+            return;
+        }
+
+
+        if (!checkAuthentication()) {
+            return;
+        }
+
+
+        const select =
+            document.getElementById(
+                "orderStatusSelect"
+            );
+
+
+        const button =
+            document.getElementById(
+                "updateStatusButton"
+            );
+
+
+        const newStatus =
+            select.value;
+
+
+        if (!newStatus) {
+
+            showToast(
+                "Select a status",
+                "Please choose an order status.",
+                true
+            );
+
+            return;
+
+        }
+
+
+        const oldStatus =
+            String(
+                selectedOrder.status || ""
+            )
+            .toLowerCase();
+
+
+        if (newStatus === oldStatus) {
+
+            showToast(
+                "No change",
+                "The order already has this status."
+            );
+
+            return;
+
+        }
+
+
+        const originalText =
+            button.innerHTML;
+
+
+        button.disabled = true;
+
+        button.innerHTML = `
+
+            <span class="spinner"></span>
+
+            Saving
+
+        `;
+
+
+        try {
+
+
+            const url =
+                `${API_BASE}/orders/admin/` +
+                `${selectedOrder.id}/status` +
+                `?new_status=${encodeURIComponent(
+                    newStatus
+                )}`;
+
+
+            const response =
+                await fetch(
+                    url,
+                    {
+                        method: "PATCH",
+
+                        headers: authHeaders()
+                    }
+                );
+
+
+            if (response.status === 401 ||
+                response.status === 403) {
+
+                window.location.href =
+                    "/admin";
+
+                return;
+
+            }
+
+
+            if (!response.ok) {
+
+                let message =
+                    "Unable to update order status.";
+
+                try {
+
+                    const errorData =
+                        await response.json();
+
+                    if (errorData.detail) {
+                        message =
+                            errorData.detail;
+                    }
+
+                } catch (_) {}
+
+                throw new Error(message);
+
+            }
+
+
+            const result =
+                await response.json();
+
+
+            selectedOrder.status =
+                result.status ||
+                newStatus;
+
+
+            renderOrderModal(
+                selectedOrder
+            );
+
+
+            const index =
+                orders.findIndex(
+                    order =>
+                        Number(order.id) ===
+                        Number(selectedOrder.id)
+                );
+
+
+            if (index !== -1) {
+
+                orders[index].status =
+                    selectedOrder.status;
+
+            }
+
+
+            updateStatistics();
+
+            applyFilters();
+
+
+            showToast(
+                "Order updated",
+                `Order #${selectedOrder.id} is now ${formatStatus(selectedOrder.status)}.`
+            );
+
+
+        } catch (error) {
+
+            console.error(
+                "Update status error:",
+                error
+            );
+
+
+            showToast(
+                "Update failed",
+                error.message ||
+                "Please try again.",
+                true
+            );
+
+
+        } finally {
+
+            button.disabled = false;
+
+            button.innerHTML =
+                originalText;
+
+        }
+
+    }
+
+
+    /* =========================================================
+       CLOSE MODAL
+    ========================================================= */
+
+    function closeOrderModal() {
+
+        document
+            .getElementById(
+                "orderModal"
+            )
+            .classList.remove("open");
+
+
+        document.body.style.overflow =
+            "";
+
+        selectedOrder = null;
+
+    }
+
+
+    function handleOverlayClick(event) {
+
+        if (
+            event.target ===
+            document.getElementById(
+                "orderModal"
+            )
+        ) {
+
+            closeOrderModal();
+
+        }
+
+    }
+
+
+    /* =========================================================
+       KEYBOARD
+    ========================================================= */
+
+    document.addEventListener(
+        "keydown",
+        event => {
+
+            if (
+                event.key === "Escape"
+            ) {
+
+                closeOrderModal();
+
+            }
+
+        }
+    );
+
+
+    /* =========================================================
+       SEARCH / FILTER EVENTS
+    ========================================================= */
+
+    document
+        .getElementById(
+            "searchInput"
+        )
+        .addEventListener(
+            "input",
+            applyFilters
+        );
+
+
+    document
+        .getElementById(
+            "statusFilter"
+        )
+        .addEventListener(
+            "change",
+            applyFilters
+        );
+
+
+    /* =========================================================
+       INITIAL LOAD
+    ========================================================= */
+
+    document.addEventListener(
+        "DOMContentLoaded",
+        () => {
+
+            if (
+                checkAuthentication()
+            ) {
+
+                loadOrders();
+
+            }
+
+        }
+    );
+
+
+</script>
+
+
+</body>
+
+</html>

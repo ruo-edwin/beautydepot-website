@@ -1,0 +1,3488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Subcategories | Beauty Depot Admin</title>
+
+    <style>
+
+        /* ============================================================
+           ROOT
+        ============================================================ */
+
+        :root {
+            --ink: #24191d;
+            --muted: #786c70;
+            --soft-muted: #9a8b91;
+
+            --white: #ffffff;
+            --soft-white: #fffafa;
+
+            --pink-soft: #fff1f4;
+            --pink-light: #f8dce3;
+            --pink: #d9a5b1;
+            --pink-deep: #b85f75;
+
+            --gold: #c6a15b;
+            --gold-light: #ead9b5;
+            --gold-dark: #9d793b;
+
+            --line: #eee2e5;
+
+            --success-bg: #edf7ef;
+            --success-text: #3f7655;
+
+            --danger-bg: #fbeaec;
+            --danger-text: #b84c5e;
+
+            --shadow-sm: 0 2px 12px rgba(70,35,45,.045);
+            --shadow-md: 0 10px 30px rgba(70,35,45,.08);
+        }
+
+
+        /* ============================================================
+           RESET
+        ============================================================ */
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            background: var(--soft-white);
+            color: var(--ink);
+
+            font-family:
+                Inter,
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                sans-serif;
+        }
+
+        button,
+        input,
+        select {
+            font: inherit;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+
+        /* ============================================================
+           HEADER
+        ============================================================ */
+
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+
+            background: rgba(255,255,255,.96);
+
+            backdrop-filter: blur(12px);
+
+            border-bottom: 1px solid var(--line);
+        }
+
+        .header-inner {
+            min-height: 78px;
+
+            max-width: 1450px;
+
+            margin: 0 auto;
+
+            padding: 0 34px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 30px;
+        }
+
+
+        /* ============================================================
+           BRAND
+        ============================================================ */
+
+        .brand {
+            text-decoration: none;
+            color: var(--ink);
+
+            display: flex;
+            flex-direction: column;
+
+            min-width: 190px;
+        }
+
+        .brand-name {
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif;
+
+            font-size: 22px;
+
+            letter-spacing: 1.8px;
+
+            font-weight: 500;
+        }
+
+        .brand-name span {
+            color: var(--pink-deep);
+        }
+
+        .brand-tagline {
+            margin-top: 3px;
+
+            color: var(--soft-muted);
+
+            font-size: 10px;
+
+            letter-spacing: 2px;
+
+            text-transform: uppercase;
+        }
+
+
+        /* ============================================================
+           NAV
+        ============================================================ */
+
+        .main-nav {
+            display: flex;
+
+            align-items: center;
+
+            gap: 30px;
+        }
+
+        .nav-link {
+            position: relative;
+
+            text-decoration: none;
+
+            color: var(--muted);
+
+            font-size: 13px;
+
+            font-weight: 500;
+
+            padding: 28px 0;
+        }
+
+        .nav-link:hover {
+            color: var(--ink);
+        }
+
+        .nav-link.active {
+            color: var(--ink);
+        }
+
+        .nav-link.active::after {
+            content: "";
+
+            position: absolute;
+
+            left: 0;
+            right: 0;
+
+            bottom: 18px;
+
+            height: 2px;
+
+            background: var(--gold);
+        }
+
+
+        /* ============================================================
+           USER
+        ============================================================ */
+
+        .header-user {
+            display: flex;
+
+            align-items: center;
+
+            gap: 11px;
+
+            min-width: 190px;
+
+            justify-content: flex-end;
+        }
+
+        .user-icon {
+            width: 36px;
+            height: 36px;
+
+            border-radius: 50%;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            background: var(--pink-soft);
+
+            border: 1px solid var(--gold-light);
+
+            font-size: 15px;
+        }
+
+        .user-name {
+            font-size: 13px;
+
+            font-weight: 600;
+        }
+
+        .user-arrow {
+            color: var(--soft-muted);
+
+            font-size: 12px;
+        }
+
+
+        /* ============================================================
+           PAGE
+        ============================================================ */
+
+        .page {
+            max-width: 1450px;
+
+            margin: 0 auto;
+
+            padding: 45px 34px 70px;
+        }
+
+
+        /* ============================================================
+           HEADING
+        ============================================================ */
+
+        .page-heading-row {
+            display: flex;
+
+            align-items: flex-end;
+
+            justify-content: space-between;
+
+            gap: 25px;
+
+            margin-bottom: 30px;
+        }
+
+        .eyebrow {
+            margin-bottom: 8px;
+
+            color: var(--pink-deep);
+
+            font-size: 11px;
+
+            font-weight: 700;
+
+            letter-spacing: 2px;
+
+            text-transform: uppercase;
+        }
+
+        .page-title {
+            margin: 0;
+
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif;
+
+            font-size: 38px;
+
+            line-height: 1.1;
+
+            font-weight: 500;
+
+            letter-spacing: -.7px;
+        }
+
+        .page-description {
+            margin: 10px 0 0;
+
+            max-width: 620px;
+
+            color: var(--muted);
+
+            font-size: 14px;
+
+            line-height: 1.6;
+        }
+
+
+        /* ============================================================
+           BUTTONS
+        ============================================================ */
+
+        .btn {
+            border: 0;
+
+            min-height: 44px;
+
+            padding: 0 18px;
+
+            border-radius: 7px;
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 8px;
+
+            transition: .2s ease;
+        }
+
+        .btn-primary {
+            color: var(--ink);
+
+            background: var(--pink-light);
+
+            border: 1px solid #ecc4ce;
+
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn-primary:hover {
+            background: var(--pink);
+
+            color: #fff;
+        }
+
+        .btn-dark {
+            background: var(--pink-deep);
+
+            color: #fff;
+        }
+
+        .btn-dark:hover {
+            background: #9f4f65;
+        }
+
+        .btn-outline {
+            background: #fff;
+
+            color: var(--muted);
+
+            border: 1px solid var(--line);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--gold);
+
+            color: var(--ink);
+        }
+
+        .btn-danger {
+            background: var(--danger-bg);
+
+            color: var(--danger-text);
+
+            border: 1px solid #f2cdd3;
+        }
+
+        .btn-danger:hover {
+            background: #f7dce0;
+        }
+
+        .plus {
+            font-size: 18px;
+
+            line-height: 1;
+        }
+
+
+        /* ============================================================
+           STATS
+        ============================================================ */
+
+        .stats-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 18px;
+
+            margin-bottom: 28px;
+        }
+
+        .stat-card {
+            position: relative;
+
+            background: #fff;
+
+            border: 1px solid var(--line);
+
+            border-radius: 10px;
+
+            padding: 23px;
+
+            overflow: hidden;
+
+            box-shadow: var(--shadow-sm);
+        }
+
+        .stat-card::before {
+            content: "";
+
+            position: absolute;
+
+            top: 0;
+            left: 0;
+            right: 0;
+
+            height: 2px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    var(--pink),
+                    var(--gold),
+                    var(--pink)
+                );
+        }
+
+        .stat-top {
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-bottom: 18px;
+        }
+
+        .stat-label {
+            color: var(--muted);
+
+            font-size: 12px;
+
+            font-weight: 600;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1px;
+        }
+
+        .stat-icon {
+            width: 36px;
+            height: 36px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 50%;
+
+            background: var(--pink-soft);
+
+            border: 1px solid var(--gold-light);
+        }
+
+        .stat-number {
+            font-size: 30px;
+
+            font-weight: 600;
+
+            letter-spacing: -.7px;
+        }
+
+        .stat-note {
+            margin-top: 6px;
+
+            color: var(--soft-muted);
+
+            font-size: 12px;
+        }
+
+
+        /* ============================================================
+           TOOLBAR
+        ============================================================ */
+
+        .toolbar {
+            background: #fff;
+
+            border: 1px solid var(--line);
+
+            border-radius: 10px;
+
+            padding: 15px;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            margin-bottom: 20px;
+
+            box-shadow: var(--shadow-sm);
+        }
+
+        .search-box {
+            position: relative;
+
+            flex: 1;
+
+            min-width: 220px;
+        }
+
+        .search-box input {
+            width: 100%;
+
+            height: 44px;
+
+            padding:
+                0 14px 0 42px;
+
+            border: 1px solid var(--line);
+
+            border-radius: 7px;
+
+            outline: none;
+
+            color: var(--ink);
+
+            background: #fff;
+        }
+
+        .search-box input:focus {
+            border-color: var(--gold);
+        }
+
+        .search-icon {
+            position: absolute;
+
+            left: 15px;
+
+            top: 50%;
+
+            transform:
+                translateY(-50%);
+
+            color: var(--soft-muted);
+        }
+
+        .filter-select {
+            height: 44px;
+
+            min-width: 165px;
+
+            padding: 0 12px;
+
+            border: 1px solid var(--line);
+
+            border-radius: 7px;
+
+            background: #fff;
+
+            color: var(--muted);
+
+            outline: none;
+        }
+
+        .filter-select:focus {
+            border-color: var(--gold);
+        }
+
+        .clear-btn {
+            height: 44px;
+
+            border: 0;
+
+            padding: 0 14px;
+
+            background: transparent;
+
+            color: var(--pink-deep);
+
+            font-size: 13px;
+
+            font-weight: 600;
+        }
+
+
+        /* ============================================================
+           SUBCATEGORY GRID
+        ============================================================ */
+
+        .subcategories-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(auto-fill, minmax(270px, 1fr));
+
+            gap: 20px;
+        }
+
+
+        /* ============================================================
+           SUBCATEGORY CARD
+        ============================================================ */
+
+        .subcategory-card {
+            background: #fff;
+
+            border: 1px solid var(--line);
+
+            border-radius: 11px;
+
+            overflow: hidden;
+
+            box-shadow: var(--shadow-sm);
+
+            transition:
+                transform .2s ease,
+                box-shadow .2s ease,
+                border-color .2s ease;
+        }
+
+        .subcategory-card:hover {
+            transform: translateY(-2px);
+
+            box-shadow: var(--shadow-md);
+
+            border-color: var(--gold-light);
+        }
+
+        .subcategory-image {
+            height: 190px;
+
+            background: var(--pink-soft);
+
+            overflow: hidden;
+
+            position: relative;
+        }
+
+        .subcategory-image img {
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+
+            display: block;
+
+            transition:
+                transform .4s ease;
+        }
+
+        .subcategory-card:hover
+        .subcategory-image img {
+            transform: scale(1.04);
+        }
+
+        .subcategory-placeholder {
+            width: 100%;
+            height: 100%;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            color: var(--pink);
+
+            font-family: Georgia, serif;
+
+            font-size: 40px;
+        }
+
+        .subcategory-status {
+            position: absolute;
+
+            top: 13px;
+
+            right: 13px;
+
+            padding: 6px 10px;
+
+            border-radius: 20px;
+
+            font-size: 10px;
+
+            font-weight: 700;
+
+            text-transform: uppercase;
+
+            letter-spacing: .7px;
+        }
+
+        .status-active {
+            background: var(--success-bg);
+
+            color: var(--success-text);
+        }
+
+        .status-inactive {
+            background: var(--danger-bg);
+
+            color: var(--danger-text);
+        }
+
+
+        /* ============================================================
+           SUBCATEGORY BODY
+        ============================================================ */
+
+        .subcategory-body {
+            padding: 19px;
+        }
+
+        .subcategory-name {
+            margin: 0 0 8px;
+
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif;
+
+            font-size: 21px;
+
+            font-weight: 500;
+        }
+
+        .parent-category {
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 6px;
+
+            margin-bottom: 12px;
+
+            padding: 6px 9px;
+
+            background: var(--pink-soft);
+
+            border: 1px solid var(--pink-light);
+
+            border-radius: 5px;
+
+            color: var(--pink-deep);
+
+            font-size: 11px;
+
+            font-weight: 700;
+
+            letter-spacing: .3px;
+        }
+
+        .subcategory-slug {
+            color: var(--soft-muted);
+
+            font-size: 12px;
+
+            margin-bottom: 18px;
+        }
+
+        .subcategory-slug span {
+            color: var(--gold-dark);
+
+            font-weight: 600;
+        }
+
+
+        /* ============================================================
+           ACTIONS
+        ============================================================ */
+
+        .subcategory-actions {
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            padding-top: 14px;
+
+            border-top: 1px solid var(--line);
+        }
+
+        .subcategory-action {
+            height: 36px;
+
+            border-radius: 6px;
+
+            padding: 0 12px;
+
+            border: 1px solid var(--line);
+
+            background: #fff;
+
+            font-size: 12px;
+
+            font-weight: 600;
+
+            color: var(--muted);
+        }
+
+        .subcategory-action:hover {
+            border-color: var(--gold);
+
+            color: var(--ink);
+        }
+
+        .subcategory-action.delete:hover {
+            border-color: #eab9c2;
+
+            color: var(--danger-text);
+
+            background: var(--danger-bg);
+        }
+
+
+        /* ============================================================
+           EMPTY STATE
+        ============================================================ */
+
+        .empty-state {
+            background: #fff;
+
+            border: 1px dashed var(--gold-light);
+
+            border-radius: 10px;
+
+            padding: 70px 20px;
+
+            text-align: center;
+
+            grid-column: 1 / -1;
+        }
+
+        .empty-icon {
+            width: 55px;
+            height: 55px;
+
+            margin:
+                0 auto 17px;
+
+            border-radius: 50%;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            background: var(--pink-soft);
+
+            border: 1px solid var(--gold-light);
+
+            color: var(--pink-deep);
+
+            font-size: 23px;
+        }
+
+        .empty-title {
+            margin: 0 0 7px;
+
+            font-family: Georgia, serif;
+
+            font-size: 22px;
+        }
+
+        .empty-text {
+            margin: 0;
+
+            color: var(--muted);
+
+            font-size: 13px;
+        }
+
+
+        /* ============================================================
+           MODAL
+        ============================================================ */
+
+        .modal-overlay {
+            position: fixed;
+
+            inset: 0;
+
+            background:
+                rgba(36,25,29,.42);
+
+            display: none;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 20px;
+
+            z-index: 2000;
+        }
+
+        .modal-overlay.show {
+            display: flex;
+        }
+
+        .modal {
+            width:
+                min(560px, 100%);
+
+            max-height: 90vh;
+
+            overflow-y: auto;
+
+            background: #fff;
+
+            border-radius: 12px;
+
+            box-shadow:
+                0 25px 70px
+                rgba(72,35,46,.16);
+
+            animation:
+                modalIn .18s ease;
+        }
+
+        @keyframes modalIn {
+
+            from {
+                opacity: 0;
+
+                transform:
+                    translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+
+                transform:
+                    translateY(0);
+            }
+
+        }
+
+        .modal-header {
+            padding: 21px 23px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            border-bottom:
+                1px solid var(--line);
+        }
+
+        .modal-title {
+            margin: 0;
+
+            font-family: Georgia, serif;
+
+            font-size: 23px;
+
+            font-weight: 500;
+        }
+
+        .modal-close {
+            width: 34px;
+            height: 34px;
+
+            border-radius: 50%;
+
+            border: 1px solid var(--line);
+
+            background: #fff;
+
+            color: var(--muted);
+
+            font-size: 17px;
+        }
+
+        .modal-close:hover {
+            border-color: var(--gold);
+
+            color: var(--ink);
+        }
+
+        .modal-body {
+            padding: 23px;
+        }
+
+
+        /* ============================================================
+           FORM
+        ============================================================ */
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-label {
+            display: block;
+
+            margin-bottom: 7px;
+
+            color: var(--ink);
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+            letter-spacing: .3px;
+        }
+
+        .form-control {
+            width: 100%;
+
+            height: 44px;
+
+            padding: 0 13px;
+
+            border: 1px solid var(--line);
+
+            border-radius: 7px;
+
+            outline: none;
+
+            color: var(--ink);
+
+            background: #fff;
+        }
+
+        .form-control:focus {
+            border-color: var(--gold);
+
+            box-shadow:
+                0 0 0 3px
+                rgba(198,161,91,.08);
+        }
+
+        .field-help {
+            margin-top: 6px;
+
+            color: var(--soft-muted);
+
+            font-size: 11px;
+        }
+
+        .checkbox-row {
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            padding: 13px;
+
+            border: 1px solid var(--line);
+
+            border-radius: 7px;
+
+            background: var(--soft-white);
+        }
+
+        .checkbox-row input {
+            width: 17px;
+            height: 17px;
+
+            accent-color: var(--pink-deep);
+        }
+
+        .checkbox-label {
+            font-size: 13px;
+
+            font-weight: 600;
+        }
+
+        .checkbox-description {
+            display: block;
+
+            color: var(--soft-muted);
+
+            font-size: 11px;
+
+            margin-top: 2px;
+        }
+
+        .modal-footer {
+            padding: 17px 23px;
+
+            border-top:
+                1px solid var(--line);
+
+            display: flex;
+
+            justify-content: flex-end;
+
+            gap: 10px;
+        }
+
+
+        /* ============================================================
+           DELETE MODAL
+        ============================================================ */
+
+        .delete-modal {
+            width:
+                min(440px, 100%);
+        }
+
+        .delete-warning {
+            width: 48px;
+            height: 48px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 50%;
+
+            background: var(--danger-bg);
+
+            color: var(--danger-text);
+
+            font-size: 21px;
+
+            margin-bottom: 15px;
+        }
+
+        .delete-title {
+            margin: 0 0 8px;
+
+            font-family: Georgia, serif;
+
+            font-size: 23px;
+        }
+
+        .delete-text {
+            margin: 0;
+
+            color: var(--muted);
+
+            font-size: 13px;
+
+            line-height: 1.6;
+        }
+
+
+        /* ============================================================
+           TOAST
+        ============================================================ */
+
+        .toast {
+            position: fixed;
+
+            right: 25px;
+            bottom: 25px;
+
+            z-index: 4000;
+
+            min-width: 280px;
+
+            max-width: 420px;
+
+            padding: 14px 17px;
+
+            background: #fff;
+
+            border: 1px solid var(--line);
+
+            border-left:
+                3px solid var(--gold);
+
+            border-radius: 8px;
+
+            box-shadow: var(--shadow-md);
+
+            display: none;
+
+            font-size: 13px;
+        }
+
+        .toast.show {
+            display: block;
+
+            animation:
+                toastIn .2s ease;
+        }
+
+        .toast.success {
+            border-left-color:
+                var(--success-text);
+        }
+
+        .toast.error {
+            border-left-color:
+                var(--danger-text);
+        }
+
+        @keyframes toastIn {
+
+            from {
+                opacity: 0;
+
+                transform:
+                    translateY(8px);
+            }
+
+            to {
+                opacity: 1;
+
+                transform:
+                    translateY(0);
+            }
+
+        }
+
+
+        /* ============================================================
+           LOADING
+        ============================================================ */
+
+        .loading {
+            grid-column: 1 / -1;
+
+            text-align: center;
+
+            padding: 70px 20px;
+
+            color: var(--muted);
+
+            font-size: 13px;
+        }
+
+        .spinner {
+            width: 28px;
+            height: 28px;
+
+            border:
+                2px solid var(--pink-light);
+
+            border-top-color:
+                var(--gold);
+
+            border-radius: 50%;
+
+            animation:
+                spin .7s linear infinite;
+
+            margin:
+                0 auto 14px;
+        }
+
+        @keyframes spin {
+
+            to {
+                transform:
+                    rotate(360deg);
+            }
+
+        }
+
+
+        /* ============================================================
+           RESPONSIVE
+        ============================================================ */
+
+        @media (max-width: 1050px) {
+
+            .main-nav {
+                gap: 18px;
+            }
+
+            .header-user {
+                min-width: auto;
+            }
+
+            .user-name,
+            .user-arrow {
+                display: none;
+            }
+
+            .stats-grid {
+                grid-template-columns:
+                    repeat(3, 1fr);
+            }
+
+        }
+
+
+        @media (max-width: 800px) {
+
+            .header-inner {
+                padding: 0 20px;
+            }
+
+            .brand {
+                min-width: auto;
+            }
+
+            .main-nav {
+                display: none;
+            }
+
+            .page {
+                padding:
+                    30px 20px 50px;
+            }
+
+            .page-heading-row {
+                align-items: flex-start;
+
+                flex-direction: column;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .toolbar {
+                flex-wrap: wrap;
+            }
+
+            .search-box {
+                flex-basis: 100%;
+            }
+
+            .filter-select {
+                flex: 1;
+            }
+
+        }
+
+
+        @media (max-width: 520px) {
+
+            .header-inner {
+                min-height: 68px;
+            }
+
+            .brand-name {
+                font-size: 19px;
+            }
+
+            .brand-tagline {
+                font-size: 8px;
+            }
+
+            .page {
+                padding:
+                    25px 15px 45px;
+            }
+
+            .page-title {
+                font-size: 31px;
+            }
+
+            .subcategories-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .subcategory-image {
+                height: 220px;
+            }
+
+            .toolbar {
+                padding: 12px;
+            }
+
+            .filter-select {
+                min-width: 0;
+            }
+
+            .modal-overlay {
+                padding: 10px;
+            }
+
+            .modal-body {
+                padding: 18px;
+            }
+
+            .modal-header {
+                padding: 18px;
+            }
+
+            .modal-footer {
+                padding:
+                    15px 18px;
+            }
+
+            .toast {
+                left: 15px;
+                right: 15px;
+
+                bottom: 15px;
+
+                min-width: 0;
+            }
+
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+<!-- ============================================================
+     HEADER
+============================================================ -->
+
+<header class="site-header">
+
+    <div class="header-inner">
+
+
+        <a
+            href="/admin/dashboard"
+            class="brand"
+        >
+
+            <div class="brand-name">
+                BEAUTY <span>DEPOT</span>
+            </div>
+
+            <div class="brand-tagline">
+                Beauty for every you
+            </div>
+
+        </a>
+
+
+        <nav class="main-nav">
+
+            <a
+                href="/admin/orders"
+                class="nav-link"
+            >
+                Orders
+            </a>
+
+            <a
+                href="/admin/dashboard"
+                class="nav-link"
+            >
+                Products
+            </a>
+
+            <a
+                href="/admin/categories"
+                class="nav-link"
+            >
+                Categories
+            </a>
+
+            <a
+                href="/admin/subcategories"
+                class="nav-link active"
+            >
+                Subcategories
+            </a>
+
+            <a
+                href="/admin/brands"
+                class="nav-link">
+                Brands
+            </a>
+
+        </nav>
+
+
+        <div class="header-user">
+
+            <div class="user-icon">
+                ♙
+            </div>
+
+            <div
+                class="user-name"
+                id="adminName"
+            >
+                Admin
+            </div>
+
+            <div class="user-arrow">
+                ▾
+            </div>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+
+<!-- ============================================================
+     PAGE
+============================================================ -->
+
+<main class="page">
+
+
+    <!-- PAGE HEADING -->
+
+    <div class="page-heading-row">
+
+        <div>
+
+            <div class="eyebrow">
+                Catalogue
+            </div>
+
+            <h1 class="page-title">
+                Subcategories
+            </h1>
+
+            <p class="page-description">
+                Organise products beneath their parent categories
+                so customers can browse your catalogue naturally.
+            </p>
+
+        </div>
+
+
+        <button
+            class="btn btn-primary"
+            onclick="openCreateModal()"
+        >
+
+            <span class="plus">
+                +
+            </span>
+
+            Add Subcategory
+
+        </button>
+
+    </div>
+
+
+
+    <!-- ========================================================
+         STATS
+    ========================================================= -->
+
+    <section class="stats-grid">
+
+
+        <div class="stat-card">
+
+            <div class="stat-top">
+
+                <div class="stat-label">
+                    Total Subcategories
+                </div>
+
+                <div class="stat-icon">
+                    ◇
+                </div>
+
+            </div>
+
+            <div
+                class="stat-number"
+                id="totalSubcategories"
+            >
+                0
+            </div>
+
+            <div class="stat-note">
+                All catalogue subcategories
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-top">
+
+                <div class="stat-label">
+                    Active
+                </div>
+
+                <div class="stat-icon">
+                    ✓
+                </div>
+
+            </div>
+
+            <div
+                class="stat-number"
+                id="activeSubcategories"
+            >
+                0
+            </div>
+
+            <div class="stat-note">
+                Visible subcategories
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-top">
+
+                <div class="stat-label">
+                    Inactive
+                </div>
+
+                <div class="stat-icon">
+                    ○
+                </div>
+
+            </div>
+
+            <div
+                class="stat-number"
+                id="inactiveSubcategories"
+            >
+                0
+            </div>
+
+            <div class="stat-note">
+                Hidden subcategories
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ========================================================
+         TOOLBAR
+    ========================================================= -->
+
+    <section class="toolbar">
+
+
+        <div class="search-box">
+
+            <span class="search-icon">
+                ⌕
+            </span>
+
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Search subcategories..."
+                oninput="renderSubcategories()"
+            >
+
+        </div>
+
+
+        <select
+            class="filter-select"
+            id="categoryFilter"
+            onchange="renderSubcategories()"
+        >
+
+            <option value="all">
+                All Categories
+            </option>
+
+        </select>
+
+
+        <select
+            class="filter-select"
+            id="statusFilter"
+            onchange="renderSubcategories()"
+        >
+
+            <option value="all">
+                All Status
+            </option>
+
+            <option value="active">
+                Active
+            </option>
+
+            <option value="inactive">
+                Inactive
+            </option>
+
+        </select>
+
+
+        <button
+            class="clear-btn"
+            onclick="clearFilters()"
+        >
+            Clear
+        </button>
+
+    </section>
+
+
+
+    <!-- ========================================================
+         GRID
+    ========================================================= -->
+
+    <section
+        class="subcategories-grid"
+        id="subcategoriesGrid"
+    >
+
+        <div class="loading">
+
+            <div class="spinner"></div>
+
+            Loading subcategories...
+
+        </div>
+
+    </section>
+
+
+</main>
+
+
+
+<!-- ============================================================
+     CREATE / EDIT MODAL
+============================================================ -->
+
+<div
+    class="modal-overlay"
+    id="subcategoryModal"
+>
+
+    <div class="modal">
+
+
+        <div class="modal-header">
+
+            <h2
+                class="modal-title"
+                id="modalTitle"
+            >
+                Add Subcategory
+            </h2>
+
+            <button
+                class="modal-close"
+                onclick="closeSubcategoryModal()"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <form
+            id="subcategoryForm"
+            onsubmit="saveSubcategory(event)"
+        >
+
+            <div class="modal-body">
+
+
+                <!-- NAME -->
+
+                <div class="form-group">
+
+                    <label class="form-label">
+                        Subcategory Name
+                    </label>
+
+                    <input
+                        type="text"
+                        class="form-control"
+                        id="subcategoryName"
+                        placeholder="e.g. Eau De Parfum"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- CATEGORY -->
+
+                <div class="form-group">
+
+                    <label class="form-label">
+                        Parent Category
+                    </label>
+
+                    <select
+                        class="form-control"
+                        id="subcategoryCategory"
+                        required
+                    >
+
+                        <option value="">
+                            Select category
+                        </option>
+
+                    </select>
+
+                    <div class="field-help">
+                        Choose the category this subcategory
+                        belongs to.
+                    </div>
+
+                </div>
+
+
+                <!-- SLUG -->
+
+                <div class="form-group">
+
+                    <label class="form-label">
+                        Slug
+                    </label>
+
+                    <input
+                        type="text"
+                        class="form-control"
+                        id="subcategorySlug"
+                        placeholder="e.g. eau-de-parfum"
+                        required
+                    >
+
+                    <div class="field-help">
+                        Use lowercase words separated by hyphens.
+                    </div>
+
+                </div>
+
+
+                <!-- IMAGE -->
+
+                <div class="form-group">
+
+                    <label class="form-label">
+                        Subcategory Image URL
+                    </label>
+
+                    <input
+                        type="url"
+                        class="form-control"
+                        id="subcategoryImage"
+                        placeholder="https://example.com/image.jpg"
+                    >
+
+                    <div class="field-help">
+                        Paste the URL of the subcategory image.
+                    </div>
+
+                </div>
+
+
+                <!-- ACTIVE -->
+
+                <div class="form-group">
+
+                    <div class="checkbox-row">
+
+                        <input
+                            type="checkbox"
+                            id="subcategoryActive"
+                            checked
+                        >
+
+                        <div>
+
+                            <label
+                                class="checkbox-label"
+                                for="subcategoryActive"
+                            >
+                                Subcategory is active
+                            </label>
+
+                            <span class="checkbox-description">
+                                Active subcategories can appear
+                                on the storefront.
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+            <div class="modal-footer">
+
+                <button
+                    type="button"
+                    class="btn btn-outline"
+                    onclick="closeSubcategoryModal()"
+                >
+                    Cancel
+                </button>
+
+                <button
+                    type="submit"
+                    class="btn btn-dark"
+                    id="saveButton"
+                >
+                    Save Subcategory
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+
+<!-- ============================================================
+     DELETE MODAL
+============================================================ -->
+
+<div
+    class="modal-overlay"
+    id="deleteModal"
+>
+
+    <div class="modal delete-modal">
+
+        <div class="modal-body">
+
+            <div class="delete-warning">
+                !
+            </div>
+
+            <h2 class="delete-title">
+                Delete Subcategory?
+            </h2>
+
+            <p
+                class="delete-text"
+                id="deleteText"
+            >
+                Are you sure you want to delete this subcategory?
+            </p>
+
+        </div>
+
+
+        <div class="modal-footer">
+
+            <button
+                type="button"
+                class="btn btn-outline"
+                onclick="closeDeleteModal()"
+            >
+                Cancel
+            </button>
+
+            <button
+                type="button"
+                class="btn btn-danger"
+                id="confirmDeleteButton"
+                onclick="confirmDelete()"
+            >
+                Delete Subcategory
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- ============================================================
+     TOAST
+============================================================ -->
+
+<div
+    class="toast"
+    id="toast"
+></div>
+
+
+
+<script>
+
+/* ================================================================
+   CONFIG
+================================================================ */
+
+const API_BASE = "/api";
+
+let subcategories = [];
+
+let categories = [];
+
+let editingSubcategoryId = null;
+
+let deletingSubcategoryId = null;
+
+
+/* ================================================================
+   AUTH
+================================================================ */
+
+const token =
+    localStorage.getItem("admin_token");
+
+
+if (!token) {
+
+    window.location.href = "/admin";
+
+}
+
+
+/* ================================================================
+   AUTH HEADERS
+================================================================ */
+
+function authHeaders() {
+
+    return {
+
+        "Content-Type":
+            "application/json",
+
+        "Authorization":
+            `Bearer ${token}`
+
+    };
+
+}
+
+
+/* ================================================================
+   INITIAL LOAD
+================================================================ */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    async function () {
+
+        loadAdminName();
+
+        await loadData();
+
+    }
+);
+
+
+/* ================================================================
+   ADMIN NAME
+================================================================ */
+
+function loadAdminName() {
+
+    const adminName =
+        localStorage.getItem("admin_name");
+
+
+    if (adminName) {
+
+        document.getElementById(
+            "adminName"
+        ).textContent =
+            adminName;
+
+    }
+
+}
+
+
+/* ================================================================
+   LOAD EVERYTHING
+================================================================ */
+
+async function loadData() {
+
+    const grid =
+        document.getElementById(
+            "subcategoriesGrid"
+        );
+
+
+    grid.innerHTML = `
+        <div class="loading">
+
+            <div class="spinner"></div>
+
+            Loading subcategories...
+
+        </div>
+    `;
+
+
+    try {
+
+        /*
+         * Both requests are public GET requests.
+         */
+
+        const [
+            subcategoryResponse,
+            categoryResponse
+        ] = await Promise.all([
+
+            fetch(
+                `${API_BASE}/subcategories/`
+            ),
+
+            fetch(
+                `${API_BASE}/categories/`
+            )
+
+        ]);
+
+
+        if (
+            !subcategoryResponse.ok ||
+            !categoryResponse.ok
+        ) {
+
+            throw new Error(
+                "Failed to load catalogue data."
+            );
+
+        }
+
+
+        subcategories =
+            await subcategoryResponse.json();
+
+
+        categories =
+            await categoryResponse.json();
+
+
+        populateCategoryFilters();
+
+        updateStats();
+
+        renderSubcategories();
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+
+        grid.innerHTML = `
+
+            <div class="empty-state">
+
+                <div class="empty-icon">
+                    !
+                </div>
+
+                <h3 class="empty-title">
+                    Could not load subcategories
+                </h3>
+
+                <p class="empty-text">
+                    Please refresh the page and try again.
+                </p>
+
+            </div>
+
+        `;
+
+
+        showToast(
+            "Could not load catalogue data.",
+            "error"
+        );
+
+    }
+
+}
+
+
+/* ================================================================
+   CATEGORY LOOKUP
+================================================================ */
+
+function getCategory(categoryId) {
+
+    return categories.find(
+        category =>
+            category.id === categoryId
+    );
+
+}
+
+
+/* ================================================================
+   POPULATE CATEGORY FILTERS
+================================================================ */
+
+function populateCategoryFilters() {
+
+    const filter =
+        document.getElementById(
+            "categoryFilter"
+        );
+
+
+    const currentValue =
+        filter.value;
+
+
+    filter.innerHTML = `
+
+        <option value="all">
+            All Categories
+        </option>
+
+    `;
+
+
+    categories.forEach(category => {
+
+        const option =
+            document.createElement("option");
+
+
+        option.value =
+            category.id;
+
+
+        option.textContent =
+            category.name;
+
+
+        filter.appendChild(option);
+
+    });
+
+
+    if (
+        categories.some(
+            category =>
+                String(category.id) ===
+                String(currentValue)
+        )
+    ) {
+
+        filter.value =
+            currentValue;
+
+    }
+
+}
+
+
+/* ================================================================
+   POPULATE MODAL CATEGORY DROPDOWN
+================================================================ */
+
+function populateCategoryDropdown() {
+
+    const select =
+        document.getElementById(
+            "subcategoryCategory"
+        );
+
+
+    select.innerHTML = `
+
+        <option value="">
+            Select category
+        </option>
+
+    `;
+
+
+    categories.forEach(category => {
+
+        const option =
+            document.createElement("option");
+
+
+        option.value =
+            category.id;
+
+
+        option.textContent =
+            category.name;
+
+
+        select.appendChild(option);
+
+    });
+
+}
+
+
+/* ================================================================
+   STATS
+================================================================ */
+
+function updateStats() {
+
+    const total =
+        subcategories.length;
+
+
+    const active =
+        subcategories.filter(
+            item => item.is_active
+        ).length;
+
+
+    const inactive =
+        subcategories.filter(
+            item => !item.is_active
+        ).length;
+
+
+    document.getElementById(
+        "totalSubcategories"
+    ).textContent =
+        total;
+
+
+    document.getElementById(
+        "activeSubcategories"
+    ).textContent =
+        active;
+
+
+    document.getElementById(
+        "inactiveSubcategories"
+    ).textContent =
+        inactive;
+
+}
+
+
+/* ================================================================
+   RENDER
+================================================================ */
+
+function renderSubcategories() {
+
+    const grid =
+        document.getElementById(
+            "subcategoriesGrid"
+        );
+
+
+    const search =
+        document.getElementById(
+            "searchInput"
+        ).value
+            .trim()
+            .toLowerCase();
+
+
+    const categoryFilter =
+        document.getElementById(
+            "categoryFilter"
+        ).value;
+
+
+    const statusFilter =
+        document.getElementById(
+            "statusFilter"
+        ).value;
+
+
+    const filtered =
+        subcategories.filter(
+            subcategory => {
+
+
+                const category =
+                    getCategory(
+                        subcategory.category_id
+                    );
+
+
+                const categoryName =
+                    category
+                        ? category.name.toLowerCase()
+                        : "";
+
+
+                const matchesSearch =
+                    !search ||
+
+                    subcategory.name
+                        .toLowerCase()
+                        .includes(search) ||
+
+                    subcategory.slug
+                        .toLowerCase()
+                        .includes(search) ||
+
+                    categoryName
+                        .includes(search);
+
+
+                const matchesCategory =
+                    categoryFilter === "all" ||
+                    String(
+                        subcategory.category_id
+                    ) === String(
+                        categoryFilter
+                    );
+
+
+                let matchesStatus = true;
+
+
+                if (
+                    statusFilter === "active"
+                ) {
+
+                    matchesStatus =
+                        subcategory.is_active === true;
+
+                }
+
+
+                if (
+                    statusFilter === "inactive"
+                ) {
+
+                    matchesStatus =
+                        subcategory.is_active === false;
+
+                }
+
+
+                return (
+                    matchesSearch &&
+                    matchesCategory &&
+                    matchesStatus
+                );
+
+            }
+        );
+
+
+    if (filtered.length === 0) {
+
+        grid.innerHTML = `
+
+            <div class="empty-state">
+
+                <div class="empty-icon">
+                    ◇
+                </div>
+
+                <h3 class="empty-title">
+                    No subcategories found
+                </h3>
+
+                <p class="empty-text">
+                    Try changing your search or filters,
+                    or create a new subcategory.
+                </p>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    grid.innerHTML =
+        filtered
+            .map(
+                subcategory =>
+                    subcategoryCard(
+                        subcategory
+                    )
+            )
+            .join("");
+
+}
+
+
+/* ================================================================
+   CARD
+================================================================ */
+
+function subcategoryCard(
+    subcategory
+) {
+
+    const category =
+        getCategory(
+            subcategory.category_id
+        );
+
+
+    const categoryName =
+        category
+            ? category.name
+            : "Unknown Category";
+
+
+    const image =
+        subcategory.image;
+
+
+    const imageHTML =
+        image
+
+            ? `
+
+                <img
+                    src="${escapeHtml(image)}"
+                    alt="${escapeHtml(subcategory.name)}"
+                    onerror="
+                        this.style.display='none';
+                        this.nextElementSibling.style.display='flex';
+                    "
+                >
+
+                <div
+                    class="subcategory-placeholder"
+                    style="display:none;"
+                >
+                    ♡
+                </div>
+
+              `
+
+            : `
+
+                <div
+                    class="subcategory-placeholder"
+                >
+                    ♡
+                </div>
+
+              `;
+
+
+    const statusHTML =
+        subcategory.is_active
+
+            ? `
+
+                <div
+                    class="subcategory-status status-active"
+                >
+                    Active
+                </div>
+
+              `
+
+            : `
+
+                <div
+                    class="subcategory-status status-inactive"
+                >
+                    Inactive
+                </div>
+
+              `;
+
+
+    return `
+
+        <article
+            class="subcategory-card"
+        >
+
+
+            <div
+                class="subcategory-image"
+            >
+
+                ${imageHTML}
+
+                ${statusHTML}
+
+            </div>
+
+
+            <div
+                class="subcategory-body"
+            >
+
+
+                <h3
+                    class="subcategory-name"
+                >
+                    ${escapeHtml(
+                        subcategory.name
+                    )}
+                </h3>
+
+
+                <div
+                    class="parent-category"
+                >
+                    ↳
+
+                    ${escapeHtml(
+                        categoryName
+                    )}
+                </div>
+
+
+                <div
+                    class="subcategory-slug"
+                >
+                    Slug:
+
+                    <span>
+                        /${escapeHtml(
+                            subcategory.slug
+                        )}
+                    </span>
+                </div>
+
+
+                <div
+                    class="subcategory-actions"
+                >
+
+
+                    <button
+                        class="subcategory-action"
+                        onclick="
+                            openEditModal(
+                                ${subcategory.id}
+                            )
+                        "
+                    >
+                        Edit
+                    </button>
+
+
+                    <button
+                        class="
+                            subcategory-action
+                            delete
+                        "
+                        onclick="
+                            openDeleteModal(
+                                ${subcategory.id}
+                            )
+                        "
+                    >
+                        Delete
+                    </button>
+
+
+                </div>
+
+            </div>
+
+        </article>
+
+    `;
+
+}
+
+
+/* ================================================================
+   CREATE MODAL
+================================================================ */
+
+function openCreateModal() {
+
+    editingSubcategoryId = null;
+
+
+    populateCategoryDropdown();
+
+
+    document.getElementById(
+        "modalTitle"
+    ).textContent =
+        "Add Subcategory";
+
+
+    document.getElementById(
+        "subcategoryForm"
+    ).reset();
+
+
+    document.getElementById(
+        "subcategoryActive"
+    ).checked = true;
+
+
+    document.getElementById(
+        "saveButton"
+    ).textContent =
+        "Save Subcategory";
+
+
+    document.getElementById(
+        "subcategoryModal"
+    ).classList.add("show");
+
+
+    setTimeout(
+        () => {
+
+            document.getElementById(
+                "subcategoryName"
+            ).focus();
+
+        },
+        100
+    );
+
+}
+
+
+/* ================================================================
+   EDIT MODAL
+================================================================ */
+
+function openEditModal(
+    subcategoryId
+) {
+
+    const subcategory =
+        subcategories.find(
+            item =>
+                item.id ===
+                subcategoryId
+        );
+
+
+    if (!subcategory) {
+
+        showToast(
+            "Subcategory not found.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    editingSubcategoryId =
+        subcategoryId;
+
+
+    populateCategoryDropdown();
+
+
+    document.getElementById(
+        "modalTitle"
+    ).textContent =
+        "Edit Subcategory";
+
+
+    document.getElementById(
+        "subcategoryName"
+    ).value =
+        subcategory.name || "";
+
+
+    document.getElementById(
+        "subcategoryCategory"
+    ).value =
+        subcategory.category_id;
+
+
+    document.getElementById(
+        "subcategorySlug"
+    ).value =
+        subcategory.slug || "";
+
+
+    document.getElementById(
+        "subcategoryImage"
+    ).value =
+        subcategory.image || "";
+
+
+    document.getElementById(
+        "subcategoryActive"
+    ).checked =
+        subcategory.is_active;
+
+
+    document.getElementById(
+        "saveButton"
+    ).textContent =
+        "Update Subcategory";
+
+
+    document.getElementById(
+        "subcategoryModal"
+    ).classList.add("show");
+
+}
+
+
+/* ================================================================
+   CLOSE MODAL
+================================================================ */
+
+function closeSubcategoryModal() {
+
+    document.getElementById(
+        "subcategoryModal"
+    ).classList.remove("show");
+
+
+    editingSubcategoryId = null;
+
+}
+
+
+/* ================================================================
+   SAVE
+================================================================ */
+
+async function saveSubcategory(
+    event
+) {
+
+    event.preventDefault();
+
+
+    const name =
+        document.getElementById(
+            "subcategoryName"
+        ).value.trim();
+
+
+    const categoryId =
+        document.getElementById(
+            "subcategoryCategory"
+        ).value;
+
+
+    const slug =
+        document.getElementById(
+            "subcategorySlug"
+        ).value.trim();
+
+
+    const image =
+        document.getElementById(
+            "subcategoryImage"
+        ).value.trim();
+
+
+    const is_active =
+        document.getElementById(
+            "subcategoryActive"
+        ).checked;
+
+
+    if (!name) {
+
+        showToast(
+            "Subcategory name is required.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    if (!categoryId) {
+
+        showToast(
+            "Please select a parent category.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    if (!slug) {
+
+        showToast(
+            "Subcategory slug is required.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    const payload = {
+
+        name,
+
+        slug,
+
+        category_id:
+            Number(categoryId),
+
+        image:
+            image || null,
+
+        is_active
+
+    };
+
+
+    const saveButton =
+        document.getElementById(
+            "saveButton"
+        );
+
+
+    saveButton.disabled = true;
+
+
+    saveButton.textContent =
+        editingSubcategoryId
+            ? "Updating..."
+            : "Saving...";
+
+
+    try {
+
+        let response;
+
+
+        if (editingSubcategoryId) {
+
+            response =
+                await fetch(
+                    `${API_BASE}/subcategories/${editingSubcategoryId}`,
+
+                    {
+
+                        method: "PUT",
+
+                        headers:
+                            authHeaders(),
+
+                        body:
+                            JSON.stringify(
+                                payload
+                            )
+
+                    }
+                );
+
+        }
+
+        else {
+
+            response =
+                await fetch(
+                    `${API_BASE}/subcategories/`,
+
+                    {
+
+                        method: "POST",
+
+                        headers:
+                            authHeaders(),
+
+                        body:
+                            JSON.stringify(
+                                payload
+                            )
+
+                    }
+                );
+
+        }
+
+
+        const data =
+            await response.json();
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                data.detail ||
+                "Unable to save subcategory."
+            );
+
+        }
+
+
+        closeSubcategoryModal();
+
+
+        showToast(
+            editingSubcategoryId
+                ? "Subcategory updated successfully."
+                : "Subcategory created successfully.",
+            "success"
+        );
+
+
+        await loadData();
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+
+        showToast(
+            error.message ||
+            "Something went wrong.",
+            "error"
+        );
+
+    }
+
+    finally {
+
+        saveButton.disabled =
+            false;
+
+        saveButton.textContent =
+            editingSubcategoryId
+                ? "Update Subcategory"
+                : "Save Subcategory";
+
+    }
+
+}
+
+
+/* ================================================================
+   DELETE MODAL
+================================================================ */
+
+function openDeleteModal(
+    subcategoryId
+) {
+
+    const subcategory =
+        subcategories.find(
+            item =>
+                item.id ===
+                subcategoryId
+        );
+
+
+    if (!subcategory) {
+
+        showToast(
+            "Subcategory not found.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    deletingSubcategoryId =
+        subcategoryId;
+
+
+    document.getElementById(
+        "deleteText"
+    ).textContent =
+        `Are you sure you want to delete "${subcategory.name}"? ` +
+        `If products are using this subcategory, the backend will prevent deletion.`;
+
+
+    document.getElementById(
+        "deleteModal"
+    ).classList.add("show");
+
+}
+
+
+/* ================================================================
+   CLOSE DELETE
+================================================================ */
+
+function closeDeleteModal() {
+
+    document.getElementById(
+        "deleteModal"
+    ).classList.remove("show");
+
+
+    deletingSubcategoryId = null;
+
+}
+
+
+/* ================================================================
+   CONFIRM DELETE
+================================================================ */
+
+async function confirmDelete() {
+
+    if (!deletingSubcategoryId) {
+        return;
+    }
+
+
+    const button =
+        document.getElementById(
+            "confirmDeleteButton"
+        );
+
+
+    button.disabled = true;
+
+    button.textContent =
+        "Deleting...";
+
+
+    try {
+
+        const response =
+            await fetch(
+
+                `${API_BASE}/subcategories/${deletingSubcategoryId}`,
+
+                {
+
+                    method: "DELETE",
+
+                    headers:
+                        authHeaders()
+
+                }
+
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                data.detail ||
+                "Unable to delete subcategory."
+            );
+
+        }
+
+
+        closeDeleteModal();
+
+
+        showToast(
+            "Subcategory deleted successfully.",
+            "success"
+        );
+
+
+        await loadData();
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+
+        showToast(
+            error.message ||
+            "Unable to delete subcategory.",
+            "error"
+        );
+
+    }
+
+    finally {
+
+        button.disabled = false;
+
+        button.textContent =
+            "Delete Subcategory";
+
+    }
+
+}
+
+
+/* ================================================================
+   CLEAR FILTERS
+================================================================ */
+
+function clearFilters() {
+
+    document.getElementById(
+        "searchInput"
+    ).value = "";
+
+
+    document.getElementById(
+        "categoryFilter"
+    ).value = "all";
+
+
+    document.getElementById(
+        "statusFilter"
+    ).value = "all";
+
+
+    renderSubcategories();
+
+}
+
+
+/* ================================================================
+   AUTO SLUG
+================================================================ */
+
+document.getElementById(
+    "subcategoryName"
+).addEventListener(
+    "input",
+    function () {
+
+        /*
+         * Do not overwrite the existing slug
+         * while editing.
+         */
+
+        if (
+            editingSubcategoryId !== null
+        ) {
+
+            return;
+
+        }
+
+
+        const slug =
+            this.value
+
+                .toLowerCase()
+
+                .trim()
+
+                .replace(
+                    /[^a-z0-9\s-]/g,
+                    ""
+                )
+
+                .replace(
+                    /\s+/g,
+                    "-"
+                )
+
+                .replace(
+                    /-+/g,
+                    "-"
+                );
+
+
+        document.getElementById(
+            "subcategorySlug"
+        ).value =
+            slug;
+
+    }
+);
+
+
+/* ================================================================
+   ESCAPE HTML
+================================================================ */
+
+function escapeHtml(value) {
+
+    if (
+        value === null ||
+        value === undefined
+    ) {
+
+        return "";
+
+    }
+
+
+    return String(value)
+
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+
+        .replace(
+            /</g,
+            "&lt;"
+        )
+
+        .replace(
+            />/g,
+            "&gt;"
+        )
+
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
+}
+
+
+/* ================================================================
+   TOAST
+================================================================ */
+
+let toastTimer;
+
+
+function showToast(
+    message,
+    type = "success"
+) {
+
+    const toast =
+        document.getElementById(
+            "toast"
+        );
+
+
+    toast.textContent =
+        message;
+
+
+    toast.className =
+        `toast show ${type}`;
+
+
+    clearTimeout(
+        toastTimer
+    );
+
+
+    toastTimer =
+        setTimeout(
+            () => {
+
+                toast.classList.remove(
+                    "show"
+                );
+
+            },
+            3500
+        );
+
+}
+
+
+/* ================================================================
+   CLOSE ON OUTSIDE CLICK
+================================================================ */
+
+document.getElementById(
+    "subcategoryModal"
+).addEventListener(
+    "click",
+    function(event) {
+
+        if (
+            event.target === this
+        ) {
+
+            closeSubcategoryModal();
+
+        }
+
+    }
+);
+
+
+document.getElementById(
+    "deleteModal"
+).addEventListener(
+    "click",
+    function(event) {
+
+        if (
+            event.target === this
+        ) {
+
+            closeDeleteModal();
+
+        }
+
+    }
+);
+
+
+/* ================================================================
+   ESCAPE KEY
+================================================================ */
+
+document.addEventListener(
+    "keydown",
+    function(event) {
+
+        if (
+            event.key !== "Escape"
+        ) {
+
+            return;
+
+        }
+
+
+        closeSubcategoryModal();
+
+        closeDeleteModal();
+
+    }
+);
+
+</script>
+
+</body>
+</html>

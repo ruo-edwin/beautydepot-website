@@ -1,0 +1,1823 @@
+{% extends "base.html" %}
+
+{% block title %}
+Beauty Depot | Beauty, Skincare, Fragrance & Lifestyle
+{% endblock %}
+
+{% block description %}
+Discover premium beauty, skincare, fragrance, hair, body care and lifestyle
+essentials at Beauty Depot.
+{% endblock %}
+
+
+{% block extra_css %}
+
+<style>
+
+/* ============================================================
+   HOMEPAGE
+============================================================ */
+
+.home-section {
+    padding: 50px 0;
+}
+
+.section-heading-row {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    margin-bottom: 32px;
+}
+
+.section-heading {
+    font-family: var(--serif);
+    font-size: 32px;
+    line-height: 1.1;
+    font-weight: 500;
+    color: var(--black);
+    white-space: nowrap;
+}
+
+.heading-line {
+    height: 1px;
+    background: var(--border);
+    flex: 1;
+}
+
+.section-link {
+    font-size: 12px;
+    white-space: nowrap;
+    color: var(--black);
+}
+
+.section-link:hover {
+    color: var(--gold-dark);
+}
+
+
+/* ============================================================
+   HERO
+============================================================ */
+
+.hero {
+    min-height: calc(100vh - 112px);
+    height: 620px;
+
+    position: relative;
+    overflow: hidden;
+
+    background: #f4eee8;
+}
+
+.hero-image {
+    position: absolute;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+    object-position: center;
+}
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(248,244,240,.97) 0%,
+            rgba(248,244,240,.88) 30%,
+            rgba(248,244,240,.35) 52%,
+            rgba(248,244,240,0) 70%
+        );
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+
+    height: 100%;
+
+    width: min(var(--container), calc(100% - 80px));
+    margin: 0 auto;
+
+    display: flex;
+    align-items: center;
+}
+
+.hero-copy {
+    width: 46%;
+    max-width: 560px;
+}
+
+.hero-eyebrow {
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+
+    color: var(--gold-dark);
+
+    margin-bottom: 18px;
+}
+
+.hero-title {
+    font-family: var(--serif);
+
+    font-size: clamp(46px, 5vw, 68px);
+    line-height: .98;
+
+    font-weight: 400;
+    letter-spacing: -2px;
+
+    color: var(--black);
+
+    margin-bottom: 24px;
+}
+
+.hero-description {
+    max-width: 470px;
+
+    font-family: var(--serif);
+
+    font-size: 18px;
+    line-height: 1.55;
+
+    color: #49423d;
+
+    margin-bottom: 28px;
+}
+
+.hero-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+
+    background: var(--gold-dark);
+    color: white;
+
+    padding: 15px 24px;
+
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+
+    transition:
+        background .2s ease,
+        transform .2s ease;
+}
+
+.hero-button:hover {
+    background: var(--black);
+    transform: translateY(-2px);
+}
+
+.hero-benefits {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+
+    margin-top: 42px;
+}
+
+.hero-benefit {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+
+    font-size: 11px;
+    line-height: 1.35;
+
+    color: #302b27;
+}
+
+.hero-benefit-icon {
+    width: 24px;
+    height: 24px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: var(--gold-dark);
+}
+
+
+/* ============================================================
+   CATEGORY SECTION
+============================================================ */
+
+.categories-section {
+    background: white;
+}
+
+.category-grid {
+    display: flex;
+    gap: 34px;
+
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    padding: 5px 2px 15px;
+
+    scrollbar-width: none;
+    scroll-behavior: smooth;
+}
+
+.category-grid::-webkit-scrollbar {
+    display: none;
+}
+
+.category-card {
+    flex: 0 0 128px;
+    min-width: 128px;
+
+    text-align: center;
+
+    cursor: pointer;
+}
+
+.category-image {
+    width: 130px;
+    height: 130px;
+
+    margin: 0 auto 17px;
+
+    border-radius: 50%;
+
+    background: #f4eee8;
+
+    overflow: hidden;
+
+    border: 1px solid #eee8e2;
+
+    transition:
+        transform .3s ease,
+        box-shadow .3s ease;
+}
+
+.category-card:hover .category-image {
+    transform: translateY(-4px);
+
+    box-shadow:
+        0 10px 25px rgba(0,0,0,.08);
+}
+
+.category-image img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+.category-placeholder {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-family: var(--serif);
+    font-size: 23px;
+
+    color: #a89684;
+}
+
+.category-name {
+    font-size: 13px;
+    font-weight: 500;
+
+    color: var(--black);
+
+    white-space: normal;
+}
+
+.category-count {
+    margin-top: 3px;
+
+    font-size: 11px;
+
+    color: #99918a;
+}
+
+
+/* ============================================================
+   PRODUCTS
+============================================================ */
+
+.products-section {
+    padding-top: 20px;
+}
+
+.product-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(5, minmax(0, 1fr));
+
+    gap: 20px;
+}
+
+.product-card {
+    position: relative;
+
+    min-width: 0;
+}
+
+.product-image-wrap {
+    position: relative;
+
+    width: 100%;
+    aspect-ratio: 1 / 1;
+
+    overflow: hidden;
+
+    background: #f7f4f1;
+
+    margin-bottom: 16px;
+}
+
+.product-image-wrap img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+
+    transition: transform .45s ease;
+}
+
+.product-card:hover
+.product-image-wrap img {
+    transform: scale(1.045);
+}
+
+.product-badge {
+    position: absolute;
+
+    top: 12px;
+    left: 12px;
+
+    z-index: 2;
+
+    background: var(--black);
+    color: white;
+
+    padding: 5px 9px;
+
+    font-size: 9px;
+    letter-spacing: .05em;
+    text-transform: uppercase;
+}
+
+.product-badge.sale {
+    background: var(--gold-dark);
+}
+
+.product-info {
+    padding-right: 5px;
+}
+
+.product-brand {
+    font-size: 10px;
+
+    text-transform: uppercase;
+    letter-spacing: .08em;
+
+    color: #918981;
+
+    margin-bottom: 4px;
+}
+
+.product-name {
+    font-family: var(--sans);
+
+    font-size: 13px;
+    line-height: 1.45;
+
+    color: var(--black);
+
+    min-height: 38px;
+}
+
+.product-price-row {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+
+    margin-top: 8px;
+}
+
+.product-price {
+    font-size: 14px;
+    font-weight: 600;
+
+    color: var(--black);
+}
+
+.product-old-price {
+    font-size: 12px;
+
+    color: #9b938c;
+
+    text-decoration: line-through;
+}
+
+.product-rating {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    margin-top: 8px;
+}
+
+.stars {
+    color: #c18d20;
+
+    font-size: 11px;
+    letter-spacing: 1px;
+}
+
+.review-count {
+    font-size: 10px;
+    color: #8b837d;
+}
+
+.product-link {
+    position: absolute;
+    inset: 0;
+
+    z-index: 1;
+}
+
+
+/* ============================================================
+   PROMO BANNER
+============================================================ */
+
+.promo-banner {
+    position: relative;
+
+    min-height: 205px;
+
+    overflow: hidden;
+
+    background: #f1e9e1;
+}
+
+.promo-image {
+    position: absolute;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+.promo-overlay {
+    position: absolute;
+    inset: 0;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(248,243,238,.98) 0%,
+            rgba(248,243,238,.91) 34%,
+            rgba(248,243,238,.30) 70%,
+            rgba(248,243,238,0) 100%
+        );
+}
+
+.promo-content {
+    position: relative;
+    z-index: 2;
+
+    min-height: 205px;
+
+    display: flex;
+    align-items: center;
+
+    padding: 30px 55px;
+}
+
+.promo-copy {
+    max-width: 450px;
+}
+
+.promo-title {
+    font-family: var(--serif);
+
+    font-size: 35px;
+    line-height: 1.05;
+
+    font-weight: 400;
+
+    margin-bottom: 10px;
+}
+
+.promo-subtitle {
+    font-size: 10px;
+    letter-spacing: 2px;
+
+    color: #6f665f;
+
+    margin-bottom: 18px;
+}
+
+.promo-button {
+    display: inline-flex;
+
+    padding: 11px 18px;
+
+    background: var(--gold-dark);
+    color: white;
+
+    font-size: 10px;
+    font-weight: 600;
+
+    letter-spacing: .06em;
+    text-transform: uppercase;
+}
+
+/* ============================================================
+   FEATURED BRANDS MARQUEE
+============================================================ */
+
+.brand-marquee {
+    width: 100%;
+    overflow: hidden;
+    padding: 18px 0 18px;
+}
+
+.brand-track {
+    display: flex;
+    width: max-content;
+
+    animation: brandSlide 28s linear infinite;
+}
+
+.brand-group {
+    display: flex;
+    align-items: center;
+
+    gap: 85px;
+
+    padding-right: 85px;
+}
+
+.brand-item {
+    flex: 0 0 auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 150px;
+    height: 70px;
+
+    text-decoration: none;
+}
+
+.brand-text {
+    font-family: "Cormorant Garamond", Georgia, serif;
+
+    font-size: 50px;
+    font-weight: 700;
+
+    letter-spacing: 1.5px;
+
+    color: var(--black);
+
+    white-space: nowrap;
+
+    transition:
+        transform .25s ease,
+        opacity .25s ease;
+}
+
+.brand-item:hover .brand-text {
+    transform: scale(1.05);
+    opacity: .65;
+}
+
+
+/* Continuous movement */
+
+@keyframes brandSlide {
+
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-50%);
+    }
+
+}
+
+
+/* Pause when the customer hovers */
+
+.brand-marquee:hover .brand-track {
+    animation-play-state: paused;
+}
+
+/* ============================================================
+   THREE FEATURE TILES
+============================================================ */
+
+.feature-tiles {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 12px;
+
+    margin-top: 30px;
+}
+
+.feature-tile {
+    position: relative;
+
+    min-height: 190px;
+
+    overflow: hidden;
+
+    background: #f2ebe4;
+}
+
+.feature-tile-image {
+    position: absolute;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    transition: transform .5s ease;
+}
+
+.feature-tile:hover
+.feature-tile-image {
+    transform: scale(1.04);
+}
+
+.feature-tile-overlay {
+    position: absolute;
+    inset: 0;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(250,247,243,.94) 0%,
+            rgba(250,247,243,.78) 43%,
+            rgba(250,247,243,.15) 100%
+        );
+}
+
+.feature-tile-content {
+    position: relative;
+    z-index: 2;
+
+    padding: 35px 25px;
+
+    max-width: 250px;
+}
+
+.feature-tile-title {
+    font-family: var(--serif);
+
+    font-size: 23px;
+    line-height: 1.1;
+
+    margin-bottom: 8px;
+}
+
+.feature-tile-description {
+    font-size: 12px;
+    line-height: 1.5;
+
+    color: #625b55;
+
+    margin-bottom: 17px;
+}
+
+.feature-tile-link {
+    font-size: 10px;
+
+    text-transform: uppercase;
+    letter-spacing: .08em;
+
+    color: var(--black);
+
+    border-bottom: 1px solid #77706a;
+
+    padding-bottom: 3px;
+}
+
+
+/* ============================================================
+   TRUST STRIP
+============================================================ */
+
+.trust-strip {
+    margin-top: 45px;
+
+    padding: 30px 0;
+
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+}
+
+.trust-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+
+    padding: 0 28px;
+
+    border-right: 1px solid var(--border);
+}
+
+.trust-item:first-child {
+    padding-left: 0;
+}
+
+.trust-item:last-child {
+    border-right: 0;
+}
+
+.trust-icon {
+    width: 34px;
+    height: 34px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: var(--gold-dark);
+
+    font-size: 20px;
+}
+
+.trust-title {
+    font-size: 12px;
+    font-weight: 600;
+
+    margin-bottom: 2px;
+}
+
+.trust-text {
+    font-size: 10px;
+
+    color: #8c847d;
+}
+
+
+/* ============================================================
+   EMPTY STATES
+============================================================ */
+
+.home-empty {
+    width: 100%;
+
+    padding: 45px 20px;
+
+    text-align: center;
+
+    background: #faf8f5;
+
+    color: #8b837c;
+
+    font-size: 13px;
+}
+
+
+/* ============================================================
+   RESPONSIVE
+============================================================ */
+
+@media (max-width: 1100px) {
+
+    .product-grid {
+        grid-template-columns:
+            repeat(4, minmax(0, 1fr));
+    }
+
+    .hero-copy {
+        width: 52%;
+    }
+
+    .hero-title {
+        font-size: 52px;
+    }
+
+    .hero-benefits {
+        gap: 18px;
+    }
+
+}
+
+
+@media (max-width: 850px) {
+
+    .hero {
+        min-height: 600px;
+        height: auto;
+    }
+
+    .hero-overlay {
+        background:
+            linear-gradient(
+                180deg,
+                rgba(248,244,240,.92) 0%,
+                rgba(248,244,240,.72) 50%,
+                rgba(248,244,240,.20) 100%
+            );
+    }
+
+    .hero-content {
+        align-items: flex-start;
+        padding-top: 70px;
+        padding-bottom: 60px;
+    }
+
+    .hero-copy {
+        width: 65%;
+    }
+
+    .hero-title {
+        font-size: 48px;
+    }
+
+    .hero-benefits {
+        flex-wrap: wrap;
+    }
+
+    .product-grid {
+        grid-template-columns:
+            repeat(3, minmax(0, 1fr));
+    }
+
+    .feature-tiles {
+        grid-template-columns: 1fr;
+    }
+
+    .trust-strip {
+        grid-template-columns: 1fr 1fr;
+        gap: 25px;
+    }
+
+    .trust-item {
+        border-right: 0;
+        padding: 0;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .home-section {
+        padding: 52px 0;
+    }
+
+    .section-heading {
+        font-size: 27px;
+    }
+
+    .section-heading-row {
+        gap: 15px;
+    }
+
+    .hero {
+        min-height: 650px;
+    }
+
+    .hero-content {
+        width: calc(100% - 36px);
+        padding-top: 45px;
+    }
+
+    .hero-copy {
+        width: 100%;
+    }
+
+    .hero-title {
+        font-size: 44px;
+        letter-spacing: -1.5px;
+    }
+
+    .hero-description {
+        font-size: 16px;
+        max-width: 350px;
+    }
+
+    .hero-benefits {
+        gap: 13px;
+        margin-top: 30px;
+    }
+
+    .hero-benefit {
+        font-size: 10px;
+        max-width: 130px;
+    }
+
+    .category-grid {
+        gap: 22px;
+    }
+
+    .category-card {
+        flex-basis: 105px;
+        min-width: 105px;
+    }
+
+    .category-image {
+        width: 98px;
+        height: 98px;
+    }
+
+    .product-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        gap: 24px 12px;
+    }
+
+    .product-name {
+        font-size: 12px;
+    }
+
+    .promo-content {
+        padding: 30px 25px;
+    }
+
+    .promo-title {
+        font-size: 29px;
+    }
+
+    .brand-grid {
+        justify-content: flex-start;
+    }
+
+    .trust-strip {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+/* ============================================================
+   VERY SMALL PHONES
+============================================================ */
+
+@media (max-width: 390px) {
+
+    .hero-title {
+        font-size: 39px;
+    }
+
+    .hero-benefit:nth-child(n+3) {
+        display: none;
+    }
+
+}
+
+</style>
+
+{% endblock %}
+
+
+
+{% block content %}
+
+
+<!-- ============================================================
+     HERO
+============================================================ -->
+
+<section class="hero">
+
+    <img
+        src="/static/images/hero2.png"
+        alt="Beauty Depot"
+        class="hero-image"
+    >
+
+    <div class="hero-overlay"></div>
+
+
+    <div class="hero-content">
+
+        <div class="hero-copy">
+
+            <div class="hero-eyebrow">
+                Beauty for a brighter you
+            </div>
+
+            <h1 class="hero-title">
+                Discover Your<br>
+                Beauty Ritual
+            </h1>
+
+            <p class="hero-description">
+
+                Premium beauty, skincare, fragrance and
+                lifestyle essentials, all in one place.
+
+            </p>
+
+            <a
+                href="/shop"
+                class="hero-button"
+            >
+                Shop Now
+                <span>→</span>
+            </a>
+
+
+            <div class="hero-benefits">
+
+                <div class="hero-benefit">
+
+                    <span class="hero-benefit-icon">
+                        ♡
+                    </span>
+
+                    <span>
+                        100% Authentic<br>
+                        Products
+                    </span>
+
+                </div>
+
+
+                <div class="hero-benefit">
+
+                    <span class="hero-benefit-icon">
+                        ♧
+                    </span>
+
+                    <span>
+                        Fast & Reliable<br>
+                        Delivery
+                    </span>
+
+                </div>
+
+
+                <div class="hero-benefit">
+
+                    <span class="hero-benefit-icon">
+                        ♢
+                    </span>
+
+                    <span>
+                        Secure<br>
+                        Payments
+                    </span>
+
+                </div>
+
+
+                <div class="hero-benefit">
+
+                    <span class="hero-benefit-icon">
+                        ♡
+                    </span>
+
+                    <span>
+                        A Happier,<br>
+                        Healthier You
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ============================================================
+     CATEGORIES
+============================================================ -->
+
+<section
+    class="home-section categories-section"
+    id="categories"
+>
+
+    <div class="container">
+
+        <div class="section-heading-row">
+
+            <div class="heading-line"></div>
+
+            <h2 class="section-heading">
+                Shop by Category
+            </h2>
+
+            <div class="heading-line"></div>
+
+        </div>
+
+
+        {% if categories %}
+
+            <div class="category-grid">
+
+                {% for category in categories %}
+
+                    <a
+                        href="/shop?category={{ category.slug }}"
+                        class="category-card"
+                    >
+
+                        <div class="category-image">
+
+                            {% if category.image %}
+
+                                <img
+                                    src="{{ category.image }}"
+                                    alt="{{ category.name }}"
+                                    loading="lazy"
+                                >
+
+                            {% else %}
+
+                                <div class="category-placeholder">
+                                    {{ category.name[0] }}
+                                </div>
+
+                            {% endif %}
+
+                        </div>
+
+
+                        <div class="category-name">
+                            {{ category.name }}
+                        </div>
+
+                    </a>
+
+                {% endfor %}
+
+            </div>
+
+        {% else %}
+
+            <div class="home-empty">
+                Categories will appear here once they are added from the admin.
+            </div>
+
+        {% endif %}
+
+    </div>
+
+</section>
+
+
+
+<!-- ============================================================
+     FEATURED PRODUCTS
+============================================================ -->
+
+<section class="home-section products-section">
+
+    <div class="container">
+
+        <div class="section-heading-row">
+
+            <h2 class="section-heading">
+                Featured Products
+            </h2>
+
+            <div class="heading-line"></div>
+
+            <a
+                href="/shop"
+                class="section-link"
+            >
+                View All Products →
+            </a>
+
+        </div>
+
+
+        {% if featured_products %}
+
+            <div class="product-grid">
+
+                {% for product in featured_products %}
+
+                    <article class="product-card">
+
+
+                        <div class="product-image-wrap">
+
+                            {% if product.image %}
+
+                                <img
+                                    src="{{ product.image }}"
+                                    alt="{{ product.name }}"
+                                    loading="lazy"
+                                >
+
+                            {% else %}
+
+                                <div
+                                    style="
+                                        width:100%;
+                                        height:100%;
+                                        display:flex;
+                                        align-items:center;
+                                        justify-content:center;
+                                        color:#a29a93;
+                                        font-family:var(--serif);
+                                        font-size:18px;
+                                    "
+                                >
+                                    {{ product.name }}
+                                </div>
+
+                            {% endif %}
+
+
+                            {% if product.is_new_arrival %}
+
+                                <span class="product-badge">
+                                    New
+                                </span>
+
+                            {% elif product.sale_price %}
+
+                                <span class="product-badge sale">
+                                    Sale
+                                </span>
+
+                            {% endif %}
+
+                        </div>
+
+
+                        <div class="product-info">
+
+
+                            {% if product.brand %}
+
+                                <div class="product-brand">
+                                    {{ product.brand.name }}
+                                </div>
+
+                            {% endif %}
+
+
+                            <div class="product-name">
+                                {{ product.name }}
+                            </div>
+
+
+                            <div class="product-price-row">
+
+                                {% if product.sale_price %}
+
+                                    <span class="product-price">
+
+                                        KSh
+                                        {{ "{:,.0f}".format(product.sale_price) }}
+
+                                    </span>
+
+                                    <span class="product-old-price">
+
+                                        KSh
+                                        {{ "{:,.0f}".format(product.price) }}
+
+                                    </span>
+
+                                {% else %}
+
+                                    <span class="product-price">
+
+                                        KSh
+                                        {{ "{:,.0f}".format(product.price) }}
+
+                                    </span>
+
+                                {% endif %}
+
+                            </div>
+
+
+                            <div class="product-rating">
+
+                                <span class="stars">
+                                    ★★★★★
+                                </span>
+
+                                <span class="review-count">
+                                    New
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <a
+                            href="/product/{{ product.id }}"
+                            class="product-link"
+                            aria-label="View {{ product.name }}"
+                        ></a>
+
+                    </article>
+
+                {% endfor %}
+
+            </div>
+
+        {% else %}
+
+            <div class="home-empty">
+
+                No featured products yet.
+
+                <br>
+
+                Products marked as
+                <strong>Featured</strong>
+                in the admin will appear here.
+
+            </div>
+
+        {% endif %}
+
+    </div>
+
+</section>
+
+
+
+<!-- ============================================================
+     SKINCARE PROMOTION
+============================================================ -->
+
+<section class="home-section">
+
+    <div class="container">
+
+        <div class="promo-banner">
+
+            <img
+                src="/static/images/skincare-banner.jpg"
+                alt="Skincare essentials"
+                class="promo-image"
+                loading="lazy"
+            >
+
+            <div class="promo-overlay"></div>
+
+
+            <div class="promo-content">
+
+                <div class="promo-copy">
+
+                    <h2 class="promo-title">
+                        The Skincare<br>
+                        Essentials Edit
+                    </h2>
+
+                    <div class="promo-subtitle">
+                        CLEANSE · TREAT · MOISTURISE · GLOW
+                    </div>
+
+                    <a
+                        href="/shop?category=face"
+                        class="promo-button"
+                    >
+                        Shop Skincare →
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ============================================================
+     FEATURED BRANDS
+============================================================ -->
+
+<section
+    class="home-section brands-section"
+    id="brands"
+>
+
+    <div class="container">
+
+        <div class="section-heading-row">
+
+            <h2 class="section-heading">
+                Featured Brands
+            </h2>
+
+            <div class="heading-line"></div>
+
+            <a
+                href="/shop#brands"
+                class="section-link"
+            >
+                View All Brands →
+            </a>
+
+        </div>
+
+
+        {% if brands %}
+        <div class="brand-marquee">
+
+            <div class="brand-track">
+
+                <!-- FIRST SET -->
+
+                <div class="brand-group">
+
+                    {% for brand in brands %}
+
+                        <a
+                            href="/shop?brand={{ brand.slug }}"
+                            class="brand-item"
+                        >
+
+                            <span class="brand-text">
+                                {{ brand.name }}
+                            </span>
+
+                        </a>
+
+                    {% endfor %}
+
+                </div>
+
+
+                <!-- DUPLICATE SET FOR SEAMLESS LOOP -->
+
+                <div class="brand-group">
+
+                    {% for brand in brands %}
+
+                        <a
+                            href="/shop?brand={{ brand.slug }}"
+                            class="brand-item"
+                            aria-hidden="true"
+                            tabindex="-1"
+                        >
+
+                            <span class="brand-text">
+                                {{ brand.name }}
+                            </span>
+
+                        </a>
+
+                    {% endfor %}
+
+                </div>
+
+            </div>
+
+        </div>
+        
+
+        {% else %}
+
+            <div class="home-empty">
+                Brands will appear here once they are added from the admin.
+            </div>
+
+        {% endif %}
+
+    </div>
+
+</section>
+
+
+
+<!-- ============================================================
+     FEATURE TILES
+============================================================ -->
+
+<section class="home-section">
+
+    <div class="container">
+
+        <div class="feature-tiles">
+
+
+            <!-- NEW ARRIVALS -->
+
+            <a
+                href="/shop?filter=new"
+                class="feature-tile"
+            >
+
+                <img
+                    src="/static/images/new arrivals.png"
+                    alt="New arrivals"
+                    class="feature-tile-image"
+                    loading="lazy"
+                >
+
+                <div class="feature-tile-overlay"></div>
+
+                <div class="feature-tile-content">
+
+                    <h3 class="feature-tile-title">
+                        New Arrivals
+                    </h3>
+
+                    <p class="feature-tile-description">
+                        Be the first to explore
+                        our latest products.
+                    </p>
+
+                    <span class="feature-tile-link">
+                        Shop Now →
+                    </span>
+
+                </div>
+
+            </a>
+
+
+
+            <!-- FRAGRANCE -->
+
+            <a
+                href="/shop?category=fragrance"
+                class="feature-tile"
+            >
+
+                <img
+                    src="/static/images/newfragnance.png"
+                    alt="Fragrance collection"
+                    class="feature-tile-image"
+                    loading="lazy"
+                >
+
+                <div class="feature-tile-overlay"></div>
+
+                <div class="feature-tile-content">
+
+                    <h3 class="feature-tile-title">
+                        Fragrance Collection
+                    </h3>
+
+                    <p class="feature-tile-description">
+                        Signature scents for
+                        every mood.
+                    </p>
+
+                    <span class="feature-tile-link">
+                        Explore →
+                    </span>
+
+                </div>
+
+            </a>
+
+
+
+            <!-- LIFESTYLE -->
+
+            <a
+                href="/shop"
+                class="feature-tile"
+            >
+
+                <img
+                    src="/static/images/beautyimage.png"
+                    alt="Beauty for every lifestyle"
+                    class="feature-tile-image"
+                    loading="lazy"
+                >
+
+                <div class="feature-tile-overlay"></div>
+
+                <div class="feature-tile-content">
+
+                    <h3 class="feature-tile-title">
+                        Beauty for
+                        Every Lifestyle
+                    </h3>
+
+                    <p class="feature-tile-description">
+                        From everyday essentials
+                        to special moments.
+                    </p>
+
+                    <span class="feature-tile-link">
+                        Shop Now →
+                    </span>
+
+                </div>
+
+            </a>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ============================================================
+     TRUST / SERVICE STRIP
+============================================================ -->
+
+<section class="container">
+
+    <div class="trust-strip">
+
+
+        <div class="trust-item">
+
+            <div class="trust-icon">
+                ♡
+            </div>
+
+            <div>
+
+                <div class="trust-title">
+                    Authentic Products
+                </div>
+
+                <div class="trust-text">
+                    Sourced from trusted brands
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="trust-item">
+
+            <div class="trust-icon">
+                ♧
+            </div>
+
+            <div>
+
+                <div class="trust-title">
+                    Nationwide Delivery
+                </div>
+
+                <div class="trust-text">
+                    Fast, safe and reliable
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="trust-item">
+
+            <div class="trust-icon">
+                ▣
+            </div>
+
+            <div>
+
+                <div class="trust-title">
+                    Payment on Delivery
+                </div>
+
+                <div class="trust-text">
+                    Pay when your order arrives
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="trust-item">
+
+            <div class="trust-icon">
+                ♡
+            </div>
+
+            <div>
+
+                <div class="trust-title">
+                    Customer Support
+                </div>
+
+                <div class="trust-text">
+                    Here when you need us
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+
+{% endblock %}
+
+
+
+{% block extra_js %}
+
+<script>
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function() {
+
+        /*
+         * Homepage initialization.
+         *
+         * Categories, products and brands are already
+         * rendered by Jinja from the database.
+         *
+         * This script is intentionally small because
+         * the homepage does not need to fetch those
+         * sections again from the API.
+         */
+
+
+        /*
+         * Smooth horizontal category scrolling
+         * using mouse wheel.
+         */
+
+        const categoryGrid =
+            document.querySelector(".category-grid");
+
+
+        if (categoryGrid) {
+
+            categoryGrid.addEventListener(
+                "wheel",
+                function(event) {
+
+                    if (
+                        Math.abs(event.deltaY) >
+                        Math.abs(event.deltaX)
+                    ) {
+
+                        event.preventDefault();
+
+                        categoryGrid.scrollLeft +=
+                            event.deltaY;
+
+                    }
+
+                },
+                {
+                    passive: false
+                }
+            );
+
+        }
+
+
+    }
+);
+
+</script>
+
+{% endblock %}
