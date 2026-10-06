@@ -1,4 +1,1 @@
-from backend.main import app
-from a2wsgi import ASGIMiddleware
-
-application = ASGIMiddleware(app)
+from backend.main import app as application
