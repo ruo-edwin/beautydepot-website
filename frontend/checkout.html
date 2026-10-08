@@ -618,9 +618,22 @@ Complete your Beauty Depot order.
     }
 
     .checkout-layout {
-        display: flex;
+        display: flex !important;
         flex-direction: column;
         gap: 0;
+    }
+        .checkout-layout > section,
+    .checkout-layout > aside {
+        width: 100%;
+        min-width: 0;
+        box-sizing: border-box;
+    }
+
+    .checkout-summary {
+        position: static !important;
+        width: 100%;
+        margin-top: 40px;
+        box-sizing: border-box;
     }
 
     /* Form */
