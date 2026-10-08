@@ -3,3 +3,6 @@ venv/
 __pycache__/
 *.pyc
 beauty_ecommerce.db
+test_mysql.py
+reset_mysql.py
+migrate_sqlite_to_mysql.py
