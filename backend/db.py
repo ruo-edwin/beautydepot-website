@@ -15,20 +15,14 @@ if DATABASE_URL and DATABASE_URL.startswith("mysql://"):
         "mysql+pymysql://",
         1
     )
-    
+
 if not DATABASE_URL:
     raise ValueError(
         "DATABASE_URL is not set in the .env file"
     )
 
 
-engine = create_engine(
-    DATABASE_URL,
-    connect_args={
-        "check_same_thread": False
-    }
-)
-
+engine = create_engine(DATABASE_URL)
 
 SessionLocal = sessionmaker(
     autocommit=False,
