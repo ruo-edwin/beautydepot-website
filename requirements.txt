@@ -5,7 +5,7 @@ pymysql
 alembic
 python-dotenv
 python-multipart
-passlib[bcrypt]
+passlib[bcrypt==4.0.1]
 python-jose[cryptography]
 jinja2
 cloudinary
