@@ -205,102 +205,439 @@ essentials at Beauty Depot.
 }
 
 
-/* ============================================================
-   CATEGORY SECTION
-============================================================ */
+/* =====================================================
+   THE BEAUTY DEPOT — SHOP BY CATEGORY
+   Complete responsive category carousel
+===================================================== */
 
 .categories-section {
-    background: white;
+    width: 100%;
+    padding: 70px 0 55px;
+    background: #fff;
+    overflow: hidden;
+    box-sizing: border-box;
 }
 
-.category-grid {
+.categories-section *,
+.categories-section *::before,
+.categories-section *::after {
+    box-sizing: border-box;
+}
+
+/* ---------- SECTION HEADING ---------- */
+
+.categories-section .section-heading-row {
     display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 35px;
+    width: 100%;
+    margin: 0 0 42px;
+}
+
+.categories-section .heading-line {
+    flex: 1 1 auto;
+    height: 1px;
+    min-width: 15px;
+    background: #e9e5e8;
+}
+
+.categories-section .section-heading {
+    flex: 0 0 auto;
+    margin: 0;
+    color: #171417;
+    font-family: var(--serif, Georgia, serif);
+    font-size: clamp(28px, 3vw, 43px);
+    font-weight: 400;
+    line-height: 1.2;
+    text-align: center;
+}
+
+/* ---------- SCROLLING WRAPPER ---------- */
+
+.category-scroll-wrapper {
+    position: relative;
+    width: 100%;
+    min-width: 0;
+    overflow: hidden;
+}
+
+/* ---------- CATEGORY TRACK ---------- */
+
+.categories-section .category-grid {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
     gap: 34px;
+
+    width: 100%;
+    min-width: 0;
+    margin: 0;
+    padding: 5px 3px 20px;
 
     overflow-x: auto;
     overflow-y: hidden;
 
-    padding: 5px 2px 15px;
-
-    scrollbar-width: none;
     scroll-behavior: smooth;
+    scroll-snap-type: x proximity;
+    overscroll-behavior-x: contain;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
 }
 
-.category-grid::-webkit-scrollbar {
+.categories-section .category-grid::-webkit-scrollbar {
     display: none;
 }
 
-.category-card {
-    flex: 0 0 128px;
-    min-width: 128px;
+/* ---------- INDIVIDUAL CATEGORY ---------- */
 
+.categories-section .category-card {
+    display: flex;
+    flex: 0 0 140px;
+    flex-direction: column;
+    align-items: center;
+
+    width: 140px;
+    min-width: 140px;
+    margin: 0;
+    padding: 0;
+
+    color: #171417;
     text-align: center;
+    text-decoration: none;
 
-    cursor: pointer;
+    scroll-snap-align: start;
+    -webkit-tap-highlight-color: transparent;
 }
 
-.category-image {
-    width: 130px;
-    height: 130px;
+.categories-section .category-image {
+    position: relative;
+    width: 136px;
+    height: 136px;
+    flex: 0 0 136px;
 
     margin: 0 auto 17px;
-
-    border-radius: 50%;
-
-    background: #f4eee8;
+    padding: 0;
 
     overflow: hidden;
-
-    border: 1px solid #eee8e2;
+    border: 1px solid #eee7e3;
+    border-radius: 50%;
+    background: #f8f4f1;
 
     transition:
-        transform .3s ease,
-        box-shadow .3s ease;
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
 }
 
-.category-card:hover .category-image {
-    transform: translateY(-4px);
-
-    box-shadow:
-        0 10px 25px rgba(0,0,0,.08);
-}
-
-.category-image img {
+.categories-section .category-image img {
+    display: block;
     width: 100%;
     height: 100%;
+    max-width: none;
+    margin: 0;
+    padding: 0;
 
     object-fit: cover;
+    object-position: center;
+    border-radius: 50%;
 }
 
-.category-placeholder {
+.categories-section .category-name {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+
+    color: #171417;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.5;
+    text-align: center;
+
+    overflow-wrap: break-word;
+}
+
+/* Optional placeholder when a category has no image */
+.categories-section .category-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
     width: 100%;
     height: 100%;
+
+    color: #a18a9f;
+    background: #f7f0f7;
+    font-family: var(--serif, Georgia, serif);
+    font-size: 30px;
+}
+
+/* Hover effect for desktop */
+@media (hover: hover) {
+    .categories-section .category-card:hover .category-image {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 22px rgba(45, 16, 50, 0.12);
+    }
+
+    .categories-section .category-card:hover .category-name {
+        color: #4b0d63;
+    }
+}
+
+/* ---------- RIGHT EDGE FADE ---------- */
+
+.category-scroll-fade {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 15px;
+    z-index: 2;
+
+    width: 85px;
+
+    background: linear-gradient(
+        to right,
+        rgba(255, 255, 255, 0),
+        rgba(255, 255, 255, 0.96)
+    );
+
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+}
+
+/* ---------- RIGHT ARROW BUTTON ---------- */
+
+.category-scroll-hint {
+    position: absolute;
+    top: 43%;
+    right: 12px;
+    z-index: 3;
 
     display: flex;
     align-items: center;
     justify-content: center;
 
-    font-family: var(--serif);
-    font-size: 23px;
+    width: 42px;
+    height: 42px;
+    margin: 0;
+    padding: 0;
 
-    color: #a89684;
+    border: 1px solid #eee5f0;
+    border-radius: 50%;
+
+    color: #4b0d63;
+    background: #fff;
+    box-shadow: 0 3px 14px rgba(0, 0, 0, 0.13);
+
+    font-family: Arial, sans-serif;
+    font-size: 25px;
+    font-weight: 400;
+    line-height: 1;
+
+    cursor: pointer;
+    transform: translateY(-50%);
+    transition:
+        color 0.2s ease,
+        background 0.2s ease,
+        opacity 0.2s ease,
+        box-shadow 0.2s ease;
 }
 
-.category-name {
-    font-size: 13px;
-    font-weight: 500;
-
-    color: var(--black);
-
-    white-space: normal;
+.category-scroll-hint:hover {
+    color: #fff;
+    background: #4b0d63;
+    box-shadow: 0 4px 16px rgba(75, 13, 99, 0.25);
 }
 
-.category-count {
-    margin-top: 3px;
+.category-scroll-hint:focus-visible {
+    outline: 2px solid #4b0d63;
+    outline-offset: 4px;
+}
 
+.category-scroll-hint.is-hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+/* ---------- SCROLL INSTRUCTION ---------- */
+
+.category-scroll-caption {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+
+    margin: 12px 0 0;
+    padding: 0 12px;
+
+    color: #817984;
     font-size: 11px;
+    font-weight: 400;
+    line-height: 1.5;
+    letter-spacing: 0.02em;
+    text-align: center;
+}
 
-    color: #99918a;
+.category-scroll-caption span {
+    color: #4b0d63;
+    font-size: 15px;
+}
+
+/* =====================================================
+   TABLETS
+===================================================== */
+
+@media (max-width: 1024px) {
+    .categories-section {
+        padding: 55px 0 45px;
+    }
+
+    .categories-section .section-heading-row {
+        gap: 22px;
+        margin-bottom: 34px;
+    }
+
+    .categories-section .category-grid {
+        gap: 25px;
+    }
+
+    .categories-section .category-card {
+        flex-basis: 120px;
+        width: 120px;
+        min-width: 120px;
+    }
+
+    .categories-section .category-image {
+        width: 116px;
+        height: 116px;
+        flex-basis: 116px;
+        margin-bottom: 13px;
+    }
+
+    .categories-section .category-name {
+        font-size: 13px;
+    }
+
+    .category-scroll-fade {
+        width: 65px;
+    }
+
+    .category-scroll-hint {
+        right: 8px;
+        width: 38px;
+        height: 38px;
+        font-size: 23px;
+    }
+}
+
+/* =====================================================
+   MOBILE PHONES
+===================================================== */
+
+@media (max-width: 600px) {
+    .categories-section {
+        padding: 38px 0 35px;
+    }
+
+    .categories-section .section-heading-row {
+        gap: 12px;
+        margin-bottom: 27px;
+    }
+
+    .categories-section .section-heading {
+        font-size: clamp(25px, 6vw, 32px);
+        white-space: nowrap;
+    }
+
+    .categories-section .heading-line {
+        min-width: 8px;
+    }
+
+    .categories-section .category-grid {
+        gap: 19px;
+        padding: 4px 3px 15px;
+    }
+
+    .categories-section .category-card {
+        flex-basis: 100px;
+        width: 100px;
+        min-width: 100px;
+    }
+
+    .categories-section .category-image {
+        width: 96px;
+        height: 96px;
+        flex-basis: 96px;
+        margin-bottom: 11px;
+    }
+
+    .categories-section .category-name {
+        font-size: 12px;
+        line-height: 1.4;
+    }
+
+    .category-scroll-fade {
+        width: 46px;
+        bottom: 10px;
+    }
+
+    .category-scroll-hint {
+        top: 41%;
+        right: 4px;
+
+        width: 32px;
+        height: 32px;
+
+        font-size: 20px;
+    }
+
+    .category-scroll-caption {
+        font-size: 10px;
+        margin-top: 8px;
+    }
+}
+
+/* Extra-small phones */
+@media (max-width: 360px) {
+    .categories-section .section-heading-row {
+        gap: 8px;
+    }
+
+    .categories-section .section-heading {
+        font-size: 24px;
+    }
+
+    .categories-section .category-grid {
+        gap: 15px;
+    }
+
+    .categories-section .category-card {
+        flex-basis: 92px;
+        width: 92px;
+        min-width: 92px;
+    }
+
+    .categories-section .category-image {
+        width: 88px;
+        height: 88px;
+        flex-basis: 88px;
+    }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+    .categories-section .category-grid {
+        scroll-behavior: auto;
+    }
+
+    .categories-section .category-image,
+    .category-scroll-fade,
+    .category-scroll-hint {
+        transition: none;
+    }
 }
 
 
@@ -1113,84 +1450,72 @@ essentials at Beauty Depot.
 
 
 
-<!-- ============================================================
-     CATEGORIES
-============================================================ -->
 
-<section
-    class="home-section categories-section"
-    id="categories"
->
+<!-- ============================
+     SHOP BY CATEGORY
+============================ -->
 
+<section class="home-section categories-section">
     <div class="container">
 
         <div class="section-heading-row">
-
             <div class="heading-line"></div>
-
-            <h2 class="section-heading">
-                Shop by Category
-            </h2>
-
+            <h2 class="section-heading">Shop by Category</h2>
             <div class="heading-line"></div>
-
         </div>
 
+        <div class="category-scroll-wrapper">
 
-        {% if categories %}
-
-            <div class="category-grid">
+            <div class="category-grid" id="categoryScroll">
 
                 {% for category in categories %}
+                <a href="{{ url_for('category_page', slug=category.slug) }}"
+                   class="category-card">
 
-                    <a
-                        href="/shop?category={{ category.slug }}"
-                        class="category-card"
-                    >
-
-                        <div class="category-image">
-
-                            {% if category.image %}
-
-                                <img
-                                    src="{{ category.image }}"
-                                    alt="{{ category.name }}"
-                                    loading="lazy"
-                                >
-
-                            {% else %}
-
-                                <div class="category-placeholder">
-                                    {{ category.name[0] }}
-                                </div>
-
-                            {% endif %}
-
+                    <div class="category-image">
+                        {% if category.image_url %}
+                        <img
+                            src="{{ category.image_url }}"
+                            alt="{{ category.name }}"
+                            loading="lazy"
+                        >
+                        {% else %}
+                        <div class="category-placeholder">
+                            {{ category.name[:1] }}
                         </div>
+                        {% endif %}
+                    </div>
 
+                    <div class="category-name">
+                        {{ category.name }}
+                    </div>
 
-                        <div class="category-name">
-                            {{ category.name }}
-                        </div>
-
-                    </a>
-
+                </a>
                 {% endfor %}
 
             </div>
 
-        {% else %}
+            <div class="category-scroll-fade" id="categoryScrollFade"></div>
 
-            <div class="home-empty">
-                Categories will appear here once they are added from the admin.
-            </div>
+            <button
+                type="button"
+                class="category-scroll-hint"
+                id="categoryScrollNext"
+                aria-label="See more categories"
+                title="See more categories"
+            >
+                &rarr;
+            </button>
 
-        {% endif %}
+        </div>
+
+        <p class="category-scroll-caption" id="categoryScrollCaption">
+            <span>←</span> Swipe or scroll to explore more categories
+            <span>→</span>
+        </p>
 
     </div>
-
 </section>
-
 
 
 <!-- ============================================================
