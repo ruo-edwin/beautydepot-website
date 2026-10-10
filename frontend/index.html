@@ -1330,6 +1330,80 @@ essentials at Beauty Depot.
 
 }
 
+/* Elegant category carousel pagination */
+.category-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    margin: 18px auto 8px;
+    min-height: 8px;
+}
+
+.category-pagination-dot {
+    appearance: none;
+    -webkit-appearance: none;
+    border: 0;
+    padding: 0;
+    width: 6px;
+    height: 6px;
+    border-radius: 99px;
+    background: #ded5e2;
+    cursor: pointer;
+    transition:
+        width 0.25s ease,
+        background-color 0.25s ease,
+        transform 0.25s ease;
+}
+
+.category-pagination-dot.active {
+    width: 22px;
+    background: #54106a;
+}
+
+.category-pagination-dot:hover {
+    background: #8a5a98;
+}
+
+.category-pagination-dot:focus-visible {
+    outline: 2px solid #54106a;
+    outline-offset: 4px;
+}
+
+.category-scroll-caption {
+    margin: 8px 0 0;
+    text-align: center;
+    font-size: 12px;
+    color: #928897;
+    letter-spacing: 0.2px;
+}
+
+/* Hide old arrow controls if their HTML remains */
+.category-scroll-hint,
+.category-scroll-fade {
+    display: none !important;
+}
+
+@media (max-width: 768px) {
+    .category-pagination {
+        margin-top: 14px;
+        gap: 6px;
+    }
+
+    .category-pagination-dot {
+        width: 5px;
+        height: 5px;
+    }
+
+    .category-pagination-dot.active {
+        width: 18px;
+    }
+
+    .category-scroll-caption {
+        font-size: 11px;
+    }
+}
+
 </style>
 
 {% endblock %}
@@ -1495,24 +1569,21 @@ essentials at Beauty Depot.
 
             </div>
 
-            <div class="category-scroll-fade" id="categoryScrollFade"></div>
+            
 
-            <button
-                type="button"
-                class="category-scroll-hint"
-                id="categoryScrollNext"
-                aria-label="See more categories"
-                title="See more categories"
-            >
-                &rarr;
-            </button>
+           
 
         </div>
 
+        
+        <div class="category-pagination" id="categoryPagination"
+            aria-label="Category carousel position">
+        </div>
+
         <p class="category-scroll-caption" id="categoryScrollCaption">
-            <span>←</span> Swipe or scroll to explore more categories
-            <span>→</span>
+            Swipe or scroll to explore more
         </p>
+
 
     </div>
 </section>
@@ -2142,6 +2213,90 @@ document.addEventListener(
 
     }
 );
+
+const categoryPagination =
+    document.getElementById("categoryPagination");
+
+if (categoryGrid && categoryPagination) {
+    const categoryCards = Array.from(
+        categoryGrid.querySelectorAll(".category-card")
+    );
+
+    function buildCategoryDots() {
+        categoryPagination.innerHTML = "";
+
+        // One dot per visible group of categories
+        const maxScroll = Math.max(
+            0,
+            categoryGrid.scrollWidth - categoryGrid.clientWidth
+        );
+
+        const pageWidth = categoryGrid.clientWidth * 0.75;
+        const pageCount = Math.max(
+            1,
+            Math.ceil(maxScroll / pageWidth) + 1
+        );
+
+        for (let i = 0; i < pageCount; i++) {
+            const dot = document.createElement("button");
+
+            dot.type = "button";
+            dot.className = "category-pagination-dot";
+            dot.setAttribute("aria-label", `Show category section ${i + 1}`);
+
+            dot.addEventListener("click", () => {
+                categoryGrid.scrollTo({
+                    left: Math.min(i * pageWidth, maxScroll),
+                    behavior: "smooth"
+                });
+            });
+
+            categoryPagination.appendChild(dot);
+        }
+
+        updateCategoryDots();
+    }
+
+    function updateCategoryDots() {
+        const dots = Array.from(
+            categoryPagination.querySelectorAll(
+                ".category-pagination-dot"
+            )
+        );
+
+        const maxScroll = Math.max(
+            0,
+            categoryGrid.scrollWidth - categoryGrid.clientWidth
+        );
+
+        const progress = maxScroll > 0
+            ? categoryGrid.scrollLeft / maxScroll
+            : 0;
+
+        const activeIndex = Math.round(
+            progress * (dots.length - 1)
+        );
+
+        dots.forEach((dot, index) => {
+            const active = index === activeIndex;
+
+            dot.classList.toggle("active", active);
+            dot.setAttribute("aria-current", active ? "true" : "false");
+        });
+
+        // Hide pagination when all categories fit without scrolling
+        categoryPagination.style.display =
+            maxScroll <= 2 ? "none" : "flex";
+    }
+
+    categoryGrid.addEventListener("scroll", updateCategoryDots, {
+        passive: true
+    });
+
+    window.addEventListener("resize", buildCategoryDots);
+
+    buildCategoryDots();
+}
 
 </script>
 
