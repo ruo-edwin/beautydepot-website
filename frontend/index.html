@@ -1469,11 +1469,11 @@ essentials at Beauty Depot.
             <div class="category-grid" id="categoryScroll">
 
                 {% for category in categories %}
-                <a href="{{ url_for('category_page', slug=category.slug) }}"
-                   class="category-card">
+                <a href="/shop?category={{ category.slug }}"
+                      class="category-card">
 
                     <div class="category-image">
-                        {% if category.image_url %}
+                        {% if category.image %}
                         <img
                             src="{{ category.image_url }}"
                             alt="{{ category.name }}"
